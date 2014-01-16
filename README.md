@@ -1,4 +1,2 @@
 Backgammon
 ==========
-
-Hei toimiiko?
