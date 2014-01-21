@@ -1,12 +1,14 @@
+package OhjelmaLogiikka;
 
-package OhjelmaLogiikka; 
-
-
-public class Pelinappula { 
+public class Pelinappula {
 
     private int sijainti;
-    
-    public Pelinappula(int sijainti){
+
+    public static void main(String[] args) {
+        System.out.println("hei");
+    }
+
+    public Pelinappula(int sijainti) {
         this.sijainti = sijainti;
     }
-} 
+}
