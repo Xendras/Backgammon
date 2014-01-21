@@ -1,4 +1,4 @@
 Backgammon
 ==========
 
-Hei toimiiko?
+Jos näet tämän niin toimii.
