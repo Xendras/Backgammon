@@ -6,6 +6,7 @@ public class Pelinappula {
 
     public static void main(String[] args) {
         System.out.println("hei");
+        System.out.println("hej igen");
     }
 
     public Pelinappula(int sijainti) {
