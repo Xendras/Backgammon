@@ -16,28 +16,43 @@ import static org.junit.Assert.*;
  * @author Xendra
  */
 public class NoppaTest {
-    
+
+    Noppa noppa;
+
     public NoppaTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
+        this.noppa = new Noppa();
     }
-    
+
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+
+    @Test
+    public void konstruktoriAsettaaNopanArvonOikein() {
+        int arvo = noppa.haeNopanArvo();
+        assertEquals(1, arvo);
+    }
+
+    @Test
+    public void nopanHeittoEiVieArvoaVaaraksi() {
+        boolean toimiko = false;
+        int arvo = noppa.heitaNoppaa();
+        if(arvo>0 && arvo < 7){
+            toimiko = true;
+        }        
+        assertEquals(toimiko,true);
+        
+    }
 }
