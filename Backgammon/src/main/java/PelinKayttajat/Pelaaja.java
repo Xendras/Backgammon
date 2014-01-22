@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package PelinKayttajat;
 
 /**
@@ -11,14 +10,14 @@ package PelinKayttajat;
  * @author jonas
  */
 public class Pelaaja {
-    
-    int vari;
-    
-    public Pelaaja(int vari){
-        this.vari = vari;
+
+    char nappulanTyyppi;
+
+    public Pelaaja(char nappulanTyyppi) {
+        this.nappulanTyyppi = nappulanTyyppi;
     }
-    
-    public int haePelaajanVari(){
-        return this.vari;
+
+    public char haePelaajanTyyppi() {
+        return this.nappulanTyyppi;
     }
 }

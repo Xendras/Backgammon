@@ -5,6 +5,9 @@
  */
 
 package PelinKayttajat;
+import PelinOsat.Pelilauta;
+import PelinOsat.Pelinappula;
+import PelinOsat.Noppa;
 
 /**
  *
@@ -13,6 +16,24 @@ package PelinKayttajat;
 public class Main {
     
     public static void main(String[] args) {
+        Pelaaja Jonas = new Pelaaja('X');                   //Testailen erilaisia toimintoja
+        Pelilauta lauta = new Pelilauta(10);
+        Pelinappula nappula1 = new Pelinappula(0,Jonas,lauta);
+        Pelinappula nappula2 = new Pelinappula(6,Jonas,lauta);
+        lauta.lisaaPelinappula(nappula1);
+        lauta.lisaaPelinappula(nappula2);
+        lauta.tulostaPelilauta();
+        System.out.println("");
         
+        lauta.siirraPelinappulaa(nappula1,1);
+        //lauta.siirraPelinappulaa(nappula2,2);
+        
+        lauta.tulostaPelilauta();
+        System.out.println("");
+        
+        lauta.siirraPelinappulaa(nappula1,5);
+        
+        lauta.tulostaPelilauta();
+        System.out.println("");
     }
 }
