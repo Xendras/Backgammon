@@ -4,6 +4,7 @@
  */
 package PelinOsat;
 
+import PelinKayttajat.Pelaaja;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,6 +18,9 @@ import static org.junit.Assert.*;
  */
 public class PelinappulaTest {
     
+    Pelilauta lauta;
+    Pelaaja Jonas;
+    Pelinappula nappula;
     public PelinappulaTest() {
     }
     
@@ -30,14 +34,29 @@ public class PelinappulaTest {
     
     @Before
     public void setUp() {
+        lauta = new Pelilauta(8);
+        Jonas = new Pelaaja('x');
+        nappula = new Pelinappula(5,Jonas,lauta);
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
+    @Test
+    public void konstruktoriAsettaaSijainninOikein(){
+        assertEquals(5,nappula.haePelinappulanSijainti());
+    }
+    
+    @Test
+    public void konstruktoriAsettaaOmistajanOikein(){
+        assertEquals(Jonas,nappula.haePelinappulanOmistaja());
+    }
+    
+    @Test
+    public void konstruktoriAsettaaPelilaudanOikein(){
+        assertEquals(lauta,nappula.haePelinappulanPelilauta());
+    }
+    
+    
 }

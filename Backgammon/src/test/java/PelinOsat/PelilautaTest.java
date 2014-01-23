@@ -110,4 +110,13 @@ public class PelilautaTest {
         lauta.siirraPelinappulaa(nappula, 8);
         assertEquals(nappula,lauta.haeLauta()[3]);
     }
+    
+    @Test
+    public void pelilautaTulostuuOikein(){
+        Pelilauta lauta2 = new Pelilauta(4);
+        nappula = new Pelinappula(3,pelaaja,lauta2);
+        lauta2.lisaaPelinappula(nappula);
+        String lautaTulostus = lauta2.tulostaPelilauta();
+        assertEquals("[] [] [] [x] ",lautaTulostus);
+    }
 }

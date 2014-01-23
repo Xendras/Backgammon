@@ -16,6 +16,9 @@ import PelinOsat.Noppa;
 public class Main {
     
     public static void main(String[] args) {
+        
+        
+        
         Pelaaja Jonas = new Pelaaja('X');                   //Testailen erilaisia toimintoja
         Pelilauta lauta = new Pelilauta(10);
         Pelinappula nappula1 = new Pelinappula(0,Jonas,lauta);
@@ -28,12 +31,10 @@ public class Main {
         lauta.siirraPelinappulaa(nappula1,1);
         //lauta.siirraPelinappulaa(nappula2,2);
         
-        lauta.tulostaPelilauta();
-        System.out.println("");
+        System.out.println(lauta.tulostaPelilauta());
         
-        lauta.siirraPelinappulaa(nappula1,5);
+        lauta.siirraPelinappulaa(nappula1,6);
         
-        lauta.tulostaPelilauta();
-        System.out.println("");
+        System.out.println(lauta.tulostaPelilauta());
     }
 }

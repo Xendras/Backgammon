@@ -9,7 +9,7 @@ public class Pelilauta {
     Pelinappula[] pelilauta;
 
     public Pelilauta(int laudanKoko) {
-        this.pelilauta = new Pelinappula[10];
+        this.pelilauta = new Pelinappula[laudanKoko];
     }
 
     public Pelinappula[] haeLauta() {
@@ -37,15 +37,18 @@ public class Pelilauta {
         this.pelilauta[nappula.sijainti] = nappula;
     }
 
-    public void tulostaPelilauta() {
+    public String tulostaPelilauta() {
+        String tulostus = "";
         for (int i = 0; i < this.pelilauta.length; i++) {
-            System.out.print("[ ");
+            tulostus += "[";
             if (this.pelilauta[i] != null) {
-                System.out.print(this.pelilauta[i].haePelinappulanOmistaja().haePelaajanTyyppi());
+                tulostus += this.pelilauta[i].haePelinappulanOmistaja().haePelaajanTyyppi();
             } else {
-                System.out.print(" ");
+                tulostus += "";
             }
-            System.out.print(" ]");
+            tulostus += "] ";
         }
+        
+        return tulostus;
     }
 }

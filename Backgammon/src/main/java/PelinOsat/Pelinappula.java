@@ -27,4 +27,12 @@ public class Pelinappula {
     public Pelaaja haePelinappulanOmistaja(){
         return this.omistaja;
     }
+    
+    public void asetaPelinappulanOmistaja(Pelaaja omistaja){
+        this.omistaja = omistaja;
+    }
+    
+    public Pelilauta haePelinappulanPelilauta(){
+        return this.pelilauta;
+    }
 }
