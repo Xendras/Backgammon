@@ -28,8 +28,8 @@
         <plugin>
             <artifactId>maven-compiler-plugin</artifactId>
             <configuration>
-                <source>1.6</source>
-                <target>1.6</target>
+                <source>1.7</source>
+                <target>1.7</target>
             </configuration>
             <version>3.0</version>
         </plugin>
@@ -42,16 +42,6 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
             <version>0.30</version>
-            <configuration>
-              <targetClasses>
-                <param>Backgammon.Backgammon.PelinOsat*</param>
-                <param>Backgammon.Backgammon.PelinKayttajat*</param>
-              </targetClasses>
-              <targetTests>
-                <param>Backgammon.Backgammon.PelinOsat*</param>
-                <param>Backgammon.Backgammon.PelinKayttajat*</param>
-              </targetTests>
-            </configuration>
         </plugin>
     </plugins>
 </build>
