@@ -2,4 +2,6 @@
 16.1.2014 // 2h // Ohja kertausta
 21.1.2014 // 1,5h // Projektin alustamista ja toisella koneella git-versiohallinnan toimimaan saamista
 22.1.2014// 30min // Luokkien luomista, PelinOsat ja PelinKäyttäjät paketit
+22.1.2014// 5h // Tämän toiminnallisuusvaiheen kaikki luokat, paitsi Main, koodattu ja testattu. Pit-testauksen kanssa painimista.
+
 

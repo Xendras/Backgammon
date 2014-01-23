@@ -42,6 +42,16 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
             <version>0.30</version>
+            <configuration>
+                <targetClasses>
+                    <param>PelinKayttajat.Pelaaja</param>
+                    <param>PelinOsat*</param>
+                </targetClasses>   
+                <targetTests>
+                    <param>PelinKayttajat*</param>
+                    <param>PelinOsat*</param>
+                </targetTests> 
+            </configuration>     
         </plugin>
     </plugins>
 </build>
