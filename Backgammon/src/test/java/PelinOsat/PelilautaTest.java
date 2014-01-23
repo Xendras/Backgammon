@@ -117,6 +117,6 @@ public class PelilautaTest {
         nappula = new Pelinappula(3,pelaaja,lauta2);
         lauta2.lisaaPelinappula(nappula);
         String lautaTulostus = lauta2.tulostaPelilauta();
-        assertEquals("[] [] [] [x] ",lautaTulostus);
+        assertEquals("[   ] [   ] [   ] [ x ] ",lautaTulostus);
     }
 }

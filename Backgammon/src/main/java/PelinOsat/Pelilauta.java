@@ -40,13 +40,13 @@ public class Pelilauta {
     public String tulostaPelilauta() {
         String tulostus = "";
         for (int i = 0; i < this.pelilauta.length; i++) {
-            tulostus += "[";
+            tulostus += "[ ";
             if (this.pelilauta[i] != null) {
                 tulostus += this.pelilauta[i].haePelinappulanOmistaja().haePelaajanTyyppi();
             } else {
-                tulostus += "";
+                tulostus += " ";
             }
-            tulostus += "] ";
+            tulostus += " ] ";
         }
         
         return tulostus;
