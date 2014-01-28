@@ -35,7 +35,7 @@ public class PelilautaTest {
     @Before
     public void setUp() {
         pelaaja = new Pelaaja('x');
-        lauta = new Pelilauta(10);
+        lauta = new Pelilauta();
         nappula = new Pelinappula(3,pelaaja,lauta);
         
     }
@@ -45,15 +45,21 @@ public class PelilautaTest {
     }
     
     @Test
-    public void konstruktoriAsettaaLaudanKoonOikein(){
-        int koko = this.lauta.haeLauta().length;
-        assertEquals(10,koko);
+    public void konstruktoriAsettaaYlaLaudanKoonOikein(){
+        int kokoYla = this.lauta.haeYlaLauta().length;        
+        assertEquals(12,kokoYla);
+    }
+    
+    @Test
+    public void konstruktoriAsettaaAlaLaudanKoonOikein(){
+        int kokoAla = this.lauta.haeAlaLauta().length;        
+        assertEquals(12,kokoAla);
     }
     
     @Test
     public void pelinappulaLisataanOikeallePaikalle(){
         lauta.lisaaPelinappula(nappula);
-        assertEquals(nappula,lauta.haeLauta()[3]);
+        assertEquals(nappula,lauta.haeYlaLauta()[0][3]);
     }
     
     @Test
@@ -63,11 +69,11 @@ public class PelilautaTest {
     
     @Test
     public void pelinappulaaEiVoiLisataLaudanUlkopuolelle(){
-        nappula = new Pelinappula(10,pelaaja,lauta);
+        nappula = new Pelinappula(25,pelaaja,lauta);
         lauta.lisaaPelinappula(nappula);
         boolean toimiko = true;
-        for(int i = 0;i < 10;i++){
-            if(lauta.haeLauta()[i] != null){
+        for(int i = 0;i < 12;i++){
+            if(lauta.haeYlaLauta()[0][i] != null){
                 toimiko = false;
             }
         }
@@ -77,22 +83,22 @@ public class PelilautaTest {
     @Test
     public void pelinappulaSiirtyyOikeallePaikalle(){
         lauta.lisaaPelinappula(nappula);
-        lauta.siirraPelinappulaa(nappula, 4);
-        assertEquals(nappula,lauta.haeLauta()[7]);
+        lauta.siirraPelinappulaaAlalaudalla(nappula, 4);
+        assertEquals(nappula,lauta.haeAlaLauta()[4][7]);
     }
     
     @Test
     public void pelinappulanSijaintiMuuttuuOikein(){
         lauta.lisaaPelinappula(nappula);
-        lauta.siirraPelinappulaa(nappula, 4);
+        lauta.siirraPelinappulaaAlalaudalla(nappula, 4);
         assertEquals(7,nappula.haePelinappulanSijainti());
     }
     
     @Test
     public void pelinappulaaEiVoiSiirtaaNegatiivistaMaaraa(){
         lauta.lisaaPelinappula(nappula);
-        lauta.siirraPelinappulaa(nappula, -1);
-        assertEquals(nappula,lauta.haeLauta()[3]);
+        lauta.siirraPelinappulaaAlalaudalla(nappula, -1);
+        assertEquals(nappula,lauta.haeAlaLauta()[4][3]);
     }
     
     @Test
@@ -100,23 +106,15 @@ public class PelilautaTest {
         Pelinappula nappula2 = new Pelinappula(5,pelaaja,lauta);
         lauta.lisaaPelinappula(nappula);
         lauta.lisaaPelinappula(nappula2);
-        lauta.siirraPelinappulaa(nappula, 2);
-        assertEquals(nappula,lauta.haeLauta()[3]);
+        lauta.siirraPelinappulaaAlalaudalla(nappula, 2);
+        assertEquals(nappula,lauta.haeAlaLauta()[4][3]);
     }
     
     @Test
     public void pelinappulaaEiVoiSiirtaaUlosLaudalta(){
         lauta.lisaaPelinappula(nappula);
-        lauta.siirraPelinappulaa(nappula, 8);
-        assertEquals(nappula,lauta.haeLauta()[3]);
+        lauta.siirraPelinappulaaYlalaudalla(nappula, 23);
+        assertEquals(nappula,lauta.haeAlaLauta()[4][3]);
     }
     
-    @Test
-    public void pelilautaTulostuuOikein(){
-        Pelilauta lauta2 = new Pelilauta(4);
-        nappula = new Pelinappula(3,pelaaja,lauta2);
-        lauta2.lisaaPelinappula(nappula);
-        String lautaTulostus = lauta2.tulostaPelilauta();
-        assertEquals("[   ] [   ] [   ] [ x ] ",lautaTulostus);
-    }
 }

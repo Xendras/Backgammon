@@ -34,7 +34,7 @@ public class PelinappulaTest {
     
     @Before
     public void setUp() {
-        lauta = new Pelilauta(8);
+        lauta = new Pelilauta();
         Jonas = new Pelaaja('x');
         nappula = new Pelinappula(5,Jonas,lauta);
     }
