@@ -42,9 +42,9 @@ public class Pelilauta {
         }
         
         if(nappula.haePelinappulanSijainti() < 13){
-            this.pelilaudanAlaosa[12-nappula.haePelinappulanSijainti()] = null;
+            this.pelilaudanAlaosa[4][12-nappula.haePelinappulanSijainti()] = null;
         } else {
-            this.pelilaudanYlaosa[nappula.haePelinappulanSijainti() - 13] = null;
+            this.pelilaudanYlaosa[0][nappula.haePelinappulanSijainti() - 13] = null;
         }
         
         nappula.sijainti += siirtoja;
@@ -56,9 +56,9 @@ public class Pelilauta {
             return;
         }    
         if(nappula.haePelinappulanSijainti() < 13){
-            this.pelilaudanAlaosa[12-nappula.haePelinappulanSijainti()] = null;
+            this.pelilaudanAlaosa[4][12-nappula.haePelinappulanSijainti()] = null;
         } else {
-            this.pelilaudanYlaosa[nappula.haePelinappulanSijainti() - 13] = null;
+            this.pelilaudanYlaosa[0][nappula.haePelinappulanSijainti() - 13] = null;
         }
         
         nappula.sijainti += siirtoja;

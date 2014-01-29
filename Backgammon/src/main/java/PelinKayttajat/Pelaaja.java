@@ -20,4 +20,8 @@ public class Pelaaja {
     public char haePelaajanTyyppi() {
         return this.nappulanTyyppi;
     }
+    
+    public void asetaPelaajanTyyppi(char x){
+        this.nappulanTyyppi = x;
+    }
 }
