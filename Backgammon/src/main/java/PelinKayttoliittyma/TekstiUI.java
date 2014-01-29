@@ -14,7 +14,7 @@ public class TekstiUI {
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
             tulostus += "[ ";
-            if (this.pelilauta.paikkaVarattu(2,i+12) == false) {
+            if (this.pelilauta.paikkaVarattu(2,i+13) == true) {
                 tulostus += this.pelilauta.haeYlaLauta()[0][i].haePelinappulanOmistaja().haePelaajanTyyppi();
             } else {
                 tulostus += " ";
@@ -29,7 +29,7 @@ public class TekstiUI {
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
             tulostus += "[ ";
-            if (this.pelilauta.paikkaVarattu(1,i+12) == false) {
+            if (this.pelilauta.paikkaVarattu(1,i) == true) {
                 tulostus += this.pelilauta.haeAlaLauta()[4][i].haePelinappulanOmistaja().haePelaajanTyyppi();
             } else {
                 tulostus += " ";

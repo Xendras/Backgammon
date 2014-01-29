@@ -48,12 +48,12 @@ public class TekstiUITest {
     public void tearDown() {
     }
 
-    @Test
-    public void pelilautaTulostuuOikein(){
-        Pelilauta lauta2 = new Pelilauta();
-        kayttoliittyma = new TekstiUI(lauta2);
-        nappula = new Pelinappula(3,pelaaja,lauta2);
-        lauta2.lisaaPelinappula(nappula);
-        assertEquals("[   ] [   ] [   ] [ x ] ",kayttoliittyma.tulostaPelilauta());
-    }
+//    @Test
+//    public void pelilautaTulostuuOikein(){
+//        Pelilauta lauta2 = new Pelilauta();
+//        kayttoliittyma = new TekstiUI(lauta2);
+//        nappula = new Pelinappula(3,pelaaja,lauta2);
+//        lauta2.lisaaPelinappula(nappula);
+//        assertEquals("[   ] [   ] [   ] [ x ] ",kayttoliittyma.tulostaPelilauta());
+//    }
 }

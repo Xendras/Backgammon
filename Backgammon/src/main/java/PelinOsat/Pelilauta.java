@@ -67,7 +67,7 @@ public class Pelilauta {
 
     public boolean paikkaVarattu(int pelilaudanOsa, int paikka) { // pelilaudanOsa 1=ala 2=ylä
         if (pelilaudanOsa == 1) {
-            if (this.pelilaudanAlaosa[4][12 - paikka] != null) {
+            if (this.pelilaudanAlaosa[4][paikka] != null) {
                 return true;
             } else {
                 return false;

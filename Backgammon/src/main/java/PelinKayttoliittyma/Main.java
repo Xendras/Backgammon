@@ -17,6 +17,8 @@ import PelinOsat.Noppa;
 public class Main {
     
     public static void main(String[] args) {
-        
+        Pelilauta lauta = new Pelilauta();
+        TekstiUI kayttoliittyma = new TekstiUI(lauta);
+        System.out.println(kayttoliittyma.tulostaPelilauta());
     }
 }
