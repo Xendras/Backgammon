@@ -25,15 +25,13 @@ public class Pelilauta {
     }
 
     public void lisaaPelinappula(Pelinappula nappula) {
-        if (nappula.haePelinappulanSijainti() < 0 || nappula.haePelinappulanSijainti() > 24) {
+        if (nappula.haePelinappulanSijainti() <= 0 || nappula.haePelinappulanSijainti() > 24) {
             return;
         }
         if (nappula.haePelinappulanSijainti() >= 13) {
             this.pelilaudanYlaosa[0][nappula.haePelinappulanSijainti() - 13] = nappula;
-            nappula.asetaPelinappulanSijainti(nappula.haePelinappulanSijainti());
         } else {
             this.pelilaudanAlaosa[4][12 - nappula.haePelinappulanSijainti()] = nappula;
-            nappula.asetaPelinappulanSijainti(nappula.haePelinappulanSijainti());
         }
     }
 
@@ -76,23 +74,9 @@ public class Pelilauta {
 
     public boolean paikkaVarattu(int pelilaudanOsa, int paikka) { // pelilaudanOsa 1=ala 2=ylä
         if (pelilaudanOsa == 1) {
-            if (this.pelilaudanAlaosa[4][12-paikka] != null) {
-                return true;
-            } else {
-                return false;
-            }
+            return this.pelilaudanAlaosa[4][12-paikka] != null;
         } else {
-            if (this.pelilaudanYlaosa[0][paikka - 13] != null) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-    
-    public void alustaPelilauta(Pelaaja pelaaja1, Pelaaja pelaaja2){
-        for(int i = 0; i < 15;i++){
-            
+            return this.pelilaudanYlaosa[0][paikka - 13] != null;
         }
     }
 }
