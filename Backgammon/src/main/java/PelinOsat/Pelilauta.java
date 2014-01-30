@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package PelinOsat;
+import PelinKayttajat.Pelaaja;
 
 public class Pelilauta {
 
@@ -37,7 +38,7 @@ public class Pelilauta {
     }
 
     public void siirraPelinappulaaYlalaudalla(Pelinappula nappula, int siirtoja) {
-        if (nappula.haePelinappulanSijainti() + siirtoja > 24 || siirtoja < 1 || this.paikkaVarattu(2, nappula.haePelinappulanSijainti() + siirtoja)) {
+        if (nappula.haePelinappulanSijainti() + siirtoja > 24 || nappula.haePelinappulanSijainti() + siirtoja < 0 ||  this.paikkaVarattu(2, nappula.haePelinappulanSijainti() + siirtoja)) {
             return;
         }
         
@@ -52,7 +53,7 @@ public class Pelilauta {
     }
     
     public void siirraPelinappulaaAlalaudalla(Pelinappula nappula, int siirtoja) {
-        if (nappula.haePelinappulanSijainti() + siirtoja > 24 || siirtoja < 1 || this.paikkaVarattu(1, nappula.haePelinappulanSijainti() + siirtoja)) {
+        if (nappula.haePelinappulanSijainti() + siirtoja > 24 || nappula.haePelinappulanSijainti() + siirtoja < 1 || this.paikkaVarattu(1, nappula.haePelinappulanSijainti() + siirtoja)) {
             return;
         }    
         if(nappula.haePelinappulanSijainti() < 13){
@@ -64,10 +65,18 @@ public class Pelilauta {
         nappula.sijainti += siirtoja;
         this.pelilaudanAlaosa[4][12-nappula.sijainti] = nappula;
     }
+    
+    public void siirraPelinappulaa(Pelinappula nappula, int siirtoja){
+        if(nappula.haePelinappulanSijainti() + siirtoja > 12){
+            this.siirraPelinappulaaYlalaudalla(nappula, siirtoja);
+        } else {
+            this.siirraPelinappulaaAlalaudalla(nappula, siirtoja);
+        }
+    }
 
     public boolean paikkaVarattu(int pelilaudanOsa, int paikka) { // pelilaudanOsa 1=ala 2=ylä
         if (pelilaudanOsa == 1) {
-            if (this.pelilaudanAlaosa[4][paikka] != null) {
+            if (this.pelilaudanAlaosa[4][12-paikka] != null) {
                 return true;
             } else {
                 return false;
@@ -78,6 +87,12 @@ public class Pelilauta {
             } else {
                 return false;
             }
+        }
+    }
+    
+    public void alustaPelilauta(Pelaaja pelaaja1, Pelaaja pelaaja2){
+        for(int i = 0; i < 15;i++){
+            
         }
     }
 }

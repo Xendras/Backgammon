@@ -29,7 +29,7 @@ public class TekstiUI {
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
             tulostus += "| ";
-            if (this.pelilauta.paikkaVarattu(1,i) == true) {
+            if (this.pelilauta.paikkaVarattu(1,12-i) == true) {
                 tulostus += this.pelilauta.haeAlaLauta()[4][i].haePelinappulanOmistaja().haePelaajanTyyppi();
             } else {
                 tulostus += " ";

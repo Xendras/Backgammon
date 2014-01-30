@@ -18,6 +18,13 @@ public class Main {
     
     public static void main(String[] args) {
         Pelilauta lauta = new Pelilauta();
+        Pelaaja jonas = new Pelaaja('j');
+        Pelaaja sandra = new Pelaaja('s');
+        Pelinappula nappulaJ = new Pelinappula(5,jonas,lauta);
+        Pelinappula nappulaS = new Pelinappula(15,sandra,lauta);
+        lauta.lisaaPelinappula(nappulaJ);
+        lauta.lisaaPelinappula(nappulaS);
+        lauta.siirraPelinappulaa(nappulaS, -11);
         TekstiUI kayttoliittyma = new TekstiUI(lauta);
         System.out.println(kayttoliittyma.tulostaPelilauta());
     }
