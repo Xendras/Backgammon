@@ -12,9 +12,11 @@ package PelinKayttajat;
 public class Pelaaja {
 
     char nappulanTyyppi;
+    String nimi;
 
-    public Pelaaja(char nappulanTyyppi) {
+    public Pelaaja(String nimi, char nappulanTyyppi) {
         this.nappulanTyyppi = nappulanTyyppi;
+        this.nimi = nimi;
     }
 
     public char haePelaajanTyyppi() {
@@ -23,5 +25,13 @@ public class Pelaaja {
     
     public void asetaPelaajanTyyppi(char x){
         this.nappulanTyyppi = x;
+    }
+    
+    public void asetaPelaajanNimi(String nimi){
+        this.nimi = nimi;
+    }
+    
+    public String haePelaajanNimi(){
+        return this.nimi;
     }
 }

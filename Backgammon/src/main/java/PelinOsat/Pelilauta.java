@@ -9,10 +9,12 @@ public class Pelilauta {
 
     Pelinappula[][] pelilaudanAlaosa;
     Pelinappula[][] pelilaudanYlaosa;
+    Pelaaja pelaajaVuorossa;
 
     public Pelilauta() {
         this.pelilaudanAlaosa = new Pelinappula[5][12];
         this.pelilaudanYlaosa = new Pelinappula[5][12];
+        this.pelaajaVuorossa = null;
     }
     
 
@@ -22,6 +24,14 @@ public class Pelilauta {
 
     public Pelinappula[][] haeAlaLauta() {
         return this.pelilaudanAlaosa;
+    }
+    
+    public Pelaaja haePelaajaVuorossa(){
+        return this.pelaajaVuorossa;
+    }
+    
+    public void asetaPelaajaVuorossa(Pelaaja pelaaja){
+        this.pelaajaVuorossa = pelaaja;
     }
 
     public void lisaaPelinappula(Pelinappula nappula) {
@@ -69,6 +79,14 @@ public class Pelilauta {
             this.siirraPelinappulaaYlalaudalla(nappula, siirtoja);
         } else {
             this.siirraPelinappulaaAlalaudalla(nappula, siirtoja);
+        }
+    }
+    
+    public Pelinappula haePelinappula(int sijainti){
+        if(sijainti >12){
+            return this.pelilaudanYlaosa[0][sijainti-13];
+        } else {
+            return this.pelilaudanAlaosa[4][12-sijainti];
         }
     }
 

@@ -1,13 +1,16 @@
 
 package PelinKayttoliittyma;
 import PelinOsat.Pelilauta;
+import java.util.Scanner;
 
 public class TekstiUI {
     
     Pelilauta pelilauta;
+    Scanner lukija;
     
     public TekstiUI(Pelilauta lauta){
         this.pelilauta = lauta;
+        this.lukija = new Scanner(System.in);
     }
     
     public String tulostaYlalauta() {
@@ -67,6 +70,15 @@ public class TekstiUI {
             tulostus += "  " + String.valueOf(12-i) + "   ";
         }  
         return tulostus;
+    }
+    
+    public void peliNappulanSiirto(){
+        System.out.print("Pelaajan" + this.pelilauta.haePelaajaVuorossa().haePelaajanNimi() + "vuoro");
+        System.out.print("Mikä sijainti?");
+        int sijainti = Integer.parseInt(lukija.nextLine());
+        System.out.print("Montako askelta?");
+        int siirrot = Integer.parseInt(lukija.nextLine());
+        
     }
     
 }
