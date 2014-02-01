@@ -18,8 +18,8 @@ public class Main {
     
     public static void main(String[] args) {
         Pelilauta lauta = new Pelilauta();
-        Pelaaja jonas = new Pelaaja('j');
-        Pelaaja sandra = new Pelaaja('s');
+        Pelaaja jonas = new Pelaaja("Jonas",'j');
+        Pelaaja sandra = new Pelaaja("Sandra",'s');
         Pelinappula nappulaJ = new Pelinappula(5,jonas,lauta);
         Pelinappula nappulaS = new Pelinappula(15,sandra,lauta);
         lauta.lisaaPelinappula(nappulaJ);
