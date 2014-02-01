@@ -6,6 +6,7 @@
 package PelinKayttoliittyma;
 
 import PelinKayttajat.Pelaaja;
+import PelinOsat.Pelikokonaisuus;
 import PelinOsat.Pelilauta;
 import PelinOsat.Pelinappula;
 import org.junit.After;
@@ -23,6 +24,7 @@ public class TekstiUITest {
 
     Pelilauta lauta;
     Pelinappula nappula;
+    Pelikokonaisuus peli;
     Pelaaja pelaaja;
     TekstiUI kayttoliittyma;
 
@@ -39,10 +41,10 @@ public class TekstiUITest {
 
     @Before
     public void setUp() {
-        pelaaja = new Pelaaja("testi",'x');
-        lauta = new Pelilauta();
-        nappula = new Pelinappula(3, pelaaja, lauta);
-        kayttoliittyma = new TekstiUI(lauta);
+        peli = new Pelikokonaisuus();
+        pelaaja = new Pelaaja("testi",'x',peli);
+        nappula = new Pelinappula(pelaaja, peli);
+        kayttoliittyma = new TekstiUI(peli);
     }
 
     @After
@@ -51,28 +53,23 @@ public class TekstiUITest {
 
     @Test
     public void alaLautaTulostuuOikein() {
-        Pelilauta lauta2 = new Pelilauta();
-        kayttoliittyma = new TekstiUI(lauta2);
-        nappula = new Pelinappula(3, pelaaja, lauta2);
-        lauta2.lisaaPelinappula(nappula);
+
+        nappula = new Pelinappula(pelaaja, peli);
+        peli.haePelilauta().lisaaPelinappula(nappula, 3);
         assertEquals("|   | |   | |   | |   | |   | |   | |   | |   | |   | | x | |   | |   | ", kayttoliittyma.tulostaAlalauta());
     }
 
     @Test
     public void ylaLautaTulostuuOikein() {
-        Pelilauta lauta2 = new Pelilauta();
-        kayttoliittyma = new TekstiUI(lauta2);
-        nappula = new Pelinappula(16, pelaaja, lauta2);
-        lauta2.lisaaPelinappula(nappula);
+        nappula = new Pelinappula(pelaaja, peli);
+        peli.haePelilauta().lisaaPelinappula(nappula, 16);
         assertEquals("|   | |   | |   | | x | |   | |   | |   | |   | |   | |   | |   | |   | ", kayttoliittyma.tulostaYlalauta());
     }
 
     @Test
     public void kokoLautaTulostuuOikein() {
-        Pelilauta lauta2 = new Pelilauta();
-        kayttoliittyma = new TekstiUI(lauta2);
-        nappula = new Pelinappula(16, pelaaja, lauta2);
-        lauta2.lisaaPelinappula(nappula);
+        nappula = new Pelinappula(pelaaja, peli);
+        peli.haePelilauta().lisaaPelinappula(nappula, 16);
         assertEquals("  13    14    15    16    17    18    19    20    21    22    23    24  \n"
                 + "------------------------------------------------------------------------\n"
                 + "|   | |   | |   | | x | |   | |   | |   | |   | |   | |   | |   | |   | \n"

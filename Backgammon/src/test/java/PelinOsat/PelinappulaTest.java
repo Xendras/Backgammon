@@ -20,6 +20,7 @@ public class PelinappulaTest {
     
     Pelilauta lauta;
     Pelaaja Jonas;
+    Pelikokonaisuus peli;
     Pelinappula nappula;
     public PelinappulaTest() {
     }
@@ -34,9 +35,10 @@ public class PelinappulaTest {
     
     @Before
     public void setUp() {
-        lauta = new Pelilauta();
-        Jonas = new Pelaaja("testi",'x');
-        nappula = new Pelinappula(5,Jonas,lauta);
+        peli = new Pelikokonaisuus();
+        lauta = peli.haePelilauta();
+        Jonas = new Pelaaja("testi",'x',peli);
+        nappula = new Pelinappula(Jonas,peli);
     }
     
     @After
@@ -45,7 +47,7 @@ public class PelinappulaTest {
     
     @Test
     public void konstruktoriAsettaaSijainninOikein(){
-        assertEquals(5,nappula.haePelinappulanSijainti());
+        assertEquals(-1,nappula.haePelinappulanSijainti());
     }
     
     @Test

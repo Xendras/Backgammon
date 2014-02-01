@@ -4,6 +4,7 @@
  */
 package PelinKayttajat;
 
+import PelinOsat.Pelikokonaisuus;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,6 +17,8 @@ import static org.junit.Assert.*;
  * @author Xendra
  */
 public class PelaajaTest {
+    
+    Pelikokonaisuus peli;
 
     public PelaajaTest() {
     }
@@ -30,6 +33,7 @@ public class PelaajaTest {
 
     @Before
     public void setUp() {
+        peli = new Pelikokonaisuus();
     }
 
     @After
@@ -39,7 +43,7 @@ public class PelaajaTest {
     
     @Test
     public void konstruktoriAsettaaNappulanTyypinOikein(){
-        Pelaaja pelaaja = new Pelaaja("testi",'P');
+        Pelaaja pelaaja = new Pelaaja("testi",'P', peli);
         
         char tyyppi = pelaaja.haePelaajanTyyppi();
         

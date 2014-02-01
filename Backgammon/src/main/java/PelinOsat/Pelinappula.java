@@ -6,13 +6,13 @@ import PelinOsat.Pelilauta;
 public class Pelinappula {
 
     int sijainti;
-    Pelilauta pelilauta;
+    Pelikokonaisuus peli;
     Pelaaja omistaja;
 
-    public Pelinappula(int sijainti, Pelaaja omistaja, Pelilauta pelilauta) {
-        this.sijainti = sijainti;
+    public Pelinappula(Pelaaja omistaja, Pelikokonaisuus peli) {
+        this.sijainti = -1;
         this.omistaja = omistaja;
-        this.pelilauta = pelilauta;
+        this.peli = peli;
     }
 
     
@@ -33,6 +33,6 @@ public class Pelinappula {
     }
     
     public Pelilauta haePelinappulanPelilauta(){
-        return this.pelilauta;
+        return this.peli.haePelilauta();
     }
 }

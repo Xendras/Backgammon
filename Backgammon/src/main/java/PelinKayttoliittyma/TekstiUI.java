@@ -1,15 +1,16 @@
 
 package PelinKayttoliittyma;
+import PelinOsat.Pelikokonaisuus;
 import PelinOsat.Pelilauta;
 import java.util.Scanner;
 
 public class TekstiUI {
     
-    Pelilauta pelilauta;
+    Pelikokonaisuus peli;
     Scanner lukija;
     
-    public TekstiUI(Pelilauta lauta){
-        this.pelilauta = lauta;
+    public TekstiUI(Pelikokonaisuus peli){
+        this.peli = peli;
         this.lukija = new Scanner(System.in);
     }
     
@@ -17,8 +18,8 @@ public class TekstiUI {
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
             tulostus += "| ";
-            if (this.pelilauta.paikkaVarattu(2,i+13) == true) {
-                tulostus += this.pelilauta.haeYlaLauta()[0][i].haePelinappulanOmistaja().haePelaajanTyyppi();
+            if (this.peli.haePelilauta().paikkaVarattu(i+13) == true) {
+                tulostus += this.peli.haePelilauta().haeYlaLauta()[0][i].haePelinappulanOmistaja().haePelaajanTyyppi();
             } else {
                 tulostus += " ";
             }
@@ -32,8 +33,8 @@ public class TekstiUI {
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
             tulostus += "| ";
-            if (this.pelilauta.paikkaVarattu(1,12-i) == true) {
-                tulostus += this.pelilauta.haeAlaLauta()[4][i].haePelinappulanOmistaja().haePelaajanTyyppi();
+            if (this.peli.haePelilauta().paikkaVarattu(12-i) == true) {
+                tulostus += this.peli.haePelilauta().haeAlaLauta()[4][i].haePelinappulanOmistaja().haePelaajanTyyppi();
             } else {
                 tulostus += " ";
             }
@@ -72,16 +73,11 @@ public class TekstiUI {
         return tulostus;
     }
     
-    public void peliNappulanSiirto(){
-        System.out.println("Pelaajan" + this.pelilauta.haePelaajaVuorossa().haePelaajanNimi() + "vuoro");
-        System.out.println("Noppa: " + String.valueOf(this.pelilauta.haeNoppa1().heitaNoppaaJaAnnaArvo()));
-        System.out.print("Mikä sijainti?");
-        int sijainti = Integer.parseInt(lukija.nextLine());
-        if(this.pelilauta.haePelinappula(sijainti).haePelinappulanOmistaja().equals(this.pelilauta.haePelaajaVuorossa())){
-            this.pelilauta.siirraPelinappulaa(this.pelilauta.haePelinappula(sijainti), this.pelilauta.haeNoppa1().haeNopanArvo());
+    public void alustaPelilauta(){
+        
     }
 }
         
         
-    }
+    
     

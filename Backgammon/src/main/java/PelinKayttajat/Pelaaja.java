@@ -5,6 +5,9 @@
  */
 package PelinKayttajat;
 
+import PelinOsat.Pelikokonaisuus;
+import PelinOsat.Pelilauta;
+
 /**
  *
  * @author jonas
@@ -13,10 +16,12 @@ public class Pelaaja {
 
     char nappulanTyyppi;
     String nimi;
+    Pelikokonaisuus peli;
 
-    public Pelaaja(String nimi, char nappulanTyyppi) {
+    public Pelaaja(String nimi, char nappulanTyyppi, Pelikokonaisuus peli) {
         this.nappulanTyyppi = nappulanTyyppi;
         this.nimi = nimi;
+        this.peli = peli;
     }
 
     public char haePelaajanTyyppi() {
@@ -33,5 +38,9 @@ public class Pelaaja {
     
     public String haePelaajanNimi(){
         return this.nimi;
+    }
+    
+    public void siirraPelinappulaa(int sijainti, int siirtoja){
+        this.peli.siirraPelinappulaa(sijainti, siirtoja);
     }
 }

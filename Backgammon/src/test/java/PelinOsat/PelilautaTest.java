@@ -20,6 +20,7 @@ public class PelilautaTest {
     Pelilauta lauta;
     Pelinappula nappula;
     Pelaaja pelaaja;
+    Pelikokonaisuus peli;
     
     public PelilautaTest() {
     }
@@ -34,9 +35,10 @@ public class PelilautaTest {
     
     @Before
     public void setUp() {
-        pelaaja = new Pelaaja("testi",'x');
-        lauta = new Pelilauta();
-        nappula = new Pelinappula(3,pelaaja,lauta);
+        peli = new Pelikokonaisuus();
+        lauta = peli.haePelilauta();
+        pelaaja = new Pelaaja("testi",'x',peli);
+        nappula = new Pelinappula(pelaaja, peli);
         
     }
     
@@ -58,19 +60,18 @@ public class PelilautaTest {
     
     @Test
     public void pelinappulaLisataanOikeallePaikalle(){
-        lauta.lisaaPelinappula(nappula);
+        lauta.lisaaPelinappula(nappula,3);
         assertEquals(nappula,lauta.haeAlaLauta()[4][9]);
     }
     
     @Test
     public void pelinappulanSijaintiAsetetaanOikein(){
-        assertEquals(3,nappula.haePelinappulanSijainti());
+        assertEquals(-1,nappula.haePelinappulanSijainti());
     }
     
     @Test
     public void pelinappulaaEiVoiLisataYlaLaudanUlkopuolelle(){
-        nappula = new Pelinappula(25,pelaaja,lauta);
-        lauta.lisaaPelinappula(nappula);
+        lauta.lisaaPelinappula(nappula,25);
         boolean toimiko = true;
         for(int i = 0;i < 12;i++){
             if(lauta.haeYlaLauta()[0][i] != null){
@@ -82,15 +83,13 @@ public class PelilautaTest {
     
     @Test
     public void lisaaPelinappulaAsettaaSijainninOikein(){
-        nappula = new Pelinappula(23,pelaaja,lauta);
-        lauta.lisaaPelinappula(nappula);
+        lauta.lisaaPelinappula(nappula,23);
         assertEquals(23,nappula.haePelinappulanSijainti());
     }
     
     @Test
     public void pelinappulaaEiVoiLisataAlaLaudanUlkopuolelle(){
-        nappula = new Pelinappula(0,pelaaja,lauta);
-        lauta.lisaaPelinappula(nappula);
+        lauta.lisaaPelinappula(nappula,0);
         boolean toimiko = true;
         for(int i = 0;i < 12;i++){
             if(lauta.haeAlaLauta()[4][i] != null){
@@ -102,47 +101,46 @@ public class PelilautaTest {
     
     @Test
     public void pelinappulaSiirtyyOikeallePaikalleYlalaudalla(){
-        nappula = new Pelinappula(14,pelaaja,lauta);
-        lauta.lisaaPelinappula(nappula);
-        lauta.siirraPelinappulaaYlalaudalla(nappula, 4);
+        lauta.lisaaPelinappula(nappula,14);
+        lauta.siirraPelinappulaaYlalaudalla(14, 4);
         assertEquals(nappula,lauta.haeYlaLauta()[0][5]);
     }
     
     @Test
     public void pelinappulaSiirtyyOikeallePaikalleAlalaudalla(){
-        lauta.lisaaPelinappula(nappula);
-        lauta.siirraPelinappulaaAlalaudalla(nappula, 4);
+        lauta.lisaaPelinappula(nappula, 3);
+        lauta.siirraPelinappulaaAlalaudalla(3, 4);
         assertEquals(nappula,lauta.haeAlaLauta()[4][5]);
     }
     
     @Test
     public void pelinappulanSijaintiMuuttuuOikein(){
-        lauta.lisaaPelinappula(nappula);
-        lauta.siirraPelinappulaaAlalaudalla(nappula, 4);
+        lauta.lisaaPelinappula(nappula,3);
+        lauta.siirraPelinappulaaAlalaudalla(3, 4);
         assertEquals(7,nappula.haePelinappulanSijainti());
     }
     
     
     @Test
     public void pelinappulaaEiVoiSiirtaaToisenNappulanPaalle(){
-        Pelinappula nappula2 = new Pelinappula(5,pelaaja,lauta);
-        lauta.lisaaPelinappula(nappula);
-        lauta.lisaaPelinappula(nappula2);
-        lauta.siirraPelinappulaaAlalaudalla(nappula, 2);
+        Pelinappula nappula2 = new Pelinappula(pelaaja,peli);
+        lauta.lisaaPelinappula(nappula, 3);
+        lauta.lisaaPelinappula(nappula2, 5);
+        lauta.siirraPelinappulaaAlalaudalla(5, 2);
         assertEquals(nappula,lauta.haeAlaLauta()[4][9]);
     }
     
     @Test
     public void pelinappulaaEiVoiSiirtaaUlosYlaLaudalta(){
-        lauta.lisaaPelinappula(nappula);
-        lauta.siirraPelinappulaaYlalaudalla(nappula, 23);
+        lauta.lisaaPelinappula(nappula, 3);
+        lauta.siirraPelinappulaaYlalaudalla(3, 23);
         assertEquals(nappula,lauta.haeAlaLauta()[4][9]);
     }
     
     @Test
     public void pelinappulaaEiVoiSiirtaaUlosAlaLaudalta(){
-        lauta.lisaaPelinappula(nappula);
-        lauta.siirraPelinappulaaAlalaudalla(nappula, -3);
+        lauta.lisaaPelinappula(nappula, 3);
+        lauta.siirraPelinappulaaAlalaudalla(3, -3);
         assertEquals(nappula,lauta.haeAlaLauta()[4][9]);
     }
     
