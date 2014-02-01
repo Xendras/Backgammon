@@ -21,8 +21,9 @@ public class Noppa {
         this.arvo = 1;
     }
 
-    public int heitaNoppaa() {
-        return arpoja.nextInt(6) + 1;
+    public int heitaNoppaaJaAnnaArvo() {
+        this.asetaNopanArvo(arpoja.nextInt(6)+1);
+        return this.arvo;
     }
 
     public void asetaNopanArvo(int uusiArvo) {

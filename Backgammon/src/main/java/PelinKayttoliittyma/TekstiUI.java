@@ -73,12 +73,15 @@ public class TekstiUI {
     }
     
     public void peliNappulanSiirto(){
-        System.out.print("Pelaajan" + this.pelilauta.haePelaajaVuorossa().haePelaajanNimi() + "vuoro");
+        System.out.println("Pelaajan" + this.pelilauta.haePelaajaVuorossa().haePelaajanNimi() + "vuoro");
+        System.out.println("Noppa: " + String.valueOf(this.pelilauta.haeNoppa1().heitaNoppaaJaAnnaArvo()));
         System.out.print("Mikä sijainti?");
         int sijainti = Integer.parseInt(lukija.nextLine());
-        System.out.print("Montako askelta?");
-        int siirrot = Integer.parseInt(lukija.nextLine());
+        if(this.pelilauta.haePelinappula(sijainti).haePelinappulanOmistaja().equals(this.pelilauta.haePelaajaVuorossa())){
+            this.pelilauta.siirraPelinappulaa(this.pelilauta.haePelinappula(sijainti), this.pelilauta.haeNoppa1().haeNopanArvo());
+    }
+}
+        
         
     }
     
-}

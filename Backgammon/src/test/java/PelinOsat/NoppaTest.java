@@ -48,7 +48,7 @@ public class NoppaTest {
     @Test
     public void nopanHeittoEiVieArvoaVaaraksi() {
         boolean toimiko = false;
-        int arvo = noppa.heitaNoppaa();
+        int arvo = noppa.heitaNoppaaJaAnnaArvo();
         if(arvo>0 && arvo < 7){
             toimiko = true;
         }        

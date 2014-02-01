@@ -39,7 +39,7 @@ public class TekstiUITest {
 
     @Before
     public void setUp() {
-        pelaaja = new Pelaaja('x');
+        pelaaja = new Pelaaja("testi",'x');
         lauta = new Pelilauta();
         nappula = new Pelinappula(3, pelaaja, lauta);
         kayttoliittyma = new TekstiUI(lauta);

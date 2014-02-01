@@ -10,14 +10,25 @@ public class Pelilauta {
     Pelinappula[][] pelilaudanAlaosa;
     Pelinappula[][] pelilaudanYlaosa;
     Pelaaja pelaajaVuorossa;
+    Noppa noppa1;
+    Noppa noppa2;
 
     public Pelilauta() {
         this.pelilaudanAlaosa = new Pelinappula[5][12];
         this.pelilaudanYlaosa = new Pelinappula[5][12];
         this.pelaajaVuorossa = null;
+        this.noppa1 = new Noppa();
+        this.noppa2 = new Noppa();
     }
     
-
+    public Noppa haeNoppa1(){
+        return this.noppa1;
+    }
+    
+    public Noppa haeNoppa2(){
+        return this.noppa2;
+    }
+    
     public Pelinappula[][] haeYlaLauta() {
         return this.pelilaudanYlaosa;
     }

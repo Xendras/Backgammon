@@ -27,5 +27,8 @@ public class Main {
         lauta.siirraPelinappulaa(nappulaS, -11);
         TekstiUI kayttoliittyma = new TekstiUI(lauta);
         System.out.println(kayttoliittyma.tulostaPelilauta());
+        lauta.asetaPelaajaVuorossa(jonas);
+        kayttoliittyma.peliNappulanSiirto();
+        System.out.println(kayttoliittyma.tulostaPelilauta());
     }
 }
