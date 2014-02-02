@@ -7,6 +7,7 @@
 package PelinOsat;
 
 import PelinKayttajat.Pelaaja;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Pelikokonaisuus { 
@@ -15,6 +16,7 @@ public class Pelikokonaisuus {
     Pelilauta pelilauta;
     HashMap<Integer, Pelinappula> nappulat1;
     HashMap<Integer, Pelinappula> nappulat2;
+    HashMap<Integer, ArrayList<Pelinappula>> nappuloidenSijainnit;
     Pelaaja pelaaja1;
     Pelaaja pelaaja2;
     
@@ -24,6 +26,7 @@ public class Pelikokonaisuus {
         this.pelilauta = new Pelilauta();
         this.nappulat1 = new HashMap<Integer,Pelinappula>();
         this.nappulat2 = new HashMap<Integer,Pelinappula>();
+        this.nappuloidenSijainnit = new HashMap<Integer, ArrayList<Pelinappula>>();
         this.pelaaja1 = null;
         this.pelaaja2 = null;
     }
@@ -64,14 +67,40 @@ public class Pelikokonaisuus {
     }
     
     public void alustaPelilauta(){
-        for(int i = 1; i <13; i++){
-            Pelinappula nappula = this.nappulat1.get(i);
-            this.lisaaPelinappula(nappula, i);
+        for(int i = 1; i < 25; i++){
+            nappuloidenSijainnit.put(i,new ArrayList<Pelinappula>());         
         }
         
-        for(int i = 1; i < 13; i++){
-            Pelinappula nappula = this.nappulat2.get(i);
-            this.lisaaPelinappula(this.nappulat2.get(i), 25-i);
+        for(int i = 1;i<3;i++){
+            nappuloidenSijainnit.get(1).add(nappulat1.get(i));
+        }
+        
+        for(int i = 3;i<8;i++){
+            nappuloidenSijainnit.get(12).add(nappulat1.get(i));
+        }
+        
+        for(int i = 8;i<11;i++){
+            nappuloidenSijainnit.get(17).add(nappulat1.get(i));
+        }
+        
+        for(int i = 11;i<16;i++){
+            nappuloidenSijainnit.get(19).add(nappulat1.get(i));
+        }
+        
+        for(int i = 1;i<3;i++){
+            nappuloidenSijainnit.get(24).add(nappulat2.get(i));
+        }
+        
+        for(int i = 3;i<8;i++){
+            nappuloidenSijainnit.get(13).add(nappulat2.get(i));
+        }
+        
+        for(int i = 8;i<11;i++){
+            nappuloidenSijainnit.get(8).add(nappulat2.get(i));
+        }
+        
+        for(int i = 11;i<16;i++){
+            nappuloidenSijainnit.get(6).add(nappulat2.get(i));
         }
     }
     
