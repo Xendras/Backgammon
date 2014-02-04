@@ -5,96 +5,65 @@
 package PelinOsat;
 
 import PelinKayttajat.Pelaaja;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Pelilauta {
 
-    Pelinappula[][] pelilaudanAlaosa;
-    Pelinappula[][] pelilaudanYlaosa;
+    HashMap<Integer, ArrayList<Pelinappula>> pelilauta;
 
     public Pelilauta() {
-        this.pelilaudanAlaosa = new Pelinappula[5][12];
-        this.pelilaudanYlaosa = new Pelinappula[5][12];
+        this.pelilauta = new HashMap<Integer, ArrayList<Pelinappula>>();
+
+        for (int i = 1; i < 25; i++) {
+            pelilauta.put(i, new ArrayList<Pelinappula>());
+        }
 
     }
 
-    public Pelinappula[][] haeYlaLauta() {
-        return this.pelilaudanYlaosa;
+    public HashMap<Integer, ArrayList<Pelinappula>> haePelilauta() {
+        return this.pelilauta;
     }
 
-    public Pelinappula[][] haeAlaLauta() {
-        return this.pelilaudanAlaosa;
+    public void lisaaNappulaLaudalle(Pelinappula nappula, int sijainti) {
+        if (voikoLisata(nappula, sijainti)) {
+            pelilauta.get(sijainti).add(nappula);
+            nappula.asetaPelinappulanSijainti(sijainti);
+        }
     }
 
-    public void lisaaPelinappula(Pelinappula nappula, int sijainti) {
-        nappula.asetaPelinappulanSijainti(sijainti);
-        if (nappula.haePelinappulanSijainti() <= 0 || nappula.haePelinappulanSijainti() > 24) {
+    public void siirraNappulaaLaudalla(int sijainti, int siirtoja) {
+        if (sijainti < 1 || sijainti > 24 || pelilauta.get(sijainti).isEmpty()) {
             return;
         }
-        if (nappula.haePelinappulanSijainti() >= 13) {
-            this.pelilaudanYlaosa[0][nappula.haePelinappulanSijainti() - 13] = nappula;
-        } else {
-            this.pelilaudanAlaosa[4][12 - nappula.haePelinappulanSijainti()] = nappula;
+        if (voikoSiirtaa(sijainti, siirtoja)) {
+            Pelinappula nappula = pelilauta.get(sijainti).get(pelilauta.get(sijainti).size() - 1);
+            pelilauta.get(sijainti).remove(pelilauta.get(sijainti).size() - 1);
+            pelilauta.get(sijainti + siirtoja).add(nappula);
         }
     }
 
-    public Pelinappula haePelinappula(int sijainti) {
-        if (sijainti > 12) {
-            return this.pelilaudanYlaosa[0][sijainti - 13];
-        } else {
-            return this.pelilaudanAlaosa[4][12 - sijainti];
+    public boolean voikoLisata(Pelinappula nappula, int sijainti) {
+        if (sijainti < 1 || sijainti > 24) {
+            return false;
         }
+        if (pelilauta.get(sijainti).isEmpty()) {
+            return true;
+        } else if (pelilauta.get(sijainti).get(0).haePelinappulanOmistaja() == nappula.haePelinappulanOmistaja()) {
+            return true;
+        }
+        return false;
     }
 
-    public void siirraPelinappulaaYlalaudalla(int sijainti, int siirtoja) {
-        Pelinappula nappula = null;
-        if (sijainti + siirtoja > 24 || sijainti + siirtoja < 13 || this.paikkaVarattu(sijainti + siirtoja)) {
-            return;
+    public boolean voikoSiirtaa(int sijainti, int siirtoja) {
+        if (sijainti + siirtoja < 1 || sijainti + siirtoja > 24) {
+            return false;
         }
-        if (sijainti < 13) {
-            nappula = this.pelilaudanAlaosa[4][12 - sijainti];
-            this.pelilaudanAlaosa[4][12 - sijainti] = null;
-        } else if (sijainti >= 13) {
-            nappula = this.pelilaudanYlaosa[0][sijainti - 13];
-            this.pelilaudanYlaosa[0][sijainti - 13] = null;
+        if (pelilauta.get(sijainti + siirtoja).isEmpty()) {
+            return true;
+        } else if (pelilauta.get(sijainti + siirtoja).get(0).haePelinappulanOmistaja() == pelilauta.get(sijainti).get(0).haePelinappulanOmistaja()) {
+            return true;
         }
-
-        nappula.asetaPelinappulanSijainti(sijainti + siirtoja);
-        this.pelilaudanYlaosa[0][nappula.sijainti - 13] = nappula;
-    }
-
-    public void siirraPelinappulaaAlalaudalla(int sijainti, int siirtoja) {
-        Pelinappula nappula = null;
-        if (sijainti + siirtoja > 12 || sijainti + siirtoja < 1 || this.paikkaVarattu(sijainti + siirtoja)) {
-            return;
-        }
-        if (sijainti < 13 && sijainti > 0) {
-            nappula = this.pelilaudanAlaosa[4][12 - sijainti];
-            this.pelilaudanAlaosa[4][12 - sijainti] = null;
-        } else if (sijainti >= 13 && sijainti <= 24) {
-            nappula = this.pelilaudanYlaosa[0][sijainti - 13];
-            this.pelilaudanYlaosa[0][sijainti - 13] = null;
-        } else {
-            return;
-        }
-
-        nappula.sijainti += siirtoja;
-        this.pelilaudanAlaosa[4][12 - nappula.sijainti] = nappula;
-    }
-
-    public void siirraPelinappulaa(int sijainti, int siirtoja) {
-        if (sijainti + siirtoja > 12 && sijainti + siirtoja < 15) {
-            this.siirraPelinappulaaYlalaudalla(sijainti, siirtoja);
-        } else if (sijainti + siirtoja < 13 && sijainti + siirtoja > 0) {
-            this.siirraPelinappulaaAlalaudalla(sijainti, siirtoja);
-        }
-    }
-
-    public boolean paikkaVarattu(int paikka) { // pelilaudanOsa 1=ala 2=ylä
-        if (paikka < 13) {
-            return this.pelilaudanAlaosa[4][12 - paikka] != null;
-        } else {
-            return this.pelilaudanYlaosa[0][paikka - 13] != null;
-        }
-
+        return false;
     }
 }

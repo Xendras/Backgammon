@@ -2,6 +2,8 @@ package PelinOsat;
 
 import PelinKayttajat.Pelaaja;
 import PelinOsat.Pelilauta;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Pelinappula {
 
@@ -32,7 +34,7 @@ public class Pelinappula {
         this.omistaja = omistaja;
     }
     
-    public Pelilauta haePelinappulanPelilauta(){
+    public HashMap<Integer,ArrayList<Pelinappula>> haePelinappulanPelilauta(){
         return this.peli.haePelilauta();
     }
 }

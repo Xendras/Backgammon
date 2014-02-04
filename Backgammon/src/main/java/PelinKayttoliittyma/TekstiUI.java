@@ -18,8 +18,8 @@ public class TekstiUI {
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
             tulostus += "| ";
-            if (this.peli.haePelilauta().paikkaVarattu(i+13) == true) {
-                tulostus += this.peli.haePelilauta().haeYlaLauta()[0][i].haePelinappulanOmistaja().haePelaajanTyyppi();
+            if (!this.peli.haePelilauta().get(i+13).isEmpty()) {
+                tulostus += this.peli.haePelilauta().get(13+i).get(0).haePelinappulanOmistaja().haePelaajanTyyppi();
             } else {
                 tulostus += " ";
             }
@@ -33,8 +33,8 @@ public class TekstiUI {
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
             tulostus += "| ";
-            if (this.peli.haePelilauta().paikkaVarattu(12-i) == true) {
-                tulostus += this.peli.haePelilauta().haeAlaLauta()[4][i].haePelinappulanOmistaja().haePelaajanTyyppi();
+            if (!this.peli.haePelilauta().get(12-i).isEmpty()) {
+                tulostus += this.peli.haePelilauta().get(12-i).get(0).haePelinappulanOmistaja().haePelaajanTyyppi();
             } else {
                 tulostus += " ";
             }

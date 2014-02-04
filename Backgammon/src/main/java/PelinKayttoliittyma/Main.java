@@ -27,6 +27,8 @@ public class Main {
         peli.alustaPelinappulat();
         peli.alustaPelilauta();
         System.out.println(kayttoliittyma.tulostaPelilauta());
+        peli.siirraPelinappulaa(17,-1);
+        peli.siirraPelinappulaa(16,8);
         System.out.println(kayttoliittyma.tulostaPelilauta());
     }
 }

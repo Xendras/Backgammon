@@ -16,7 +16,6 @@ public class Pelikokonaisuus {
     Pelilauta pelilauta;
     HashMap<Integer, Pelinappula> nappulat1;
     HashMap<Integer, Pelinappula> nappulat2;
-    HashMap<Integer, ArrayList<Pelinappula>> nappuloidenSijainnit;
     Pelaaja pelaaja1;
     Pelaaja pelaaja2;
     
@@ -26,13 +25,12 @@ public class Pelikokonaisuus {
         this.pelilauta = new Pelilauta();
         this.nappulat1 = new HashMap<Integer,Pelinappula>();
         this.nappulat2 = new HashMap<Integer,Pelinappula>();
-        this.nappuloidenSijainnit = new HashMap<Integer, ArrayList<Pelinappula>>();
         this.pelaaja1 = null;
         this.pelaaja2 = null;
     }
     
-    public Pelilauta haePelilauta(){
-        return this.pelilauta;
+    public HashMap<Integer, ArrayList<Pelinappula>> haePelilauta(){
+        return this.pelilauta.haePelilauta();
     }
     
     public void asetaPelaaja1(Pelaaja pelaaja1){
@@ -52,55 +50,52 @@ public class Pelikokonaisuus {
     }
     
     public void siirraPelinappulaa(int sijainti, int siirtoja){
-        this.pelilauta.siirraPelinappulaa(sijainti, siirtoja);
+        this.pelilauta.siirraNappulaaLaudalla(sijainti, siirtoja);
     }
     
     public void lisaaPelinappula(Pelinappula nappula, int sijainti){
-        this.pelilauta.lisaaPelinappula(nappula, sijainti);
+        this.pelilauta.lisaaNappulaLaudalle(nappula, sijainti);
     }
     
     public void alustaPelinappulat(){
         for(int i = 1;i <16;i++){
-            nappulat1.put(i,new Pelinappula(pelaaja1,this));
-            nappulat2.put(i,new Pelinappula(pelaaja2,this));
+            this.nappulat1.put(i,new Pelinappula(pelaaja1,this));
+            this.nappulat2.put(i,new Pelinappula(pelaaja2,this));
         }
     }
     
     public void alustaPelilauta(){
-        for(int i = 1; i < 25; i++){
-            nappuloidenSijainnit.put(i,new ArrayList<Pelinappula>());         
-        }
         
         for(int i = 1;i<3;i++){
-            nappuloidenSijainnit.get(1).add(nappulat1.get(i));
+            this.lisaaPelinappula(nappulat1.get(i), 1);
         }
         
         for(int i = 3;i<8;i++){
-            nappuloidenSijainnit.get(12).add(nappulat1.get(i));
+            this.lisaaPelinappula(nappulat1.get(i), 12);
         }
         
         for(int i = 8;i<11;i++){
-            nappuloidenSijainnit.get(17).add(nappulat1.get(i));
+            this.lisaaPelinappula(nappulat1.get(i), 17);
         }
         
         for(int i = 11;i<16;i++){
-            nappuloidenSijainnit.get(19).add(nappulat1.get(i));
+            this.lisaaPelinappula(nappulat1.get(i), 19);
         }
         
         for(int i = 1;i<3;i++){
-            nappuloidenSijainnit.get(24).add(nappulat2.get(i));
+            this.lisaaPelinappula(nappulat2.get(i), 24);
         }
         
         for(int i = 3;i<8;i++){
-            nappuloidenSijainnit.get(13).add(nappulat2.get(i));
+            this.lisaaPelinappula(nappulat2.get(i), 13);
         }
         
         for(int i = 8;i<11;i++){
-            nappuloidenSijainnit.get(8).add(nappulat2.get(i));
+            this.lisaaPelinappula(nappulat2.get(i), 8);
         }
         
         for(int i = 11;i<16;i++){
-            nappuloidenSijainnit.get(6).add(nappulat2.get(i));
+            this.lisaaPelinappula(nappulat2.get(i), 6);
         }
     }
     
