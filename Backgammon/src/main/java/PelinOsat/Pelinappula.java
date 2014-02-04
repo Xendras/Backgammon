@@ -35,6 +35,6 @@ public class Pelinappula {
     }
     
     public HashMap<Integer,ArrayList<Pelinappula>> haePelinappulanPelilauta(){
-        return this.peli.haePelilauta();
+        return this.peli.haePelilaudanNappulat();
     }
 }

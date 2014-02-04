@@ -19,16 +19,19 @@ public class Main {
     
     public static void main(String[] args) {
         Pelikokonaisuus peli = new Pelikokonaisuus();
-        Pelaaja jonas = new Pelaaja("Jonas",'j',peli);
-        Pelaaja sandra = new Pelaaja("Sandra",'s',peli);
-        peli.asetaPelaaja1(jonas);
-        peli.asetaPelaaja2(sandra);
         TekstiUI kayttoliittyma = new TekstiUI(peli);
+        LaudanTulostaja tulostaja = new LaudanTulostaja(peli);
+        kayttoliittyma.aloitaPeli();
         peli.alustaPelinappulat();
         peli.alustaPelilauta();
-        System.out.println(kayttoliittyma.tulostaPelilauta());
-        peli.siirraPelinappulaa(17,-1);
-        peli.siirraPelinappulaa(16,8);
-        System.out.println(kayttoliittyma.tulostaPelilauta());
+        System.out.println(tulostaja.tulostaPelilauta());
+        
+        boolean loppu = false;
+        while(!loppu){
+            loppu = peli.haePelilauta().ovatkoNappulatVastustajanAlueella(peli.haePelaajaVuorossa().haeVastustaja());
+            System.out.println(tulostaja.tulostaPelilauta());
+            kayttoliittyma.seuraavaVuoro();
+        }
+       
     }
 }

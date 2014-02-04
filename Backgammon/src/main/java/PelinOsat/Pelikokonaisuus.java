@@ -18,19 +18,49 @@ public class Pelikokonaisuus {
     HashMap<Integer, Pelinappula> nappulat2;
     Pelaaja pelaaja1;
     Pelaaja pelaaja2;
+    Pelaaja vuorossa;
     
     public Pelikokonaisuus(){
         this.noppa1 = new Noppa();
         this.noppa2 = new Noppa();
-        this.pelilauta = new Pelilauta();
+        this.pelilauta = new Pelilauta(this);
         this.nappulat1 = new HashMap<Integer,Pelinappula>();
         this.nappulat2 = new HashMap<Integer,Pelinappula>();
         this.pelaaja1 = null;
         this.pelaaja2 = null;
+        this.vuorossa = pelaaja1;
     }
     
-    public HashMap<Integer, ArrayList<Pelinappula>> haePelilauta(){
+    public HashMap<Integer, ArrayList<Pelinappula>> haePelilaudanNappulat(){
         return this.pelilauta.haePelilauta();
+    }
+    
+    public Pelilauta haePelilauta(){
+        return this.pelilauta;
+    }
+    
+    public Pelaaja haePelaajaVuorossa(){
+        return vuorossa;
+    }
+    
+    public void asetaPelaajaVuorossa(Pelaaja pelaaja){
+        this.vuorossa = pelaaja;
+    }
+    
+    public HashMap<Integer, Pelinappula> haePelaaja1Nappulat(){
+        return this.nappulat1;
+    }
+    
+    public HashMap<Integer, Pelinappula> haePelaaja2Nappulat(){
+        return this.nappulat2;
+    }
+    
+    public Pelaaja haePelaaja1(){
+        return pelaaja1;
+    }
+    
+    public Pelaaja haePelaaja2(){
+        return pelaaja2;
     }
     
     public void asetaPelaaja1(Pelaaja pelaaja1){
@@ -47,6 +77,14 @@ public class Pelikokonaisuus {
     
     public int heitaNoppaa2(){
         return this.noppa2.heitaNoppaaJaAnnaArvo();
+    }
+    
+    public int haeNopan1Arvo(){
+        return noppa1.haeNopanArvo();
+    }
+    
+    public int haeNopan2Arvo(){
+        return noppa2.haeNopanArvo();
     }
     
     public void siirraPelinappulaa(int sijainti, int siirtoja){

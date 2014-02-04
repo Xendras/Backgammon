@@ -11,9 +11,11 @@ import java.util.HashMap;
 public class Pelilauta {
 
     HashMap<Integer, ArrayList<Pelinappula>> pelilauta;
+    Pelikokonaisuus peli;
 
-    public Pelilauta() {
+    public Pelilauta(Pelikokonaisuus peli) {
         this.pelilauta = new HashMap<Integer, ArrayList<Pelinappula>>();
+        this.peli = peli;
 
         for (int i = 1; i < 25; i++) {
             pelilauta.put(i, new ArrayList<Pelinappula>());
@@ -40,6 +42,7 @@ public class Pelilauta {
             Pelinappula nappula = pelilauta.get(sijainti).get(pelilauta.get(sijainti).size() - 1);
             pelilauta.get(sijainti).remove(pelilauta.get(sijainti).size() - 1);
             pelilauta.get(sijainti + siirtoja).add(nappula);
+            nappula.asetaPelinappulanSijainti(sijainti+siirtoja);
         }
     }
 
@@ -56,14 +59,25 @@ public class Pelilauta {
     }
 
     public boolean voikoSiirtaa(int sijainti, int siirtoja) {
+        boolean voiko = true;
         if (sijainti + siirtoja < 1 || sijainti + siirtoja > 24) {
             return false;
         }
-        if (pelilauta.get(sijainti + siirtoja).isEmpty()) {
-            return true;
-        } else if (pelilauta.get(sijainti + siirtoja).get(0).haePelinappulanOmistaja() == pelilauta.get(sijainti).get(0).haePelinappulanOmistaja()) {
-            return true;
+        if(pelilauta.get(sijainti).get(0).haePelinappulanOmistaja() != peli.haePelaajaVuorossa()){
+            return false;
         }
-        return false;
+        if (!pelilauta.get(sijainti + siirtoja).isEmpty() && pelilauta.get(sijainti + siirtoja).get(0).haePelinappulanOmistaja() != pelilauta.get(sijainti).get(0).haePelinappulanOmistaja() ) {
+            return false;
+        }
+        return voiko;
+    }
+    
+    public boolean ovatkoNappulatVastustajanAlueella(Pelaaja pelaaja){
+        for(int i = 1;i < 16;i++){
+            if(pelaaja.haePelaajanNappulat().get(i).haePelinappulanSijainti() < 19){
+                return false;
+            }
+        }
+        return true;
     }
 }
