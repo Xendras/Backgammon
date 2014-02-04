@@ -19,12 +19,11 @@ public class Main {
     
     public static void main(String[] args) {
         Pelikokonaisuus peli = new Pelikokonaisuus();
-        TekstiUI kayttoliittyma = new TekstiUI(peli);
         LaudanTulostaja tulostaja = new LaudanTulostaja(peli);
+        TekstiUI kayttoliittyma = new TekstiUI(peli, tulostaja);
         kayttoliittyma.aloitaPeli();
         peli.alustaPelinappulat();
         peli.alustaPelilauta();
-        System.out.println(tulostaja.tulostaPelilauta());
         
         boolean loppu = false;
         while(!loppu){

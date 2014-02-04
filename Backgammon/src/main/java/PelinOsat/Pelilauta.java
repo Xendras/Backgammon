@@ -73,11 +73,20 @@ public class Pelilauta {
     }
     
     public boolean ovatkoNappulatVastustajanAlueella(Pelaaja pelaaja){
+        if(pelaaja == peli.haePelaaja1()){
         for(int i = 1;i < 16;i++){
             if(pelaaja.haePelaajanNappulat().get(i).haePelinappulanSijainti() < 19){
                 return false;
             }
         }
         return true;
+        } else {
+           for(int i = 1;i < 16;i++){
+            if(pelaaja.haePelaajanNappulat().get(i).haePelinappulanSijainti() > 6){
+                return false;
+            }
+        } 
+           return true;
+        }
     }
 }

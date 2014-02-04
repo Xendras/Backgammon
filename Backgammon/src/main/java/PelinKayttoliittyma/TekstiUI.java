@@ -9,10 +9,12 @@ public class TekstiUI {
 
     Pelikokonaisuus peli;
     Scanner lukija;
+    LaudanTulostaja tulostaja;
 
-    public TekstiUI(Pelikokonaisuus peli) {
+    public TekstiUI(Pelikokonaisuus peli, LaudanTulostaja tulostaja) {
         this.peli = peli;
         this.lukija = new Scanner(System.in);
+        this.tulostaja = tulostaja;
     }
 
     public void aloitaPeli() {
@@ -30,24 +32,70 @@ public class TekstiUI {
     }
 
     public void seuraavaVuoro() {
-        if (peli.haePelilauta().ovatkoNappulatVastustajanAlueella(peli.haePelaaja1())) {
-            System.out.println(peli.haePelaaja1().haePelaajanNimi() + " voitti!");
-            return;
-        }
-        if (peli.haePelilauta().ovatkoNappulatVastustajanAlueella(peli.haePelaaja2())) {
-            System.out.println(peli.haePelaaja2().haePelaajanNimi() + " voitti!");
+        if (onkoPeliLoppu()) {
             return;
         }
 
-        System.out.println(peli.haePelaajaVuorossa().haePelaajanNimi() + " vuoro, nopan lukema: " + peli.heitaNoppaa1());
-        System.out.print("Anna nappulan sijainti jota haluat siirtää: ");
-        int sijainti = Integer.parseInt(lukija.nextLine());
-        if (peli.haePelaajaVuorossa() == peli.haePelaaja2()) {
-            peli.siirraPelinappulaa(sijainti, -4);
+        System.out.println(peli.haePelaajaVuorossa().haePelaajanNimi() + " vuoro, noppien lukemat: " + peli.heitaNoppaa1() + " " + peli.heitaNoppaa2());
+
+        if (peli.haeNopan1Arvo() == peli.haeNopan2Arvo()) {
+            siirraNappulaa("ensimmäisen", peli.haeNopan1Arvo());
+            System.out.println(tulostaja.tulostaPelilauta());
+            siirraNappulaa("toisen", peli.haeNopan1Arvo());
+            System.out.println(tulostaja.tulostaPelilauta());
+            siirraNappulaa("kolmannen", peli.haeNopan1Arvo());
+            System.out.println(tulostaja.tulostaPelilauta());
+            siirraNappulaa("neljännen", peli.haeNopan1Arvo());
+            System.out.println(tulostaja.tulostaPelilauta());
         } else {
-            peli.siirraPelinappulaa(sijainti, 3);
+            int summa = peli.haeNopan1Arvo() + peli.haeNopan2Arvo();
+            int siirtoja = siirraNappulaaEriArvoilla("ensimmäinen");
+            System.out.println(tulostaja.tulostaPelilauta());
+            siirraNappulaa("toisen", summa - siirtoja);
+
         }
+
         peli.asetaPelaajaVuorossa(peli.haePelaajaVuorossa().haeVastustaja());
 
     }
+
+    public void siirraNappulaa(String kuinkaMonesNappula, int noppa1) {
+        System.out.print("Anna " + kuinkaMonesNappula + " nappulan sijainti jota haluat siirtää: ");
+        int sijainti = Integer.parseInt(lukija.nextLine());
+        if (peli.haePelaajaVuorossa() == peli.haePelaaja2()) {
+            peli.siirraPelinappulaa(sijainti, -noppa1);
+        } else {
+            peli.siirraPelinappulaa(sijainti, noppa1);
+        }
+
+    }
+
+    public int siirraNappulaaEriArvoilla(String kuinkaMonesNappula) {
+        System.out.print("Anna " + kuinkaMonesNappula + " nappulan sijainti jota haluat siirtää: ");
+        int sijainti = Integer.parseInt(lukija.nextLine());
+        System.out.print("Anna siirtojen määrä (" + peli.haeNopan1Arvo() + " tai " + peli.haeNopan2Arvo() + "): ");
+        int siirtoja = Integer.parseInt(lukija.nextLine());
+        if (siirtoja == peli.haeNopan1Arvo() || siirtoja == peli.haeNopan2Arvo()) {
+            if (peli.haePelaajaVuorossa() == peli.haePelaaja2()) {
+                peli.siirraPelinappulaa(sijainti, -siirtoja);
+            } else {
+                peli.siirraPelinappulaa(sijainti, siirtoja);
+            }
+        }
+        
+        return siirtoja;
+    }
+
+    public boolean onkoPeliLoppu() {
+        if (peli.haePelilauta().ovatkoNappulatVastustajanAlueella(peli.haePelaaja1())) {
+            System.out.println(peli.haePelaaja1().haePelaajanNimi() + " voitti!");
+            return true;
+        } else if (peli.haePelilauta().ovatkoNappulatVastustajanAlueella(peli.haePelaaja2())) {
+            System.out.println(peli.haePelaaja2().haePelaajanNimi() + " voitti!");
+            return true;
+        }
+
+        return false;
+    }
+
 }
