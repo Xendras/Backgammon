@@ -9,17 +9,28 @@ package PelinKayttoliittyma;
 import PelinOsat.Pelikokonaisuus;
 import java.util.Scanner;
 
-
+/**
+ * Vastaa laudan tulostamisesta tekstikäyttöliittymässä.
+ * @author Jonas Westerlund
+ */
 public class LaudanTulostaja { 
 
     Pelikokonaisuus peli;
     Scanner lukija;
     
+    /**
+     * Luo tulostajan joka saa syötteekseen pelikokonaisuuden.
+     * @param peli Pelikokonaisuus joka annetaan tulostajalle.
+     */
     public LaudanTulostaja(Pelikokonaisuus peli){
         this.peli = peli;
         this.lukija = new Scanner(System.in);
     }
     
+    /**
+     * Tulostaa ylälaudan pelilaudasta
+     * @return Palauttaa String:inä pelilaudan yläosan (sen missä ensimmäinen nappula sijaitsee)
+     */
     public String tulostaYlalauta() {
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
@@ -35,6 +46,10 @@ public class LaudanTulostaja {
         return tulostus;
     }
     
+    /**
+     * Tulostaa alalaudan pelilaudasta
+     * @return Palauttaa String:inä pelilaudan alaosan (sen missä ensimmäinen nappula sijaitsee)
+     */
     public String tulostaAlalauta(){
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
@@ -50,6 +65,11 @@ public class LaudanTulostaja {
         return tulostus;
     }
     
+    /**
+     * Tulostaa yhden rivin ylälaudasta.
+     * @param rivi Kuinka mones rivi on kyseessä (1-4)
+     * @return Palauttaa yhden rivin ylälaudalta.
+     */
     public String tulostaYksiRiviYlaLaudalla(int rivi){
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
@@ -65,6 +85,11 @@ public class LaudanTulostaja {
         return tulostus;
     }
     
+    /**
+     * Tulostaa yhden rivin alalaudasta.
+     * @param rivi Kuinka mones rivi on kyseessä (1-4)
+     * @return Palauttaa yhden rivin alalaudalta.
+     */
     public String tulostaYksiRiviAlaLaudalla(int rivi){
         String tulostus = "";
         for (int i = 0; i < 12; i++) {
@@ -80,6 +105,10 @@ public class LaudanTulostaja {
         return tulostus;
     }
     
+    /**
+     * Tulostaa koko pelilaudan.
+     * @return Palauttaa koko pelilaudan ulkonäön.
+     */
     public String tulostaPelilauta(){
         String tulostus = "";
         for(int i = 0; i<12;i++){

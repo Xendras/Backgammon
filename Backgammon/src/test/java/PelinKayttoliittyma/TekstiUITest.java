@@ -27,6 +27,7 @@ public class TekstiUITest {
     Pelikokonaisuus peli;
     Pelaaja pelaaja;
     TekstiUI kayttoliittyma;
+    LaudanTulostaja tulostaja;
 
     public TekstiUITest() {
     }
@@ -42,46 +43,14 @@ public class TekstiUITest {
     @Before
     public void setUp() {
         peli = new Pelikokonaisuus();
-        pelaaja = new Pelaaja("testi",'x',peli);
+        pelaaja = new Pelaaja("testi",'x',peli, peli.haePelaaja1Nappulat());
         nappula = new Pelinappula(pelaaja, peli);
-        kayttoliittyma = new TekstiUI(peli);
+        tulostaja = new LaudanTulostaja(peli);
+        kayttoliittyma = new TekstiUI(peli, tulostaja);
+
     }
 
     @After
     public void tearDown() {
-    }
-
-    @Test
-    public void alaLautaTulostuuOikein() {
-
-        nappula = new Pelinappula(pelaaja, peli);
-        peli.haePelilauta().lisaaPelinappula(nappula, 3);
-        assertEquals("|   | |   | |   | |   | |   | |   | |   | |   | |   | | x | |   | |   | ", kayttoliittyma.tulostaAlalauta());
-    }
-
-    @Test
-    public void ylaLautaTulostuuOikein() {
-        nappula = new Pelinappula(pelaaja, peli);
-        peli.haePelilauta().lisaaPelinappula(nappula, 16);
-        assertEquals("|   | |   | |   | | x | |   | |   | |   | |   | |   | |   | |   | |   | ", kayttoliittyma.tulostaYlalauta());
-    }
-
-    @Test
-    public void kokoLautaTulostuuOikein() {
-        nappula = new Pelinappula(pelaaja, peli);
-        peli.haePelilauta().lisaaPelinappula(nappula, 16);
-        assertEquals("  13    14    15    16    17    18    19    20    21    22    23    24  \n"
-                + "------------------------------------------------------------------------\n"
-                + "|   | |   | |   | | x | |   | |   | |   | |   | |   | |   | |   | |   | \n"
-                + "\n"
-                + "\n"
-                + "\n"
-                + "\n"
-                + "\n"
-                + "\n"
-                + "\n"
-                + "|   | |   | |   | |   | |   | |   | |   | |   | |   | |   | |   | |   | \n"
-                + "------------------------------------------------------------------------\n"
-                + "  12    11    10    9     8     7     6     5     4     3     2     1   ", kayttoliittyma.tulostaPelilauta());
     }
 }

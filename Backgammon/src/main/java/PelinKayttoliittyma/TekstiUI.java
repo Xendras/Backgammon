@@ -5,18 +5,30 @@ import PelinOsat.Pelikokonaisuus;
 import PelinOsat.Pelilauta;
 import java.util.Scanner;
 
+/**
+ * Vastaa pelin tekstikäyttöliittymästä kun peliä pelataan.
+ * @author Jonas Westerlund
+ */
 public class TekstiUI {
 
     Pelikokonaisuus peli;
     Scanner lukija;
     LaudanTulostaja tulostaja;
 
+    /**
+     * Luo tekstikäyttöliittymän joka käyttää tulostajaa.
+     * @param peli Pelikokonaisuus johon käyttöliittymää sovelletaan
+     * @param tulostaja Tulostaja jota käyttöliittymä hyödyntää
+     */
     public TekstiUI(Pelikokonaisuus peli, LaudanTulostaja tulostaja) {
         this.peli = peli;
         this.lukija = new Scanner(System.in);
         this.tulostaja = tulostaja;
     }
 
+    /**
+     * Metodi aloittaa pelin ja alustaa pelin pelaajat peliä varten.
+     */
     public void aloitaPeli() {
         System.out.println("Backgammon-peli");
         System.out.print("Anna pelaaja 1 nimi: ");
@@ -31,6 +43,12 @@ public class TekstiUI {
         System.out.println(pelaaja1Nimi + " (nappulat X) aloittaa pelin ja liikkuu myötäpäivään. " + pelaaja2Nimi + " (nappulat O) jatkaa ja pelaa vastapäivään.");
     }
 
+    /**
+     * Aloittaa seuraavan vuoron ja tarkistaa jos peli on loppu. Pyytää pelaajilta vuoron 
+     * perään syötteenä nappulan sijainnin jota he haluavat siirtää, ja riippuen nopista paljolla he haluavat siirtää nappuloita. 
+     * Kun siirrot on tehty vuoro vaihtuu.
+     * 
+     */
     public void seuraavaVuoro() {
         if (onkoPeliLoppu()) {
             return;
@@ -59,17 +77,30 @@ public class TekstiUI {
 
     }
 
-    public void siirraNappulaa(String kuinkaMonesNappula, int noppa1) {
+    /**
+     * Metodi avustaa seuraavaVuoro metodia tekemällä siitä selvemmän. 
+     * Siirtää siis nappulaa nopan lukeman verran.
+     * Käytetään kun pelaaja heittää kaksi samaa lukua nopilla.
+     * @param kuinkaMonesNappula Syötteenä annettu nappulan sijainti
+     * @param noppa Nopan lukema.
+     */
+    public void siirraNappulaa(String kuinkaMonesNappula, int noppa) {
         System.out.print("Anna " + kuinkaMonesNappula + " nappulan sijainti jota haluat siirtää: ");
         int sijainti = Integer.parseInt(lukija.nextLine());
         if (peli.haePelaajaVuorossa() == peli.haePelaaja2()) {
-            peli.siirraPelinappulaa(sijainti, -noppa1);
+            peli.siirraPelinappulaa(sijainti, -noppa);
         } else {
-            peli.siirraPelinappulaa(sijainti, noppa1);
+            peli.siirraPelinappulaa(sijainti, noppa);
         }
 
     }
 
+    /**
+     * Käytetään kun pelaaja heittää eri arvot nopilla.
+     * Kysyy monella sitä siirretään ja kysyy mitä siirretään lopuilla siirroilla.
+     * @param kuinkaMonesNappula
+     * @return Palauttaa kuinka monta askelta nappulaa siirrettiin
+     */
     public int siirraNappulaaEriArvoilla(String kuinkaMonesNappula) {
         System.out.print("Anna " + kuinkaMonesNappula + " nappulan sijainti jota haluat siirtää: ");
         int sijainti = Integer.parseInt(lukija.nextLine());
@@ -86,6 +117,10 @@ public class TekstiUI {
         return siirtoja;
     }
 
+    /**
+     * Tarkistaa onko peli loppu, eli siis jos peli on loppuasetelmassa.
+     * @return Palauttaa booleanin joka kertoo onko peli loppu vai ei
+     */
     public boolean onkoPeliLoppu() {
         if (peli.haePelilauta().ovatkoNappulatVastustajanAlueella(peli.haePelaaja1())) {
             System.out.println(peli.haePelaaja1().haePelaajanNimi() + " voitti!");

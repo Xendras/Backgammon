@@ -6,5 +6,8 @@
 27.1.2014 // 1h // Tekstikäyttöliittymäluokan lisääminen, pelilaudan kehittäminen
 29.1.2014 // 1h // Pelilaudan ulkoasun testaamista ja koodausta
 30.1.2014 // 4h // Testien kehittämistä ja ideointia, luokkakaavion piirtämistä
+4.2.2014  // 2h // Pelilaudan perustan muuttamista taulukosta HashMapiksi, pelaajien toimintojen lisäämistä ja TekstiUIn kehittämistä
+4.2.2014  // 4h // Pelin käynnistyksen ja itse pelin kulun kehittämistä
+5.2.2014 // 2h // Javadocin kirjoittamista ja testien päivitystä
 
 

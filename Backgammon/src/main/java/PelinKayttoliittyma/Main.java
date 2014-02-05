@@ -13,7 +13,7 @@ import PelinOsat.Pelikokonaisuus;
 
 /**
  *
- * @author jonas
+ * @author Jonas Westerlund
  */
 public class Main {
     

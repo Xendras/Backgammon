@@ -8,19 +8,26 @@ package PelinOsat;
 import java.util.Random;
 
 /**
- *
- * @author jonas
+ * Luokka simuloi nopan toimintoja
+ * @author Jonas Westerlund
  */
 public class Noppa {
 
     Random arpoja;
     int arvo;
 
+    /**
+     * Luo nopan joka koostuu arpojasta sekä nopan arvosta.
+     */
     public Noppa() {
         this.arpoja = new Random();
         this.arvo = 1;
     }
 
+    /**
+     * Arpoo nopalle arvon ja palauttaa arvon.
+     * @return Nopan arvo
+     */
     public int heitaNoppaaJaAnnaArvo() {
         this.asetaNopanArvo(arpoja.nextInt(6)+1);
         return this.arvo;

@@ -10,6 +10,10 @@ import PelinKayttajat.Pelaaja;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Luokka kerää kaikki pelin osat yhteen kokonaisuuteen joka hallinnoi eri osia.
+ * @author Jonas Westerlund
+ */
 public class Pelikokonaisuus { 
     Noppa noppa1;
     Noppa noppa2;
@@ -20,6 +24,9 @@ public class Pelikokonaisuus {
     Pelaaja pelaaja2;
     Pelaaja vuorossa;
     
+    /**
+     * Luo pelikokonaisuuden joka sisältää kaksi noppaa, yhden pelilaudan, kaksi rykelmää pelinappuloita, kaksi pelaajaa, sekä vuorossa olevan pelaajan
+     */
     public Pelikokonaisuus(){
         this.noppa1 = new Noppa();
         this.noppa2 = new Noppa();
@@ -31,10 +38,18 @@ public class Pelikokonaisuus {
         this.vuorossa = pelaaja1;
     }
     
+    /**
+     * Hakee pelilaudan nappulat, eli siis HashMapin
+     * @return Palauttaa HashMapin jossa on sijainnit yhidstettynä pelinappulalistoihin
+     */
     public HashMap<Integer, ArrayList<Pelinappula>> haePelilaudanNappulat(){
         return this.pelilauta.haePelilauta();
     }
     
+    /**
+     * Hakee pelilaudan, eli siis luokkaolion joka sisältää pelinappulaHashMapin
+     * @return Palauttaa pelilaudan
+     */
     public Pelilauta haePelilauta(){
         return this.pelilauta;
     }
@@ -87,14 +102,27 @@ public class Pelikokonaisuus {
         return noppa2.haeNopanArvo();
     }
     
+    /**
+     *
+     * @param sijainti
+     * @param siirtoja
+     */
     public void siirraPelinappulaa(int sijainti, int siirtoja){
         this.pelilauta.siirraNappulaaLaudalla(sijainti, siirtoja);
     }
     
+    /**
+     *
+     * @param nappula
+     * @param sijainti
+     */
     public void lisaaPelinappula(Pelinappula nappula, int sijainti){
         this.pelilauta.lisaaNappulaLaudalle(nappula, sijainti);
     }
     
+    /**
+     *
+     */
     public void alustaPelinappulat(){
         for(int i = 1;i <16;i++){
             this.nappulat1.put(i,new Pelinappula(pelaaja1,this));
@@ -102,6 +130,9 @@ public class Pelikokonaisuus {
         }
     }
     
+    /**
+     *
+     */
     public void alustaPelilauta(){
         
         for(int i = 1;i<3;i++){

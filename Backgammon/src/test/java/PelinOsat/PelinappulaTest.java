@@ -37,7 +37,7 @@ public class PelinappulaTest {
     public void setUp() {
         peli = new Pelikokonaisuus();
         lauta = peli.haePelilauta();
-        Jonas = new Pelaaja("testi",'x',peli);
+        Jonas = new Pelaaja("testi",'x',peli,peli.haePelaaja1Nappulat());
         nappula = new Pelinappula(Jonas,peli);
     }
     
@@ -57,7 +57,7 @@ public class PelinappulaTest {
     
     @Test
     public void konstruktoriAsettaaPelilaudanOikein(){
-        assertEquals(lauta,nappula.haePelinappulanPelilauta());
+        assertEquals(peli,nappula.haePelinappulanPeli());
     }
     
     

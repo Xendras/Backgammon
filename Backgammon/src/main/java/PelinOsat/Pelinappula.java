@@ -5,12 +5,21 @@ import PelinOsat.Pelilauta;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Luokka simuloi pelinappulaa ja sen toimintoja.
+ * @author Jonas Westerlund
+ */
 public class Pelinappula {
 
     int sijainti;
     Pelikokonaisuus peli;
     Pelaaja omistaja;
 
+    /**
+     * Luo pelinappulan jolla on tietty omistaja ja joka kuuluu tiettyyn pelikokonaisuuteen
+     * @param omistaja Pelinappulan omistaja
+     * @param peli Pelinappulan pelikokonaisuus
+     */
     public Pelinappula(Pelaaja omistaja, Pelikokonaisuus peli) {
         this.sijainti = -1;
         this.omistaja = omistaja;
@@ -34,7 +43,7 @@ public class Pelinappula {
         this.omistaja = omistaja;
     }
     
-    public HashMap<Integer,ArrayList<Pelinappula>> haePelinappulanPelilauta(){
-        return this.peli.haePelilaudanNappulat();
+    public Pelikokonaisuus haePelinappulanPeli(){
+        return this.peli;
     }
 }

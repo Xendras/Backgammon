@@ -11,8 +11,8 @@ import PelinOsat.Pelinappula;
 import java.util.HashMap;
 
 /**
- *
- * @author jonas
+ * Pelaaja-olio joka simuloi oikean pelaajan toimintoja.
+ * @author Jonas Westerlund
  */
 public class Pelaaja {
 
@@ -22,6 +22,13 @@ public class Pelaaja {
     HashMap<Integer, Pelinappula> nappulat;
     Pelaaja vastustaja;
 
+    /**
+     * Luo Pelaaja-olion jolla on nimi, nappulan tyyppi, peli johon pelaaja kuuluu, sekä nappulakokoelma joka kuuluu pelaajalle.
+     * @param nimi Käyttäjän antama nimi.
+     * @param nappulanTyyppi Käyttäjän antama nappulatyyppi.
+     * @param peli Peli johon pelaaja kuuluu.
+     * @param nappulat Nappulat jotka kuuluvat pelaajalle
+     */
     public Pelaaja(String nimi, char nappulanTyyppi, Pelikokonaisuus peli, HashMap<Integer, Pelinappula> nappulat) {
         this.nappulanTyyppi = nappulanTyyppi;
         this.nimi = nimi;
@@ -58,6 +65,11 @@ public class Pelaaja {
         return this.nimi;
     }
     
+    /**
+     * Kutsuu pelikokonaisuuden pelinappulan siirtoa.
+     * @param sijainti Missä siirrettävä nappula on.
+     * @param siirtoja Montako siirtoa nappulaa siirretään.
+     */
     public void siirraPelinappulaa(int sijainti, int siirtoja){
         this.peli.siirraPelinappulaa(sijainti, siirtoja);
     }
