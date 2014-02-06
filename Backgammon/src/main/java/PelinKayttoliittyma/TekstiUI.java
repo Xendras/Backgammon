@@ -60,23 +60,25 @@ public class TekstiUI {
         }
         if (!peli.haePelilauta().onkoPelaajanJaahyTyhja(vuorossa)) {
             System.out.println(vuorossa.haePelaajanNimi() + " vuoro, noppien lukemat: " + peli.heitaNoppaa1() + " " + peli.heitaNoppaa2());
-        }
-        System.out.println(vuorossa.haePelaajanNimi() + " vuoro, noppien lukemat: " + peli.heitaNoppaa1() + " " + peli.heitaNoppaa2());
-        if (peli.haeNopan1Arvo() == peli.haeNopan2Arvo()) {
-            siirraNappulaa("ensimmäisen", peli.haeNopan1Arvo());
-            System.out.println(tulostaja.tulostaPelilauta());
-            siirraNappulaa("toisen", peli.haeNopan1Arvo());
-            System.out.println(tulostaja.tulostaPelilauta());
-            siirraNappulaa("kolmannen", peli.haeNopan1Arvo());
-            System.out.println(tulostaja.tulostaPelilauta());
-            siirraNappulaa("neljännen", peli.haeNopan1Arvo());
-            System.out.println(tulostaja.tulostaPelilauta());
+            lisaaNappulaTakaisinLaudalle(1);
         } else {
-            int summa = peli.haeNopan1Arvo() + peli.haeNopan2Arvo();
-            int siirtoja = siirraNappulaaEriArvoilla("ensimmäinen");
-            System.out.println(tulostaja.tulostaPelilauta());
-            siirraNappulaa("toisen", summa - siirtoja);
+            System.out.println(vuorossa.haePelaajanNimi() + " vuoro, noppien lukemat: " + peli.heitaNoppaa1() + " " + peli.heitaNoppaa2());
+            if (peli.haeNopan1Arvo() == peli.haeNopan2Arvo()) {
+                siirraNappulaa("ensimmäisen", peli.haeNopan1Arvo());
+                System.out.println(tulostaja.tulostaPelilauta());
+                siirraNappulaa("toisen", peli.haeNopan1Arvo());
+                System.out.println(tulostaja.tulostaPelilauta());
+                siirraNappulaa("kolmannen", peli.haeNopan1Arvo());
+                System.out.println(tulostaja.tulostaPelilauta());
+                siirraNappulaa("neljännen", peli.haeNopan1Arvo());
+                System.out.println(tulostaja.tulostaPelilauta());
+            } else {
+                int summa = peli.haeNopan1Arvo() + peli.haeNopan2Arvo();
+                int siirtoja = siirraNappulaaEriArvoilla("ensimmäinen");
+                System.out.println(tulostaja.tulostaPelilauta());
+                siirraNappulaa("toisen", summa - siirtoja);
 
+            }
         }
 
         peli.asetaPelaajaVuorossa(vuorossa.haeVastustaja());
@@ -150,19 +152,35 @@ public class TekstiUI {
         return siirtoja;
     }
 
-    public void lisaaNappulaTakaisinLaudalle(Pelinappula nappula, int noppa) {
+    public void lisaaNappulaTakaisinLaudalle(int noppa) {
         System.out.print("Anna sijainti mihin nappula siirretään jäähyltä: ");
         int sijainti = Integer.parseInt(lukija.nextLine());
 
-        if (peli.haePelilauta().voikoLisata(nappula, sijainti)) {
+        if (peli.haePelilauta().voikoLisata(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), sijainti)) {
             if (peli.haePelaajaVuorossa() == peli.haePelaaja1() && sijainti < 7 && sijainti > 0) {
-                if (peli.haePelilaudanNappulat().get(noppa).size() == 1 && peli.haePelilaudanNappulat().get(sijainti + siirtoja).get(0).haePelinappulanOmistaja() != peli.haePelaajaVuorossa()) {
-                Pelinappula vastustaja = peli.haePelilaudanNappulat().get(sijainti + siirtoja).get(0);
-                this.lisaaNappulaPelaajanJaahylle(vastustaja, peli.haePelaajaVuorossa().haeVastustaja());
-                Pelinappula nappula = pelilauta.get(sijainti).get(pelilauta.get(sijainti).size() - 1);
-                pelilauta.get(sijainti).remove(pelilauta.get(sijainti).size() - 1);
-                pelilauta.get(sijainti + siirtoja).add(nappula);
-            }
+                if (peli.haePelilaudanNappulat().get(sijainti).size() == 1 && peli.haePelilaudanNappulat().get(sijainti).get(0).haePelinappulanOmistaja() != peli.haePelaajaVuorossa()) {
+                    Pelinappula vastustaja = peli.haePelilaudanNappulat().get(sijainti).get(0);
+                    peli.haePelilauta().lisaaNappulaPelaajanJaahylle(vastustaja, peli.haePelaajaVuorossa().haeVastustaja());
+                    peli.haePelilaudanNappulat().get(sijainti).remove(0);
+                    peli.lisaaPelinappula(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), sijainti);
+                    peli.haePelaajaVuorossa().haePelaajanJaahy().remove(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1);
+
+                } else {
+                    peli.lisaaPelinappula(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), sijainti);
+                    peli.haePelaajaVuorossa().haePelaajanJaahy().remove(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1);
+                }
+            } else if (peli.haePelaajaVuorossa() == peli.haePelaaja2() && sijainti > 18 && sijainti < 25) {
+                if (peli.haePelilaudanNappulat().get(sijainti).isEmpty() || peli.haePelilaudanNappulat().get(sijainti).get(0).haePelinappulanOmistaja() == peli.haePelaajaVuorossa() ) {
+                    peli.lisaaPelinappula(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), sijainti);
+                    peli.haePelaajaVuorossa().haePelaajanJaahy().remove(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1);
+                } else if (peli.haePelilaudanNappulat().get(sijainti).size() == 1) {
+                    Pelinappula vastustaja = peli.haePelilaudanNappulat().get(sijainti).get(0);
+                    peli.haePelilauta().lisaaNappulaPelaajanJaahylle(vastustaja, peli.haePelaajaVuorossa().haeVastustaja());
+                    peli.haePelilaudanNappulat().get(sijainti).remove(0);
+                    peli.lisaaPelinappula(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), sijainti);
+                    peli.haePelaajaVuorossa().haePelaajanJaahy().remove(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1);
+
+                }
             }
         }
     }
