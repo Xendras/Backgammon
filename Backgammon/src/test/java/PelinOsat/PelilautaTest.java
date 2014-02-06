@@ -39,7 +39,7 @@ public class PelilautaTest {
     public void setUp() {
         peli = new Pelikokonaisuus();
         lauta = peli.haePelilaudanNappulat();
-        pelaaja1 = new Pelaaja("testi",'x',peli, peli.haePelaaja1Nappulat());
+        pelaaja1 = new Pelaaja("testi",'x',peli, peli.haePelaaja1Nappulat(),peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti());
         nappula = new Pelinappula(pelaaja1, peli);
         peli.asetaPelaaja1(pelaaja1);
         peli.asetaPelaajaVuorossa(peli.haePelaaja1());
@@ -111,10 +111,12 @@ public class PelilautaTest {
     
     
     @Test
-    public void pelinappulaaEiVoiSiirtaaToisenPelaajanNappulanPaalle(){
-        Pelinappula nappula2 = new Pelinappula(new Pelaaja("h", 'c', peli,peli.haePelaaja2Nappulat()),peli);
+    public void pelinappulaaEiVoiSiirtaaToisenPelaajanKahdenNappulanPaalle(){
+        Pelinappula nappula2 = new Pelinappula(new Pelaaja("h", 'c', peli,peli.haePelaaja2Nappulat(),peli.haePelaajan2Jaahy(), peli.haePelaajan2Koti()),peli);
+        Pelinappula nappula3 = new Pelinappula(new Pelaaja("h", 'c', peli,peli.haePelaaja2Nappulat(),peli.haePelaajan2Jaahy(), peli.haePelaajan2Koti()),peli);
         peli.lisaaPelinappula(nappula, 3);
         peli.lisaaPelinappula(nappula2, 5);
+        peli.lisaaPelinappula(nappula3, 5);
         peli.haePelaaja1().siirraPelinappulaa(3, 2);
         assertEquals(nappula,peli.haePelilaudanNappulat().get(3).get(0));
     }

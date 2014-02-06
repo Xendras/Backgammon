@@ -43,7 +43,7 @@ public class PelaajaTest {
     
     @Test
     public void konstruktoriAsettaaNappulanTyypinOikein(){
-        Pelaaja pelaaja = new Pelaaja("testi",'P', peli, peli.haePelaaja1Nappulat());
+        Pelaaja pelaaja = new Pelaaja("testi",'P', peli, peli.haePelaaja1Nappulat(), peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti());
         
         char tyyppi = pelaaja.haePelaajanTyyppi();
         

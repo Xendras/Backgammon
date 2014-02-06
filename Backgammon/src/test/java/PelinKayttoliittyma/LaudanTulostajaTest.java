@@ -43,12 +43,11 @@ public class LaudanTulostajaTest {
     @Before
     public void setUp() {
         peli = new Pelikokonaisuus();
-        pelaaja = new Pelaaja("testi", 'x', peli, peli.haePelaaja1Nappulat());
         nappula = new Pelinappula(pelaaja, peli);
         tulostaja = new LaudanTulostaja(peli);
         kayttoliittyma = new TekstiUI(peli, tulostaja);
-        peli.asetaPelaaja1(new Pelaaja("Jonas", 'X', peli, peli.haePelaaja1Nappulat()));
-        peli.asetaPelaaja2(new Pelaaja("Sandra", 'O', peli, peli.haePelaaja2Nappulat()));
+        peli.asetaPelaaja1(new Pelaaja("Jonas", 'X', peli, peli.haePelaaja1Nappulat(), peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti()));
+        peli.asetaPelaaja2(new Pelaaja("Sandra", 'O', peli, peli.haePelaaja2Nappulat(), peli.haePelaajan2Jaahy(), peli.haePelaajan2Koti()));
         peli.alustaPelinappulat();
         peli.alustaPelilauta();
 
@@ -62,6 +61,7 @@ public class LaudanTulostajaTest {
     public void kokoLautaTulostuuOikein() {
         assertEquals("  13    14    15    16    17    18    19    20    21    22    23    24  \n"
                 + "------------------------------------------------------------------------\n"
+                + "                                          Pelaaja 2 jäähynappulat: \n"
                 + "| O | |   | |   | |   | | X | |   | | X | |   | |   | |   | |   | | O | \n"
                 + "  O                       X           X                             O   \n"
                 + "  O                       X           X                                 \n"
@@ -73,6 +73,7 @@ public class LaudanTulostajaTest {
                 + "  X                       O           O                                 \n"
                 + "  X                       O           O                             X   \n"
                 + "| X | |   | |   | |   | | O | |   | | O | |   | |   | |   | |   | | X | \n"
+                + "                                          Pelaajan 1 jäähynappulat: \n"
                 + "------------------------------------------------------------------------\n"
                 + "  12    11    10    9     8     7     6     5     4     3     2     1   ", tulostaja.tulostaPelilauta());
     }

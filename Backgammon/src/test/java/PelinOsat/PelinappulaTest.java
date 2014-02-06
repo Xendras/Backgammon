@@ -37,7 +37,7 @@ public class PelinappulaTest {
     public void setUp() {
         peli = new Pelikokonaisuus();
         lauta = peli.haePelilauta();
-        Jonas = new Pelaaja("testi",'x',peli,peli.haePelaaja1Nappulat());
+        Jonas = new Pelaaja("testi",'x',peli,peli.haePelaaja1Nappulat(),peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti());
         nappula = new Pelinappula(Jonas,peli);
     }
     

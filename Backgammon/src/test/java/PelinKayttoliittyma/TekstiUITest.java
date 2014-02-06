@@ -43,7 +43,7 @@ public class TekstiUITest {
     @Before
     public void setUp() {
         peli = new Pelikokonaisuus();
-        pelaaja = new Pelaaja("testi",'x',peli, peli.haePelaaja1Nappulat());
+        pelaaja = new Pelaaja("testi",'x',peli, peli.haePelaaja1Nappulat(),peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti());
         nappula = new Pelinappula(pelaaja, peli);
         tulostaja = new LaudanTulostaja(peli);
         kayttoliittyma = new TekstiUI(peli, tulostaja);
