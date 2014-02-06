@@ -8,6 +8,7 @@ package PelinKayttajat;
 import PelinOsat.Pelikokonaisuus;
 import PelinOsat.Pelilauta;
 import PelinOsat.Pelinappula;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -21,6 +22,8 @@ public class Pelaaja {
     Pelikokonaisuus peli;
     HashMap<Integer, Pelinappula> nappulat;
     Pelaaja vastustaja;
+    ArrayList<Pelinappula> jaahy;
+    ArrayList<Pelinappula> koti;
 
     /**
      * Luo Pelaaja-olion jolla on nimi, nappulan tyyppi, peli johon pelaaja kuuluu, sekä nappulakokoelma joka kuuluu pelaajalle.
@@ -28,15 +31,26 @@ public class Pelaaja {
      * @param nappulanTyyppi Käyttäjän antama nappulatyyppi.
      * @param peli Peli johon pelaaja kuuluu.
      * @param nappulat Nappulat jotka kuuluvat pelaajalle
+     * @param jaahy
+     * @param koti
      */
-    public Pelaaja(String nimi, char nappulanTyyppi, Pelikokonaisuus peli, HashMap<Integer, Pelinappula> nappulat) {
+    public Pelaaja(String nimi, char nappulanTyyppi, Pelikokonaisuus peli, HashMap<Integer, Pelinappula> nappulat, ArrayList<Pelinappula> jaahy, ArrayList<Pelinappula> koti) {
         this.nappulanTyyppi = nappulanTyyppi;
         this.nimi = nimi;
         this.peli = peli;
         this.nappulat = nappulat;
         this.vastustaja = null;
+        this.jaahy = jaahy;
+        this.koti = koti;
     }
 
+    public ArrayList<Pelinappula> haePelaajanJaahy(){
+        return this.jaahy;
+    }
+    public ArrayList<Pelinappula> haePelaajanKoti(){
+        return this.koti;
+    }
+    
     public char haePelaajanTyyppi() {
         return this.nappulanTyyppi;
     }

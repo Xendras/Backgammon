@@ -33,6 +33,14 @@ public class LaudanTulostaja {
      */
     public String tulostaYlalauta() {
         String tulostus = "";
+        for(int i = 0; i<42;i++){
+            tulostus += " ";
+        } 
+        tulostus += "Pelaaja 2 jäähynappulat: ";
+        for(int i = 0; i < peli.haePelaaja2().haePelaajanJaahy().size();i++){
+            tulostus += "O ";
+        }
+        tulostus += '\n';
         for (int i = 0; i < 12; i++) {
             tulostus += "| ";
             if (!this.peli.haePelilaudanNappulat().get(i+13).isEmpty()) {
@@ -60,6 +68,14 @@ public class LaudanTulostaja {
                 tulostus += " ";
             }
             tulostus += " | ";
+        }
+        tulostus += '\n';
+        for(int i = 0; i<42;i++){
+            tulostus += " ";
+        } 
+        tulostus += "Pelaajan 1 jäähynappulat: ";
+        for(int i = 0; i < peli.haePelaaja1().haePelaajanJaahy().size();i++){
+            tulostus += "X ";
         }
         
         return tulostus;

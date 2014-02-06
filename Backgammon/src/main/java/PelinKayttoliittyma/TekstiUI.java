@@ -3,10 +3,12 @@ package PelinKayttoliittyma;
 import PelinKayttajat.Pelaaja;
 import PelinOsat.Pelikokonaisuus;
 import PelinOsat.Pelilauta;
+import PelinOsat.Pelinappula;
 import java.util.Scanner;
 
 /**
  * Vastaa pelin tekstikäyttöliittymästä kun peliä pelataan.
+ *
  * @author Jonas Westerlund
  */
 public class TekstiUI {
@@ -17,6 +19,7 @@ public class TekstiUI {
 
     /**
      * Luo tekstikäyttöliittymän joka käyttää tulostajaa.
+     *
      * @param peli Pelikokonaisuus johon käyttöliittymää sovelletaan
      * @param tulostaja Tulostaja jota käyttöliittymä hyödyntää
      */
@@ -35,8 +38,8 @@ public class TekstiUI {
         String pelaaja1Nimi = lukija.nextLine();
         System.out.print("Anna pelaaja 2 nimi: ");
         String pelaaja2Nimi = lukija.nextLine();
-        peli.asetaPelaaja1(new Pelaaja(pelaaja1Nimi, 'X', peli, peli.haePelaaja1Nappulat()));
-        peli.asetaPelaaja2(new Pelaaja(pelaaja2Nimi, 'O', peli, peli.haePelaaja2Nappulat()));
+        peli.asetaPelaaja1(new Pelaaja(pelaaja1Nimi, 'X', peli, peli.haePelaaja1Nappulat(), peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti()));
+        peli.asetaPelaaja2(new Pelaaja(pelaaja2Nimi, 'O', peli, peli.haePelaaja2Nappulat(), peli.haePelaajan2Jaahy(), peli.haePelaajan2Koti()));
         peli.haePelaaja1().asetaVastustaja(peli.haePelaaja2());
         peli.haePelaaja2().asetaVastustaja(peli.haePelaaja1());
         peli.asetaPelaajaVuorossa(peli.haePelaaja1());
@@ -44,18 +47,21 @@ public class TekstiUI {
     }
 
     /**
-     * Aloittaa seuraavan vuoron ja tarkistaa jos peli on loppu. Pyytää pelaajilta vuoron 
-     * perään syötteenä nappulan sijainnin jota he haluavat siirtää, ja riippuen nopista paljolla he haluavat siirtää nappuloita. 
-     * Kun siirrot on tehty vuoro vaihtuu.
-     * 
+     * Aloittaa seuraavan vuoron ja tarkistaa jos peli on loppu. Pyytää
+     * pelaajilta vuoron perään syötteenä nappulan sijainnin jota he haluavat
+     * siirtää, ja riippuen nopista paljolla he haluavat siirtää nappuloita. Kun
+     * siirrot on tehty vuoro vaihtuu.
+     *
      */
     public void seuraavaVuoro() {
-        if (onkoPeliLoppu()) {
+        Pelaaja vuorossa = peli.haePelaajaVuorossa();
+        if (peli.haePelilauta().onkoPeliLoppu(vuorossa)) {
             return;
         }
-
-        System.out.println(peli.haePelaajaVuorossa().haePelaajanNimi() + " vuoro, noppien lukemat: " + peli.heitaNoppaa1() + " " + peli.heitaNoppaa2());
-
+        if (!peli.haePelilauta().onkoPelaajanJaahyTyhja(vuorossa)) {
+            System.out.println(vuorossa.haePelaajanNimi() + " vuoro, noppien lukemat: " + peli.heitaNoppaa1() + " " + peli.heitaNoppaa2());
+        }
+        System.out.println(vuorossa.haePelaajanNimi() + " vuoro, noppien lukemat: " + peli.heitaNoppaa1() + " " + peli.heitaNoppaa2());
         if (peli.haeNopan1Arvo() == peli.haeNopan2Arvo()) {
             siirraNappulaa("ensimmäisen", peli.haeNopan1Arvo());
             System.out.println(tulostaja.tulostaPelilauta());
@@ -73,14 +79,15 @@ public class TekstiUI {
 
         }
 
-        peli.asetaPelaajaVuorossa(peli.haePelaajaVuorossa().haeVastustaja());
+        peli.asetaPelaajaVuorossa(vuorossa.haeVastustaja());
 
     }
 
     /**
-     * Metodi avustaa seuraavaVuoro metodia tekemällä siitä selvemmän. 
-     * Siirtää siis nappulaa nopan lukeman verran.
-     * Käytetään kun pelaaja heittää kaksi samaa lukua nopilla.
+     * Metodi avustaa seuraavaVuoro metodia tekemällä siitä selvemmän. Siirtää
+     * siis nappulaa nopan lukeman verran. Käytetään kun pelaaja heittää kaksi
+     * samaa lukua nopilla.
+     *
      * @param kuinkaMonesNappula Syötteenä annettu nappulan sijainti
      * @param noppa Nopan lukema.
      */
@@ -88,16 +95,27 @@ public class TekstiUI {
         System.out.print("Anna " + kuinkaMonesNappula + " nappulan sijainti jota haluat siirtää: ");
         int sijainti = Integer.parseInt(lukija.nextLine());
         if (peli.haePelaajaVuorossa() == peli.haePelaaja2()) {
+            while (!peli.haePelilauta().voikoSiirtaa(sijainti, -noppa)) {
+                System.out.println("Nappulaa ei voi siirtää.");
+                System.out.print("Anna " + kuinkaMonesNappula + " nappulan sijainti jota haluat siirtää: ");
+                sijainti = Integer.parseInt(lukija.nextLine());
+            }
             peli.siirraPelinappulaa(sijainti, -noppa);
         } else {
+            while (!peli.haePelilauta().voikoSiirtaa(sijainti, noppa)) {
+                System.out.println("Nappulaa ei voi siirtää.");
+                System.out.print("Anna " + kuinkaMonesNappula + " nappulan sijainti jota haluat siirtää: ");
+                sijainti = Integer.parseInt(lukija.nextLine());
+            }
             peli.siirraPelinappulaa(sijainti, noppa);
         }
 
     }
 
     /**
-     * Käytetään kun pelaaja heittää eri arvot nopilla.
-     * Kysyy monella sitä siirretään ja kysyy mitä siirretään lopuilla siirroilla.
+     * Käytetään kun pelaaja heittää eri arvot nopilla. Kysyy monella sitä
+     * siirretään ja kysyy mitä siirretään lopuilla siirroilla.
+     *
      * @param kuinkaMonesNappula
      * @return Palauttaa kuinka monta askelta nappulaa siirrettiin
      */
@@ -106,31 +124,47 @@ public class TekstiUI {
         int sijainti = Integer.parseInt(lukija.nextLine());
         System.out.print("Anna siirtojen määrä (" + peli.haeNopan1Arvo() + " tai " + peli.haeNopan2Arvo() + "): ");
         int siirtoja = Integer.parseInt(lukija.nextLine());
+
         if (siirtoja == peli.haeNopan1Arvo() || siirtoja == peli.haeNopan2Arvo()) {
             if (peli.haePelaajaVuorossa() == peli.haePelaaja2()) {
+                while (!peli.haePelilauta().voikoSiirtaa(sijainti, -siirtoja)) {
+                    System.out.println("Nappulaa ei voi siirtää.");
+                    System.out.print("Anna " + kuinkaMonesNappula + " nappulan sijainti jota haluat siirtää: ");
+                    sijainti = Integer.parseInt(lukija.nextLine());
+                    System.out.print("Anna siirtojen määrä (" + peli.haeNopan1Arvo() + " tai " + peli.haeNopan2Arvo() + "): ");
+                    siirtoja = Integer.parseInt(lukija.nextLine());
+                }
                 peli.siirraPelinappulaa(sijainti, -siirtoja);
             } else {
+                while (!peli.haePelilauta().voikoSiirtaa(sijainti, siirtoja)) {
+                    System.out.println("Nappulaa ei voi siirtää.");
+                    System.out.print("Anna " + kuinkaMonesNappula + " nappulan sijainti jota haluat siirtää: ");
+                    sijainti = Integer.parseInt(lukija.nextLine());
+                    System.out.print("Anna siirtojen määrä (" + peli.haeNopan1Arvo() + " tai " + peli.haeNopan2Arvo() + "): ");
+                    siirtoja = Integer.parseInt(lukija.nextLine());
+                }
                 peli.siirraPelinappulaa(sijainti, siirtoja);
             }
         }
-        
+
         return siirtoja;
     }
 
-    /**
-     * Tarkistaa onko peli loppu, eli siis jos peli on loppuasetelmassa.
-     * @return Palauttaa booleanin joka kertoo onko peli loppu vai ei
-     */
-    public boolean onkoPeliLoppu() {
-        if (peli.haePelilauta().ovatkoNappulatVastustajanAlueella(peli.haePelaaja1())) {
-            System.out.println(peli.haePelaaja1().haePelaajanNimi() + " voitti!");
-            return true;
-        } else if (peli.haePelilauta().ovatkoNappulatVastustajanAlueella(peli.haePelaaja2())) {
-            System.out.println(peli.haePelaaja2().haePelaajanNimi() + " voitti!");
-            return true;
-        }
+    public void lisaaNappulaTakaisinLaudalle(Pelinappula nappula, int noppa) {
+        System.out.print("Anna sijainti mihin nappula siirretään jäähyltä: ");
+        int sijainti = Integer.parseInt(lukija.nextLine());
 
-        return false;
+        if (peli.haePelilauta().voikoLisata(nappula, sijainti)) {
+            if (peli.haePelaajaVuorossa() == peli.haePelaaja1() && sijainti < 7 && sijainti > 0) {
+                if (peli.haePelilaudanNappulat().get(noppa).size() == 1 && peli.haePelilaudanNappulat().get(sijainti + siirtoja).get(0).haePelinappulanOmistaja() != peli.haePelaajaVuorossa()) {
+                Pelinappula vastustaja = peli.haePelilaudanNappulat().get(sijainti + siirtoja).get(0);
+                this.lisaaNappulaPelaajanJaahylle(vastustaja, peli.haePelaajaVuorossa().haeVastustaja());
+                Pelinappula nappula = pelilauta.get(sijainti).get(pelilauta.get(sijainti).size() - 1);
+                pelilauta.get(sijainti).remove(pelilauta.get(sijainti).size() - 1);
+                pelilauta.get(sijainti + siirtoja).add(nappula);
+            }
+            }
+        }
     }
 
 }

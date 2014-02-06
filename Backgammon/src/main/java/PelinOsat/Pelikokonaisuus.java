@@ -23,6 +23,11 @@ public class Pelikokonaisuus {
     Pelaaja pelaaja1;
     Pelaaja pelaaja2;
     Pelaaja vuorossa;
+    ArrayList<Pelinappula> jaahy1;
+    ArrayList<Pelinappula> jaahy2;
+    ArrayList<Pelinappula> koti1;
+    ArrayList<Pelinappula> koti2;
+    
     
     /**
      * Luo pelikokonaisuuden joka sisältää kaksi noppaa, yhden pelilaudan, kaksi rykelmää pelinappuloita, kaksi pelaajaa, sekä vuorossa olevan pelaajan
@@ -33,9 +38,14 @@ public class Pelikokonaisuus {
         this.pelilauta = new Pelilauta(this);
         this.nappulat1 = new HashMap<Integer,Pelinappula>();
         this.nappulat2 = new HashMap<Integer,Pelinappula>();
+        this.jaahy1 = new ArrayList<Pelinappula>();
+        this.jaahy2 = new ArrayList<Pelinappula>();
+        this.koti1 = new ArrayList<Pelinappula>();
+        this.koti2 = new ArrayList<Pelinappula>();
         this.pelaaja1 = null;
         this.pelaaja2 = null;
         this.vuorossa = pelaaja1;
+        
     }
     
     /**
@@ -53,6 +63,21 @@ public class Pelikokonaisuus {
     public Pelilauta haePelilauta(){
         return this.pelilauta;
     }
+    
+    public ArrayList<Pelinappula> haePelaajan1Jaahy(){
+        return this.jaahy1;
+    }
+    public ArrayList<Pelinappula> haePelaajan2Jaahy(){
+        return this.jaahy2;
+    }
+    public ArrayList<Pelinappula> haePelaajan1Koti(){
+        return this.koti1;
+    }
+    public ArrayList<Pelinappula> haePelaajan2Koti(){
+        return this.koti2;
+    }
+    
+    
     
     public Pelaaja haePelaajaVuorossa(){
         return vuorossa;
@@ -103,25 +128,25 @@ public class Pelikokonaisuus {
     }
     
     /**
-     *
-     * @param sijainti
-     * @param siirtoja
+     * Kutsuu pelilaudan metodia joka siirtaa nappulaa HashMapissa.
+     * @param sijainti Siirrettävän nappulan sijainti
+     * @param siirtoja Kuinka monta siirtoa
      */
     public void siirraPelinappulaa(int sijainti, int siirtoja){
         this.pelilauta.siirraNappulaaLaudalla(sijainti, siirtoja);
     }
     
     /**
-     *
-     * @param nappula
-     * @param sijainti
+     * Kutsuu pelilaudan metodia joka lisää nappulan HashMapiin.
+     * @param nappula Siirrettävän nappulan sijainti
+     * @param sijainti Kuinka monta siirtoa
      */
     public void lisaaPelinappula(Pelinappula nappula, int sijainti){
         this.pelilauta.lisaaNappulaLaudalle(nappula, sijainti);
     }
     
     /**
-     *
+     * Alustaa 16 pelinappulaa per pelaaja ja lisää ne vastaaviin rykelmiin nappuloita
      */
     public void alustaPelinappulat(){
         for(int i = 1;i <16;i++){
@@ -131,7 +156,7 @@ public class Pelikokonaisuus {
     }
     
     /**
-     *
+     * Alustaa pelilaudan pelin alkutilanteeseen, eli lisää pelinappulat pelilaudan HashMapiin tietyllä tavalla.
      */
     public void alustaPelilauta(){
         
