@@ -10,5 +10,6 @@
 4.2.2014  // 4h // Pelin käynnistyksen ja itse pelin kulun kehittämistä
 5.2.2014 // 2h // Javadocin kirjoittamista ja testien päivitystä
 6.2.2014 // 2h // Sekvenssikaavioita ja testejä
+10.2.2014 // 5h // Testien päivittelyä ajantasalle ja graafisen käyttöliittymän aloittelua
 
 
