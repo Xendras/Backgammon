@@ -107,4 +107,42 @@ public class PelikokonaisuusTest {
         }
         assertEquals(true,toimiko);
     }
+    
+    @Test
+    public void nopanHeittoToimii(){
+        boolean toimiko = false;
+        int arvo = peli.heitaNoppaa1();
+        if(arvo>0 && arvo < 7){
+            toimiko = true;
+        }        
+        assertEquals(true,toimiko);
+    }
+    
+    @Test
+    public void nopanArvonHakuToimii(){
+        boolean toimiko = false;
+        peli.heitaNoppaa1();
+        int arvo = peli.haeNopan1Arvo();
+        if(arvo>0 && arvo < 7){
+            toimiko = true;
+        }        
+        assertEquals(true,toimiko);
+    }
+    
+    @Test
+    public void peliLaudanAlustusToimiiNappuloidenOsalta(){
+        peli.alustaPelinappulat();
+        peli.alustaPelilauta();    
+        int nappuloidenMaara = 0;
+        for(int i = 1; i< 25;i++){
+            nappuloidenMaara += peli.haePelilauta().haePelilauta().get(i).size();
+        }
+        assertEquals(30,nappuloidenMaara);
+    }
+    
+    @Test
+    public void peliLaudanNappuloidenAlustusToimii(){
+        peli.alustaPelinappulat();   
+        assertEquals(15,peli.haePelaaja1Nappulat().keySet().size());
+    }
 }

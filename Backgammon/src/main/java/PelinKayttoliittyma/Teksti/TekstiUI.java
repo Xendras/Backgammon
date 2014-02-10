@@ -1,4 +1,4 @@
-package PelinKayttoliittyma;
+package PelinKayttoliittyma.Teksti;
 
 import PelinKayttajat.Pelaaja;
 import PelinOsat.Pelikokonaisuus;
@@ -152,6 +152,12 @@ public class TekstiUI {
         return siirtoja;
     }
 
+    /**
+     * Lisää nappulan takaisin laudalle jäähylaudalta.
+     *
+     * @param noppa
+     */
+    
     public void lisaaNappulaTakaisinLaudalle(int noppa) {
         System.out.print("Anna sijainti mihin nappula siirretään jäähyltä: ");
         int sijainti = Integer.parseInt(lukija.nextLine());

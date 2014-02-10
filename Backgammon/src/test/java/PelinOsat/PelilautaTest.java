@@ -21,8 +21,11 @@ import java.util.HashMap;
 public class PelilautaTest {
     HashMap<Integer,ArrayList<Pelinappula>> lauta;
     Pelinappula nappula;
+    Pelinappula nappula2;
     Pelaaja pelaaja1;
+    Pelaaja pelaaja2;
     Pelikokonaisuus peli;
+    Pelilauta pelilauta;
     
     public PelilautaTest() {
     }
@@ -39,9 +42,13 @@ public class PelilautaTest {
     public void setUp() {
         peli = new Pelikokonaisuus();
         lauta = peli.haePelilaudanNappulat();
-        pelaaja1 = new Pelaaja("testi",'x',peli, peli.haePelaaja1Nappulat(),peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti());
+        pelilauta = peli.haePelilauta();
+        pelaaja1 = new Pelaaja("testi1",'x',peli, peli.haePelaaja1Nappulat(),peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti());
+        pelaaja2 = new Pelaaja("testi2",'o',peli, peli.haePelaaja2Nappulat(),peli.haePelaajan2Jaahy(), peli.haePelaajan2Koti());
         nappula = new Pelinappula(pelaaja1, peli);
+        nappula2 = new Pelinappula(pelaaja2, peli);
         peli.asetaPelaaja1(pelaaja1);
+        peli.asetaPelaaja2(pelaaja2);
         peli.asetaPelaajaVuorossa(peli.haePelaaja1());
         
     }
@@ -60,6 +67,11 @@ public class PelilautaTest {
         }       
         assertEquals(true,tyhja);
     }
+    
+    @Test
+    public void konstruktoriLuoOikeanMaaranListoja(){
+        assertEquals(24,lauta.keySet().size());
+    }
       
     @Test
     public void pelinappulaLisataanOikeallePaikalle(){
@@ -68,8 +80,18 @@ public class PelilautaTest {
     }
     
     @Test
-    public void pelinappulanSijaintiAsetetaanOikein(){
-        assertEquals(-1,nappula.haePelinappulanSijainti());
+    public void pelinappulaLisataanOikeinJaahylle(){
+        peli.lisaaPelinappula(nappula,3);
+        peli.haePelilauta().lisaaNappulaPelaajanJaahylle(nappula,peli.haePelaaja1());
+        assertEquals(nappula,peli.haePelaaja1().haePelaajanJaahy().get(0));
+    }
+    
+    @Test
+    public void pelinappulaHaetaanOikeinJaahylta(){
+        peli.lisaaPelinappula(nappula,3);
+        peli.haePelilauta().lisaaNappulaPelaajanJaahylle(nappula,peli.haePelaaja1());
+        Pelinappula nappula2 = peli.haePelilauta().haeNappulaPelaajanJaahylta(peli.haePelaaja1());
+        assertEquals(nappula,nappula2);
     }
     
     @Test
@@ -91,15 +113,15 @@ public class PelilautaTest {
     @Test
     public void pelinappulaSiirtyyOikeallePaikalleYlalaudalla(){
         peli.lisaaPelinappula(nappula,14);
-        peli.haePelaaja1().siirraPelinappulaa(14, 4);
-        assertEquals(nappula,peli.haePelilaudanNappulat().get(18).get(0));
+        pelilauta.siirraNappulaaLaudalla(14, 4);
+        assertEquals(nappula,lauta.get(18).get(0));
     }
     
     @Test
     public void pelinappulaSiirtyyOikeallePaikalleAlalaudalla(){
         peli.lisaaPelinappula(nappula,3);
-        peli.haePelaaja1().siirraPelinappulaa(3, 4);
-        assertEquals(nappula,peli.haePelilaudanNappulat().get(7).get(0));
+        pelilauta.siirraNappulaaLaudalla(3, 4);
+        assertEquals(nappula,lauta.get(7).get(0));
     }
     
     @Test
@@ -124,15 +146,175 @@ public class PelilautaTest {
     @Test
     public void pelinappulaaEiVoiSiirtaaUlosYlaLaudalta(){
         peli.lisaaPelinappula(nappula, 3);
-        peli.haePelaaja1().siirraPelinappulaa(3, 23);
-        assertEquals(nappula,peli.haePelilaudanNappulat().get(3).get(0));
+        pelilauta.siirraNappulaaLaudalla(3, 23);
+        assertEquals(nappula,lauta.get(3).get(0));
     }
     
     @Test
     public void pelinappulaaEiVoiSiirtaaUlosAlaLaudalta(){
         peli.lisaaPelinappula(nappula, 3);
-        peli.haePelaaja1().siirraPelinappulaa(3, -3);
-        assertEquals(nappula,peli.haePelilaudanNappulat().get(3).get(0));
+        pelilauta.siirraNappulaaLaudalla(3, -3);
+        assertEquals(nappula,lauta.get(3).get(0));
     }
+    
+    @Test
+    public void voikoSiirtaaPalauttaaFalseAlalaudalla(){
+        peli.lisaaPelinappula(nappula, 3);
+        assertEquals(false,pelilauta.voikoSiirtaa(3,-3));
+    }
+    
+    @Test
+    public void voikoSiirtaaPalauttaaFalseYlalaudalla(){
+        peli.lisaaPelinappula(nappula, 3);
+        assertEquals(false,pelilauta.voikoSiirtaa(3,22));
+    }
+    
+    @Test
+    public void voikoSiirtaaPalauttaaTrueYlalaudalla(){
+        peli.lisaaPelinappula(nappula, 3);
+        assertEquals(true,pelilauta.voikoSiirtaa(3,21));
+    }
+    
+    @Test
+    public void voikoSiirtaaPalauttaaTrueAlalaudalla(){
+        peli.lisaaPelinappula(nappula, 3);
+        assertEquals(true,pelilauta.voikoSiirtaa(3,-2));
+    }
+    
+    @Test
+    public void voikoSiirtaaPalauttaaFalseKunVaaraPelaaja(){
+        peli.lisaaPelinappula(nappula, 3);
+        peli.asetaPelaajaVuorossa(peli.haePelaaja2());
+        assertEquals(false,pelilauta.voikoSiirtaa(3,6));
+    }
+    
+    @Test
+    public void voikoSiirtaaKotiinPalauttaaFalseAlalaudalla(){
+        peli.lisaaPelinappula(nappula, 3);
+        assertEquals(false,pelilauta.voikoSiirtaaKotiin(pelaaja1,3,-2));
+    }
+    
+    @Test
+    public void voikoSiirtaaKotiinPalauttaaFalseYlalaudalla(){
+        peli.lisaaPelinappula(nappula, 19);
+        assertEquals(false,pelilauta.voikoSiirtaaKotiin(pelaaja1,19,2));
+    }
+    
+    @Test
+    public void voikoSiirtaaKotiinPalauttaaTrueYlalaudalla(){
+        peli.lisaaPelinappula(nappula, 19);
+        assertEquals(true,pelilauta.voikoSiirtaaKotiin(pelaaja1,19,6));
+    }
+    
+    @Test
+    public void voikoSiirtaaKotiinPalauttaaTrueAlalaudalla(){
+        peli.lisaaPelinappula(nappula2, 3);
+        peli.asetaPelaajaVuorossa(peli.haePelaaja2());
+        assertEquals(true,pelilauta.voikoSiirtaaKotiin(pelaaja2,3,-3));
+    }
+    
+    @Test
+    public void voikoSiirtaaKotiinPalauttaaFalseKunVaaraPelaaja(){
+        peli.lisaaPelinappula(nappula, 19);
+        peli.asetaPelaajaVuorossa(peli.haePelaaja2());
+        assertEquals(false,pelilauta.voikoSiirtaaKotiin(pelaaja2,19,6));
+    }
+    
+    @Test
+    public void voikoSiirtaaKotiinPalauttaaFalseKunTyhjaSijainti(){
+        assertEquals(false,pelilauta.voikoSiirtaaKotiin(pelaaja1,19,6));
+    }
+    
+    @Test
+    public void siirraKotiinEiTeeMitaanJosSiirrotOvatVaarin(){
+        peli.lisaaPelinappula(nappula, 19);
+        pelilauta.siirraNappulaKotiin(pelaaja1,19,7);
+        assertEquals(nappula,lauta.get(19).get(0));
+    }
+    
+    @Test
+    public void siirraKotiinSiirtaaOikein(){
+        peli.lisaaPelinappula(nappula, 19);
+        pelilauta.siirraNappulaKotiin(pelaaja1,19,6);
+        assertEquals(nappula,pelaaja1.haePelaajanKoti().get(0));
+    }
+    
+    @Test
+    public void voikoSiirtaaPalauttaaFalseKunSiirretaanToisenPelaajanPaalleJollaEnemmanKuinYksiNappula(){
+        Pelinappula nappula2 = new Pelinappula(pelaaja2,peli);
+        Pelinappula nappula3 = new Pelinappula(pelaaja2,peli);
+        pelilauta.lisaaNappulaLaudalle(nappula2,9);
+        pelilauta.lisaaNappulaLaudalle(nappula3,9);
+        pelilauta.lisaaNappulaLaudalle(nappula,3);
+        assertEquals(false,pelilauta.voikoSiirtaa(3,6));
+    }
+    
+    @Test
+    public void voikoSiirtaaPalauttaaTrueKunSiirretaanToisenPelaajanPaalleJollaOnYksiNappula(){
+        Pelinappula nappula3 = new Pelinappula(pelaaja2,peli);
+        pelilauta.lisaaNappulaLaudalle(nappula3,9);
+        pelilauta.lisaaNappulaLaudalle(nappula,3);
+        assertEquals(true,pelilauta.voikoSiirtaa(3,6));
+    }
+    
+    @Test
+    public void onkoPelaajanJaahyTyhjaToimii(){
+        assertEquals(true,pelilauta.onkoPelaajanJaahyTyhja(peli.haePelaaja1()));
+    }
+    
+    @Test
+    public void onkoPelaajanKotiTaynna(){
+        assertEquals(false,pelilauta.onkoPelaajanKotiTaynna(peli.haePelaaja1()));
+    }
+    
+    @Test
+    public void onkoPeliLoppuPalauttaaFalse(){
+        assertEquals(false,pelilauta.onkoPeliLoppu(peli.haePelaaja1()));
+    }
+    
+    @Test
+    public void onkoPeliLoppuPalauttaaTrue(){
+        peli.alustaPelinappulat();
+        peli.alustaPelilauta();
+        for(int i = 1;i <16;i++){
+            pelilauta.lisaaNappulaPelaajanKotiin(peli.haePelaaja1Nappulat().get(i),pelaaja1);
+        }
+        assertEquals(true,pelilauta.onkoPeliLoppu(peli.haePelaaja1()));
+    }
+    
+    
+    @Test
+    public void NappulatPelaajan1Alueella(){
+        peli.alustaPelinappulat();
+        for(int i = 1;i <16;i++){
+            peli.haePelaaja1Nappulat().get(i).asetaPelinappulanSijainti(20);
+        }
+        assertEquals(true,pelilauta.ovatkoNappulatVastustajanAlueella(peli.haePelaaja1()));
+    }
+    
+    @Test
+    public void NappulatPelaajan2Alueella(){
+        peli.alustaPelinappulat();
+        for(int i = 1;i <16;i++){
+            peli.haePelaaja2Nappulat().get(i).asetaPelinappulanSijainti(2);
+        }
+        assertEquals(true,pelilauta.ovatkoNappulatVastustajanAlueella(peli.haePelaaja2()));
+    }
+    
+    @Test
+    public void NappulatEivatPelaajan2Alueella(){
+        peli.alustaPelinappulat();
+        peli.alustaPelilauta();
+        assertEquals(false,pelilauta.ovatkoNappulatVastustajanAlueella(peli.haePelaaja2()));
+    }
+    
+    @Test
+    public void NappulatEivatPelaajan1Alueella(){
+        peli.alustaPelinappulat();
+        peli.alustaPelilauta();
+        assertEquals(false,pelilauta.ovatkoNappulatVastustajanAlueella(peli.haePelaaja1()));
+    }
+    
+    
     
 }

@@ -44,6 +44,10 @@ public class Pelilauta {
         peli.haePelilaudanNappulat().get(nappula.haePelinappulanSijainti()).remove(0);
     }
 
+    public void lisaaNappulaPelaajanKotiin(Pelinappula nappula, Pelaaja pelaaja) {
+        pelaaja.haePelaajanKoti().add(nappula);
+    }
+
     public Pelinappula haeNappulaPelaajanJaahylta(Pelaaja pelaaja) {
         return pelaaja.haePelaajanJaahy().get(pelaaja.haePelaajanJaahy().size() - 1);
     }
@@ -68,9 +72,6 @@ public class Pelilauta {
      * @param siirtoja määrä siirtoja
      */
     public void siirraNappulaaLaudalla(int sijainti, int siirtoja) {
-        if (sijainti < 1 || sijainti > 24 || pelilauta.get(sijainti).isEmpty()) {
-            return;
-        }
         if (voikoSiirtaa(sijainti, siirtoja)) {
             if (peli.haePelilaudanNappulat().get(sijainti + siirtoja).size() == 1 && peli.haePelilaudanNappulat().get(sijainti + siirtoja).get(0).haePelinappulanOmistaja() != peli.haePelaajaVuorossa()) {
                 Pelinappula vastustaja = peli.haePelilaudanNappulat().get(sijainti + siirtoja).get(0);
@@ -87,13 +88,14 @@ public class Pelilauta {
         }
     }
 
-    public void siirraNappulaKotiin(Pelaaja vuorossa, int sijainti) {
-        Pelinappula nappula = pelilauta.get(sijainti).get(pelilauta.get(sijainti).size() - 1);
-        if (vuorossa == nappula.haePelinappulanOmistaja()) {
-            pelilauta.get(sijainti).remove(pelilauta.get(sijainti).size() - 1);
-            vuorossa.haePelaajanKoti().add(nappula);
-            nappula.asetaPelinappulanSijainti(0);
+    public void siirraNappulaKotiin(Pelaaja vuorossa, int sijainti, int siirrot) {
+        if (!voikoSiirtaaKotiin(vuorossa, sijainti, siirrot)) {
+            return;
         }
+        Pelinappula nappula = pelilauta.get(sijainti).get(pelilauta.get(sijainti).size() - 1);
+        pelilauta.get(sijainti).remove(pelilauta.get(sijainti).size() - 1);
+        lisaaNappulaPelaajanKotiin(nappula, vuorossa);
+        nappula.asetaPelinappulanSijainti(0);
 
     }
 
@@ -111,7 +113,7 @@ public class Pelilauta {
         }
         if (pelilauta.get(sijainti).isEmpty()) {
             return true;
-        } else if (pelilauta.get(sijainti).get(0).haePelinappulanOmistaja() == nappula.haePelinappulanOmistaja() || pelilauta.get(sijainti).size() == 1 ) {
+        } else if (pelilauta.get(sijainti).get(0).haePelinappulanOmistaja() == nappula.haePelinappulanOmistaja() || pelilauta.get(sijainti).size() == 1) {
             return true;
         }
         return false;
@@ -127,17 +129,43 @@ public class Pelilauta {
      * @return Palauttaa booleanin joka kertoo jos nappulaa pystyi siirtämään
      */
     public boolean voikoSiirtaa(int sijainti, int siirtoja) {
-        boolean voiko = true;
         if (sijainti + siirtoja < 1 || sijainti + siirtoja > 24) {
+            return false;
+        }
+        if (pelilauta.get(sijainti).isEmpty()) {
             return false;
         }
         if (pelilauta.get(sijainti).get(0).haePelinappulanOmistaja() != peli.haePelaajaVuorossa()) {
             return false;
         }
-        if (!pelilauta.get(sijainti + siirtoja).isEmpty() && pelilauta.get(sijainti + siirtoja).get(0).haePelinappulanOmistaja() != pelilauta.get(sijainti).get(0).haePelinappulanOmistaja() && pelilauta.get(sijainti + siirtoja).size() > 1) {
+        if (pelilauta.get(sijainti + siirtoja).isEmpty()) {
+            return true;
+        }
+        if (pelilauta.get(sijainti + siirtoja).get(0).haePelinappulanOmistaja() != pelilauta.get(sijainti).get(0).haePelinappulanOmistaja() && pelilauta.get(sijainti + siirtoja).size() > 1) {
             return false;
         }
-        return voiko;
+        return true;
+    }
+
+    public boolean voikoSiirtaaKotiin(Pelaaja pelaaja, int sijainti, int siirtoja) {
+        if (pelilauta.get(sijainti).isEmpty()) {
+            return false;
+        }
+
+        if (pelaaja != pelilauta.get(sijainti).get(0).haePelinappulanOmistaja()) {
+            return false;
+        }
+        if (pelaaja == peli.haePelaaja1()) {
+            if (sijainti + siirtoja == 25) {
+                return true;
+            }
+        } else {
+            if (sijainti + siirtoja == 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -170,11 +198,10 @@ public class Pelilauta {
      * Tarkistaa onko peli loppu, eli siis jos peli on loppuasetelmassa.
      *
      * @return Palauttaa booleanin joka kertoo onko peli loppu vai ei
+     * @param vuorossa Pelaaja joka on tällä hetkellä vuorossa
      */
     public boolean onkoPeliLoppu(Pelaaja vuorossa) {
         if (this.onkoPelaajanKotiTaynna(vuorossa)) {
-            return true;
-        } else if (this.onkoPelaajanKotiTaynna(vuorossa)) {
             return true;
         }
         return false;

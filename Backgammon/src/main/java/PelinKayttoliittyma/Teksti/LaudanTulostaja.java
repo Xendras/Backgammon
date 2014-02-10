@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package PelinKayttoliittyma; 
+package PelinKayttoliittyma.Teksti; 
 
 import PelinOsat.Pelikokonaisuus;
 import java.util.Scanner;

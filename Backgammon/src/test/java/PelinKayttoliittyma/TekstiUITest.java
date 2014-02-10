@@ -5,6 +5,8 @@
  */
 package PelinKayttoliittyma;
 
+import PelinKayttoliittyma.Teksti.LaudanTulostaja;
+import PelinKayttoliittyma.Teksti.TekstiUI;
 import PelinKayttajat.Pelaaja;
 import PelinOsat.Pelikokonaisuus;
 import PelinOsat.Pelilauta;

@@ -30,7 +30,7 @@ public class Pelikokonaisuus {
     
     
     /**
-     * Luo pelikokonaisuuden joka sisältää kaksi noppaa, yhden pelilaudan, kaksi rykelmää pelinappuloita, kaksi pelaajaa, sekä vuorossa olevan pelaajan
+     * Luo pelikokonaisuuden joka sisältää kaksi noppaa, yhden pelilaudan, kaksi rykelmää pelinappuloita, kaksi pelaajaa, sekä vuorossa olevan pelaajan jäähy ja kotilaudat
      */
     public Pelikokonaisuus(){
         this.noppa1 = new Noppa();
@@ -76,8 +76,6 @@ public class Pelikokonaisuus {
     public ArrayList<Pelinappula> haePelaajan2Koti(){
         return this.koti2;
     }
-    
-    
     
     public Pelaaja haePelaajaVuorossa(){
         return vuorossa;
@@ -149,7 +147,7 @@ public class Pelikokonaisuus {
      * Alustaa 16 pelinappulaa per pelaaja ja lisää ne vastaaviin rykelmiin nappuloita
      */
     public void alustaPelinappulat(){
-        for(int i = 1;i <16;i++){
+        for(int i = 1;0<= i && i <16;i++){
             this.nappulat1.put(i,new Pelinappula(pelaaja1,this));
             this.nappulat2.put(i,new Pelinappula(pelaaja2,this));
         }

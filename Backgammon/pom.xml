@@ -46,12 +46,10 @@
                 <targetClasses>
                     <param>PelinKayttajat.Pelaaja</param>
                     <param>PelinOsat*</param>
-                    <param>PelinKayttoliittyma.TekstiUI</param>
                 </targetClasses>   
                 <targetTests>
                     <param>PelinKayttajat*</param>
                     <param>PelinOsat*</param>
-                    <param>PelinKayttoliittyma.TekstiUITest</param>
                 </targetTests> 
             </configuration>     
         </plugin>

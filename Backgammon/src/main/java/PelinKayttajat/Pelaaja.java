@@ -31,8 +31,8 @@ public class Pelaaja {
      * @param nappulanTyyppi Käyttäjän antama nappulatyyppi.
      * @param peli Peli johon pelaaja kuuluu.
      * @param nappulat Nappulat jotka kuuluvat pelaajalle
-     * @param jaahy
-     * @param koti
+     * @param jaahy Pelaajalle kuuluva jäähylauta.
+     * @param koti Pelaajalle kuuluva kotilauta.
      */
     public Pelaaja(String nimi, char nappulanTyyppi, Pelikokonaisuus peli, HashMap<Integer, Pelinappula> nappulat, ArrayList<Pelinappula> jaahy, ArrayList<Pelinappula> koti) {
         this.nappulanTyyppi = nappulanTyyppi;

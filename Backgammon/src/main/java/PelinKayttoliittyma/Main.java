@@ -5,11 +5,15 @@
  */
 
 package PelinKayttoliittyma;
+import PelinKayttoliittyma.Graafinen.GraafinenUI;
 import PelinKayttajat.Pelaaja;
+import PelinKayttoliittyma.Teksti.LaudanTulostaja;
+import PelinKayttoliittyma.Teksti.TekstiUI;
 import PelinOsat.Pelilauta;
 import PelinOsat.Pelinappula;
 import PelinOsat.Noppa;
 import PelinOsat.Pelikokonaisuus;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -19,18 +23,8 @@ public class Main {
     
     public static void main(String[] args) {
         Pelikokonaisuus peli = new Pelikokonaisuus();
-        LaudanTulostaja tulostaja = new LaudanTulostaja(peli);
-        TekstiUI kayttoliittyma = new TekstiUI(peli, tulostaja);
-        kayttoliittyma.aloitaPeli();
-        peli.alustaPelinappulat();
-        peli.alustaPelilauta();
-        
-        boolean loppu = false;
-        while(!loppu){
-            loppu = peli.haePelilauta().ovatkoNappulatVastustajanAlueella(peli.haePelaajaVuorossa().haeVastustaja());
-            System.out.println(tulostaja.tulostaPelilauta());
-            kayttoliittyma.seuraavaVuoro();
-        }
+        GraafinenUI kayttoliittyma = new GraafinenUI(peli);
+        SwingUtilities.invokeLater(kayttoliittyma);
        
     }
 }
