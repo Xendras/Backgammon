@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 public class PelaajienLisaysPaneeli extends JPanel {
     
     JPanel pelaajienLisaysPaneeli;
+    
     public PelaajienLisaysPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen){
         pelaajienLisaysPaneeli = new JPanel();
         GridLayout layout = new GridLayout(3, 2);

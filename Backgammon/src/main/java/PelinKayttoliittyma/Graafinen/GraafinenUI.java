@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,26 +32,47 @@ public class GraafinenUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Backgammon");
-        frame.setPreferredSize(new Dimension(300, 150));
+        frame.setPreferredSize(new Dimension(700, 550));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        PelaajienLisaysPaneeli nimiPaneeli = new PelaajienLisaysPaneeli(peli,this);
-        frame.getContentPane().add(nimiPaneeli.haePaneeli());
+        
+        haeContentPane().add(new PelilaudanPiirtoPaneeli());
+//        alustaPelaajienNimetPaneeli();
+        frame.setResizable(false);
 
         frame.pack();
         frame.setVisible(true);
     }
     
-    
-    public void poistaLisaaJaPaivitaContentPane(JPanel paneeli){
+    public void siirryAloitusPaneeliin(){
+        haeFrame().setSize(new Dimension(400, 175));
         frame.getContentPane().removeAll();
-        frame.getContentPane().add(paneeli);
-        frame.getContentPane().revalidate();
-        frame.getContentPane().repaint();
+        AloitusValikkoPaneeli aloitusValikko = new AloitusValikkoPaneeli(peli,this);
+        haeContentPane().add(aloitusValikko.haePaneeli(), BorderLayout.CENTER);
+        haeContentPane().repaint();
+        
     }
     
+    public void siirryPeliPaneeliin(){
+        haeFrame().setSize(new Dimension(700, 300));
+        frame.getContentPane().removeAll();
+        PeliPaneeli peliNakyma = new PeliPaneeli(this.peli,this);
+        haeContentPane().add(peliNakyma.haePaneeli(), BorderLayout.CENTER);
+        haeContentPane().repaint();
+        
+    }
+    
+    public void alustaPelaajienNimetPaneeli(){
+        PelaajienLisaysPaneeli nimiPaneeli = new PelaajienLisaysPaneeli(peli,this);
+        frame.getContentPane().add(nimiPaneeli.haePaneeli());
+    }
+
     public JFrame haeFrame(){
         return this.frame;
+    }
+    
+    public Container haeContentPane(){
+        return this.frame.getContentPane();
     }
 
     

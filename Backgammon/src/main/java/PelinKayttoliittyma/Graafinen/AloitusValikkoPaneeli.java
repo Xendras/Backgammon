@@ -7,8 +7,10 @@
 package PelinKayttoliittyma.Graafinen;
 
 import PelinOsat.Pelikokonaisuus;
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.GridLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,31 +20,41 @@ import javax.swing.JPanel;
 public class AloitusValikkoPaneeli {
     
     JPanel paneeli;
+    JLabel tervetuloaTeksti;
+    JPanel nappulat;
+    JLabel pelaaja1Teksti;
+    JLabel pelaaja2Teksti;
     
     public AloitusValikkoPaneeli(Pelikokonaisuus peli,GraafinenUI graafinen){
         paneeli = new JPanel();
-        graafinen.haeFrame().getContentPane().setLayout(new BoxLayout(graafinen.haeFrame().getContentPane(),BoxLayout.PAGE_AXIS));
-        paneeli.setLayout(new BoxLayout(paneeli,BoxLayout.PAGE_AXIS));
-        paneeli.setAlignmentX(Component.CENTER_ALIGNMENT);
-        paneeli.add(new JLabel("Tervetuloa Backgammon-peliin!"));
-        paneeli.add(new JLabel(""));
+        paneeli.setLayout(new GridLayout(2,2));
         
-        JPanel nappulat = new JPanel();
-        nappulat.setLayout(new BoxLayout(nappulat,BoxLayout.LINE_AXIS));
-        nappulat.setAlignmentX(Component.CENTER_ALIGNMENT);
-        nappulat.add(new JButton("Aloita peli"));    
+        tervetuloaTeksti = new JLabel("Tervetuloa Backgammon-peliin!");
+        tervetuloaTeksti.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        nappulat = new JPanel();
+        nappulat.setLayout(new BoxLayout(nappulat,BoxLayout.Y_AXIS));
+        nappulat.add(new JButton("Aloita peli"));  
+        nappulat.add(new JButton("Vaihda pelaajat"));
         nappulat.add(new JButton("Lue säännöt"));
         nappulat.add(new JButton("Lopeta peli"));
+        nappulat.setAlignmentX(Component.RIGHT_ALIGNMENT);
         
+        pelaaja1Teksti = new JLabel("Pelaaja 1: " + peli.haePelaaja1().haePelaajanNimi() + " (Nappulan väri musta)");
+        pelaaja2Teksti = new JLabel("Pelaaja 2: " + peli.haePelaaja2().haePelaajanNimi() + " (Nappulan väri valkoinen)");
+        pelaaja1Teksti.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pelaaja2Teksti.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
+        paneeli.add(tervetuloaTeksti);
         paneeli.add(nappulat);
+        paneeli.add(pelaaja1Teksti);
+        paneeli.add(pelaaja2Teksti);
+
         
-        paneeli.add(new JLabel(""));
-        paneeli.add(new JLabel("Pelaaja 1: " + peli.haePelaaja1().haePelaajanNimi() + " (Nappulan väri musta)"));
-        paneeli.add(new JLabel("Pelaaja 2: " + peli.haePelaaja2().haePelaajanNimi() + " (Nappulan väri valkoinen)"));
     }
     
-    public JPanel haePaneeli() {
-        return paneeli;
+    public JPanel haePaneeli(){
+        return this.paneeli;
     }
 
     

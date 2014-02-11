@@ -11,9 +11,11 @@ import PelinKayttoliittyma.Graafinen.AloitusValikkoPaneeli;
 import PelinKayttoliittyma.Graafinen.GraafinenUI;
 import PelinKayttoliittyma.Teksti.TekstiUI;
 import PelinOsat.Pelikokonaisuus;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 
 
@@ -40,10 +42,8 @@ public class PelaajanLisaysKuuntelija implements ActionListener {
         peli.haePelaaja2().asetaVastustaja(peli.haePelaaja1());
         peli.asetaPelaajaVuorossa(peli.haePelaaja1());
         
-        graafinen.haeFrame().setSize(new Dimension(400, 300));
-        AloitusValikkoPaneeli aloitusValikko = new AloitusValikkoPaneeli(peli,graafinen);
-        graafinen.poistaLisaaJaPaivitaContentPane(aloitusValikko.haePaneeli());
-        
-        
+        graafinen.siirryAloitusPaneeliin();
+             
     }
+ 
 } 
