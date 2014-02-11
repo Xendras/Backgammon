@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 
-package PelinKayttoliittyma.Graafinen; 
+package PelinKayttoliittyma.Kuuntelijat; 
 
 import PelinKayttajat.Pelaaja;
+import PelinKayttoliittyma.Graafinen.AloitusValikkoPaneeli;
+import PelinKayttoliittyma.Graafinen.GraafinenUI;
 import PelinKayttoliittyma.Teksti.TekstiUI;
 import PelinOsat.Pelikokonaisuus;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JTextField;
@@ -19,12 +22,14 @@ public class PelaajanLisaysKuuntelija implements ActionListener {
     public Pelikokonaisuus peli;
     public JTextField nimi1Kentta;
     public JTextField nimi2Kentta;
+    public GraafinenUI graafinen;
     
     
-    public PelaajanLisaysKuuntelija(Pelikokonaisuus peli, JTextField nimi1Kentta, JTextField nimi2Kentta){
+    public PelaajanLisaysKuuntelija(Pelikokonaisuus peli, JTextField nimi1Kentta, JTextField nimi2Kentta, GraafinenUI graafinen){
         this.peli = peli;
         this.nimi1Kentta = nimi1Kentta;
         this.nimi2Kentta = nimi2Kentta;
+        this.graafinen = graafinen;
     }
     
     @Override
@@ -34,12 +39,11 @@ public class PelaajanLisaysKuuntelija implements ActionListener {
         peli.haePelaaja1().asetaVastustaja(peli.haePelaaja2());
         peli.haePelaaja2().asetaVastustaja(peli.haePelaaja1());
         peli.asetaPelaajaVuorossa(peli.haePelaaja1());
-        pelinAlustus();
+        
+        graafinen.haeFrame().setSize(new Dimension(400, 300));
+        AloitusValikkoPaneeli aloitusValikko = new AloitusValikkoPaneeli(peli,graafinen);
+        graafinen.poistaLisaaJaPaivitaContentPane(aloitusValikko.haePaneeli());
+        
+        
     }
-    
-    public void pelinAlustus(){
-        peli.alustaPelinappulat();
-        peli.alustaPelilauta();
-    }
-
 } 

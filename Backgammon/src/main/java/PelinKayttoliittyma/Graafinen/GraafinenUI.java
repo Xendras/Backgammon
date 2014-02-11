@@ -1,5 +1,6 @@
 package PelinKayttoliittyma.Graafinen;
 
+import PelinKayttoliittyma.Kuuntelijat.PelaajanLisaysKuuntelija;
 import PelinKayttoliittyma.Teksti.TekstiUI;
 import PelinOsat.Pelikokonaisuus;
 import java.awt.BorderLayout;
@@ -30,62 +31,29 @@ public class GraafinenUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Backgammon");
-        frame.setPreferredSize(new Dimension(830, 500));
+        frame.setPreferredSize(new Dimension(300, 150));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        luoKomponentit(frame.getContentPane());
+        PelaajienLisaysPaneeli nimiPaneeli = new PelaajienLisaysPaneeli(peli,this);
+        frame.getContentPane().add(nimiPaneeli.haePaneeli());
 
-        frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
     }
-
-    private void luoKomponentit(Container container) {
-
-//        GridLayout layout = new GridLayout(3, 2);
-//        container.setLayout(layout);
-//
-//        JLabel pelaaja1 = new JLabel("Pelaaja 1: ");
-//        JTextField nimi1Kentta = new JTextField();
-//        JLabel pelaaja2 = new JLabel("Pelaaja 2: ");
-//        JTextField nimi2Kentta = new JTextField();
-//
-//        JButton lisaaPelaajat = new JButton("Lisää pelaajat!");
-//        PelaajanLisaysKuuntelija kuuntelija = new PelaajanLisaysKuuntelija(peli, nimi1Kentta, nimi2Kentta);
-//        lisaaPelaajat.addActionListener(kuuntelija);
-//
-//        container.add(pelaaja1);
-//        container.add(nimi1Kentta);
-//        container.add(pelaaja2);
-//        container.add(nimi2Kentta);
-//        container.add(new JLabel(""));
-//        container.add(lisaaPelaajat);
-        try {
-            BufferedImage backgammon = ImageIO.read(new File("src/images/backgammonLautaResize.gif"));
-            JLabel backgammonLabel = new JLabel(new ImageIcon(backgammon));
-            container.add(backgammonLabel, BorderLayout.WEST);
-        } catch (IOException e) {
-
-        }
-        container.add(luoTietoalue(), BorderLayout.EAST);
+    
+    
+    public void poistaLisaaJaPaivitaContentPane(JPanel paneeli){
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(paneeli);
+        frame.getContentPane().revalidate();
+        frame.getContentPane().repaint();
+    }
+    
+    public JFrame haeFrame(){
+        return this.frame;
     }
 
-    public JPanel luoValikko() {
-        JPanel panel = new JPanel(new GridLayout(3, 1));
-        JButton aloita = new JButton("Aloita peli");
-        aloita.setBounds(415,250,50,100);
-        panel.add(aloita);
-        
-        panel.add(new JButton("Siirrä nappulaa"));
-        panel.add(new JButton("Lopeta Peli"));
-        return panel;
-    }
-
-    public JPanel luoTietoalue() {
-        JPanel panel = new JPanel(new GridLayout(2, 1));
-        panel.add(new JLabel("Pelaajan 1 vuoro!"));
-        panel.add(luoValikko());
-        return panel;
-    }
+    
+    
 
 }
