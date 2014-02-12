@@ -62,8 +62,10 @@ public class PelaajienLisaysPaneeli extends JPanel {
         peli.haePelaaja1().asetaVastustaja(peli.haePelaaja2());
         peli.haePelaaja2().asetaVastustaja(peli.haePelaaja1());
         peli.asetaPelaajaVuorossa(peli.haePelaaja1());
+        peli.alustaPelinappulat();
+        peli.alustaPelilauta();
         
-        graafinen.siirryAloitusPaneeliin();
+        graafinen.siirryPeliPaneeliin();
              
     }
  

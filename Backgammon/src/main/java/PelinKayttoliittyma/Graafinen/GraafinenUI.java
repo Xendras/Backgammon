@@ -31,13 +31,13 @@ public class GraafinenUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Backgammon");
-        frame.setPreferredSize(new Dimension(660, 450));
+        frame.setPreferredSize(new Dimension(650, 775));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-        haeContentPane().add(new PelilaudanPiirtoPaneeli(peli,this));
-//        alustaPelaajienNimetPaneeli();
-        frame.setResizable(true);
+//        haeContentPane().add(new PeliPaneeli(peli,this));
+        alustaPelaajienNimetPaneeli();
+        frame.setResizable(false);
 
         frame.pack();
         frame.setVisible(true);
@@ -53,10 +53,10 @@ public class GraafinenUI implements Runnable {
     }
     
     public void siirryPeliPaneeliin(){
-        haeFrame().setSize(new Dimension(700, 300));
         frame.getContentPane().removeAll();
         PeliPaneeli peliNakyma = new PeliPaneeli(this.peli,this);
-        haeContentPane().add(peliNakyma.haePaneeli(), BorderLayout.CENTER);
+        haeContentPane().add(peliNakyma);
+        haeContentPane().revalidate();
         haeContentPane().repaint();
         
     }

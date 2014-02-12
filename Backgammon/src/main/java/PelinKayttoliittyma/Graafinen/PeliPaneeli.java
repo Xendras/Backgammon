@@ -7,20 +7,76 @@
 package PelinKayttoliittyma.Graafinen; 
 
 import PelinOsat.Pelikokonaisuus;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 
 
-public class PeliPaneeli { 
+public class PeliPaneeli extends JPanel { 
+    
+    Pelikokonaisuus peli;
+    GraafinenUI graafinen;
+    JLabel noppa1;
+    JLabel noppa2;
 
-    JPanel peliPaneeli;
+   
     
     public PeliPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen){
-        peliPaneeli = new JPanel();
+        this.peli = peli;
+        this.graafinen = graafinen;
         
-        JPanel pelilauta = new JPanel();
+        PelilaudanPiirtoPaneeli pelilauta = new PelilaudanPiirtoPaneeli(peli,graafinen);
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        setPreferredSize(new Dimension(660, 805));
+        
+        JPanel alaOsio = new JPanel();
+        alaOsio.setLayout(new BoxLayout(alaOsio,BoxLayout.X_AXIS));
+        
+        JTextField kentta = new JTextField("Tähän tulee peli-ilmoitukset!", SwingConstants.CENTER);
+        kentta.setPreferredSize(new Dimension(100,75));
+        noppa1 = new JLabel("", SwingConstants.CENTER);
+        noppa1.setPreferredSize(new Dimension(125,75));
+        noppa2 = new JLabel("", SwingConstants.CENTER);
+        noppa2.setPreferredSize(new Dimension(125,75));
+        JButton heitaNoppaa = new JButton("Heitä noppia!");
+        heitaNoppaa.setPreferredSize(new Dimension(150,100));
+        
+        NopanHeittoKuuntelija kuuntelija = new NopanHeittoKuuntelija();
+        heitaNoppaa.addActionListener(kuuntelija);
+        
+        alaOsio.setPreferredSize(new Dimension(660,75));
+        
+        alaOsio.add(kentta);
+        alaOsio.add(noppa1);
+        alaOsio.add(heitaNoppaa);
+        alaOsio.add(noppa2);
+        
+        
+        add(pelilauta);
+        add(alaOsio);
+        
     }
     
-    public JPanel haePaneeli(){
-        return this.peliPaneeli;
+    public class NopanHeittoKuuntelija implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            noppa1.setText("Nopan 1 arvo: " + peli.heitaNoppaa1());
+            noppa2.setText("Nopan 2 arvo: " + peli.heitaNoppaa2());
+            
+        }
+        
+        
     }
 } 
