@@ -11,23 +11,29 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class AloitusValikkoPaneeli {
+public class AloitusValikkoPaneeli extends JPanel {
     
     JPanel paneeli;
     JLabel tervetuloaTeksti;
     JPanel nappulat;
     JLabel pelaaja1Teksti;
     JLabel pelaaja2Teksti;
+    Pelikokonaisuus peli;
+    GraafinenUI graafinen;
     
     public AloitusValikkoPaneeli(Pelikokonaisuus peli,GraafinenUI graafinen){
-        paneeli = new JPanel();
-        paneeli.setLayout(new GridLayout(2,2));
+        this.peli = peli;
+        this.graafinen = graafinen;
+        
+        setLayout(new GridLayout(2,2));
         
         tervetuloaTeksti = new JLabel("Tervetuloa Backgammon-peliin!");
         tervetuloaTeksti.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -45,17 +51,22 @@ public class AloitusValikkoPaneeli {
         pelaaja1Teksti.setAlignmentX(Component.LEFT_ALIGNMENT);
         pelaaja2Teksti.setAlignmentX(Component.CENTER_ALIGNMENT);
         
-        paneeli.add(tervetuloaTeksti);
-        paneeli.add(nappulat);
-        paneeli.add(pelaaja1Teksti);
-        paneeli.add(pelaaja2Teksti);
+        add(tervetuloaTeksti);
+        add(nappulat);
+        add(pelaaja1Teksti);
+        add(pelaaja2Teksti);
 
         
     }
     
-    public JPanel haePaneeli(){
-        return this.paneeli;
+    public class PelinAloitusKuuntelija implements ActionListener { 
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+}
 
     
 }

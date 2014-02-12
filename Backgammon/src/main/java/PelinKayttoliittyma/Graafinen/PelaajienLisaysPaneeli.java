@@ -6,10 +6,12 @@
 
 package PelinKayttoliittyma.Graafinen;
 
-import PelinKayttoliittyma.Kuuntelijat.PelaajanLisaysKuuntelija;
+import PelinKayttajat.Pelaaja;
 import PelinOsat.Pelikokonaisuus;
 import java.awt.Container;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,31 +23,49 @@ import javax.swing.JTextField;
  */
 public class PelaajienLisaysPaneeli extends JPanel {
     
-    JPanel pelaajienLisaysPaneeli;
+    JLabel pelaaja1;
+    JTextField nimi1Kentta;
+    JLabel pelaaja2;
+    JTextField nimi2Kentta;
+    JButton lisaaPelaajat;
+    Pelikokonaisuus peli;
+    GraafinenUI graafinen;
     
     public PelaajienLisaysPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen){
-        pelaajienLisaysPaneeli = new JPanel();
-        GridLayout layout = new GridLayout(3, 2);
-        pelaajienLisaysPaneeli.setLayout(layout);
+        this.peli = peli;
+        this.graafinen = graafinen;
+        
+        setLayout(new GridLayout(3,2));
 
-        JLabel pelaaja1 = new JLabel("Pelaaja 1: ");
-        JTextField nimi1Kentta = new JTextField();
-        JLabel pelaaja2 = new JLabel("Pelaaja 2: ");
-        JTextField nimi2Kentta = new JTextField();
+        pelaaja1 = new JLabel("Pelaaja 1: ");
+        nimi1Kentta = new JTextField();
+        pelaaja2 = new JLabel("Pelaaja 2: ");
+        nimi2Kentta = new JTextField();
 
-        JButton lisaaPelaajat = new JButton("Lisää pelaajat!");
-        PelaajanLisaysKuuntelija kuuntelija = new PelaajanLisaysKuuntelija(peli, nimi1Kentta, nimi2Kentta,graafinen);
-        lisaaPelaajat.addActionListener(kuuntelija);
+        lisaaPelaajat = new JButton("Lisää pelaajat!");
+        lisaaPelaajat.addActionListener(new PelaajanLisaysKuuntelija());
 
-        pelaajienLisaysPaneeli.add(pelaaja1);
-        pelaajienLisaysPaneeli.add(nimi1Kentta);
-        pelaajienLisaysPaneeli.add(pelaaja2);
-        pelaajienLisaysPaneeli.add(nimi2Kentta);
-        pelaajienLisaysPaneeli.add(new JLabel(""));
-        pelaajienLisaysPaneeli.add(lisaaPelaajat);
+        add(pelaaja1);
+        add(nimi1Kentta);
+        add(pelaaja2);
+        add(nimi2Kentta);
+        add(new JLabel(""));
+        add(lisaaPelaajat);
     }
     
-    public JPanel haePaneeli(){
-        return this.pelaajienLisaysPaneeli;
+    public class PelaajanLisaysKuuntelija implements ActionListener { 
+    
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        peli.asetaPelaaja1(new Pelaaja(nimi1Kentta.getText(), 'X', peli, peli.haePelaaja1Nappulat(), peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti()));
+        peli.asetaPelaaja2(new Pelaaja(nimi2Kentta.getText(), 'O', peli, peli.haePelaaja2Nappulat(), peli.haePelaajan2Jaahy(), peli.haePelaajan2Koti()));
+        peli.haePelaaja1().asetaVastustaja(peli.haePelaaja2());
+        peli.haePelaaja2().asetaVastustaja(peli.haePelaaja1());
+        peli.asetaPelaajaVuorossa(peli.haePelaaja1());
+        
+        graafinen.siirryAloitusPaneeliin();
+             
     }
+ 
+}
 }

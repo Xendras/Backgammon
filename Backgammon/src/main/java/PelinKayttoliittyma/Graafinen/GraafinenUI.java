@@ -1,6 +1,5 @@
 package PelinKayttoliittyma.Graafinen;
 
-import PelinKayttoliittyma.Kuuntelijat.PelaajanLisaysKuuntelija;
 import PelinKayttoliittyma.Teksti.TekstiUI;
 import PelinOsat.Pelikokonaisuus;
 import java.awt.BorderLayout;
@@ -32,13 +31,13 @@ public class GraafinenUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Backgammon");
-        frame.setPreferredSize(new Dimension(700, 550));
+        frame.setPreferredSize(new Dimension(660, 450));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-        haeContentPane().add(new PelilaudanPiirtoPaneeli());
+        haeContentPane().add(new PelilaudanPiirtoPaneeli(peli,this));
 //        alustaPelaajienNimetPaneeli();
-        frame.setResizable(false);
+        frame.setResizable(true);
 
         frame.pack();
         frame.setVisible(true);
@@ -48,7 +47,7 @@ public class GraafinenUI implements Runnable {
         haeFrame().setSize(new Dimension(400, 175));
         frame.getContentPane().removeAll();
         AloitusValikkoPaneeli aloitusValikko = new AloitusValikkoPaneeli(peli,this);
-        haeContentPane().add(aloitusValikko.haePaneeli(), BorderLayout.CENTER);
+        haeContentPane().add(aloitusValikko, BorderLayout.CENTER);
         haeContentPane().repaint();
         
     }
@@ -64,7 +63,7 @@ public class GraafinenUI implements Runnable {
     
     public void alustaPelaajienNimetPaneeli(){
         PelaajienLisaysPaneeli nimiPaneeli = new PelaajienLisaysPaneeli(peli,this);
-        frame.getContentPane().add(nimiPaneeli.haePaneeli());
+        frame.getContentPane().add(nimiPaneeli);
     }
 
     public JFrame haeFrame(){
