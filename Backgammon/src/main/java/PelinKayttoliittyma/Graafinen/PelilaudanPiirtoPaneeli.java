@@ -12,11 +12,16 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Polygon;
+import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+/**
+ * Luokka jossa pelin sisältö piirretään. Sisältää myös paneelin joka vastaa nappuloiden toiminnallisuudesta.
+ * @author Jonas Westerlund
+ */
 public class PelilaudanPiirtoPaneeli extends JPanel {
 
     Pelikokonaisuus peli;
@@ -25,48 +30,128 @@ public class PelilaudanPiirtoPaneeli extends JPanel {
     Color kolmio1;
     Color kolmio2;
     int nappuloidenMaara;
+    ArrayList<JButton> nappuloidenNappulat;
+    PeliPaneeli peliPaneeli;
     
+    /**
+     * Pelikentän korkeus
+     */
     public static final int KentanKorkeus = 560;
+
+    /**
+     * Kolmion korkeus
+     */
     public static final int KolmionKorkeus = 230;
+
+    /**
+     * Pelikentän leveys
+     */
     public static final int KentanLeveys = 520;
+
+    /**
+     * Kolmion (ja myös pelinappulan) leveys
+     */
     public static final int KolmionLeveys = KentanLeveys/13;
 
-    public PelilaudanPiirtoPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen) {
+    /**
+     * Luo paneelin joka koostuu piirrettävästä osuudesta (pelilauta sekä pelinappulat) sekä JButton-gridistä joka ohjaa pelinappuloita.
+     * @param peli Pelikokonaisuus jota paneeli ohjaa.
+     * @param graafinen Käyttöliittymä johon paneeli kuuluu.
+     * @param peliPaneeli Paneeli johon tämä paneeli kuuluu.
+     */
+    public PelilaudanPiirtoPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen, PeliPaneeli peliPaneeli) {
         this.peli = peli;
         this.graafinen = graafinen;
+        this.peliPaneeli = peliPaneeli;
         this.tausta = new Color(255,228,196);
         this.kolmio1 = new Color(205,133,63);
         this.kolmio2 = new Color(139,69,19);
-        
-        
+               
         super.setBackground(tausta);
         setPreferredSize(new Dimension(KentanLeveys,KentanKorkeus));
 
         setLayout(new GridLayout(14, 13));
         
-        for(int i = 0 ; i<7;i++){
-            for(int k = 13; k<25;k++){
-                add(new NappulaNappi(peli,graafinen,k));
-            }
-        }
+        alustaNappulat();
         
-        for(int i = 0 ; i<7;i++){
-            for(int k = 12; k>0;k--){
-                add(new NappulaNappi(peli,graafinen,k));
-            }
-        }
-
     }
 
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         piirraPelilauta(graphics);
+        piirraNumerot(graphics);
         piirraNappulat(graphics);
-        
-
     }
     
+    /**
+     * Muuttaa pelinappuloita ohjaavien JButton-nappien toiminnallisuutta.
+     * @param tila
+     */
+    public void muutaNappuloidenTilaa(boolean tila){
+        for(JButton nappi:nappuloidenNappulat){
+            nappi.setEnabled(tila);
+        }
+    }
+    
+    /**
+     * Alustaa JButton-gridin pelilaudan päälle.
+     */
+    public void alustaNappulat(){
+        nappuloidenNappulat = new ArrayList<JButton>();
+        
+        for(int i = 0 ; i<7;i++){
+            for(int k = 13; k<19;k++){
+                NappulaNappi nappi = new NappulaNappi(peli,graafinen,peliPaneeli,k);
+                nappuloidenNappulat.add(nappi);
+                add(nappi);
+            }
+            
+            add(new NappulaNappi(peli,graafinen,peliPaneeli,0));
+        
+            for(int k = 19; k<25;k++){
+                NappulaNappi nappi = new NappulaNappi(peli,graafinen,peliPaneeli,k);
+                nappuloidenNappulat.add(nappi);
+                add(nappi);
+            }
+
+        }
+        
+        for(int i = 0 ; i<7;i++){
+            for(int k = 12; k>6;k--){
+                NappulaNappi nappi = new NappulaNappi(peli,graafinen,peliPaneeli,k);
+                nappuloidenNappulat.add(nappi);
+                add(nappi);
+            }
+            
+            add(new NappulaNappi(peli,graafinen,peliPaneeli,0));
+        
+            for(int k = 6; k>0;k--){
+                NappulaNappi nappi = new NappulaNappi(peli,graafinen,peliPaneeli,k);
+                nappuloidenNappulat.add(nappi);
+                add(nappi);
+            }
+        }
+    }
+    
+    public void piirraNumerot(Graphics graphics){
+        graphics.setColor(Color.BLACK);
+        for(int i = 1; i < 7;i++){
+            graphics.drawString(String.valueOf(i),(13-i)*KolmionLeveys + 3*KolmionLeveys/7,KentanKorkeus-6*KolmionLeveys);
+        }
+        
+        for(int i = 7; i < 13;i++){
+            graphics.drawString(String.valueOf(i),(12-i)*KolmionLeveys + 3*KolmionLeveys/7,KentanKorkeus-6*KolmionLeveys);
+        }
+        
+        for(int i = 13; i < 19;i++){
+            graphics.drawString(String.valueOf(i),(i-13)*KolmionLeveys + 3*KolmionLeveys/7,6*KolmionLeveys+KolmionLeveys/4);
+        }
+        
+        for(int i = 19; i < 25;i++){
+            graphics.drawString(String.valueOf(i),(i-12)*KolmionLeveys + 3*KolmionLeveys/7,6*KolmionLeveys+KolmionLeveys/4);
+        }
+    }
     public void piirraNappulat(Graphics graphics){
         for(int i = 0; i < 6;i++){
             nappuloidenMaara = peli.haePelilaudanNappulat().get(i+13).size();
@@ -80,6 +165,23 @@ public class PelilaudanPiirtoPaneeli extends JPanel {
                 }
             }
         }
+        
+            nappuloidenMaara = peli.haePelaajan2Jaahy().size();
+            for(int k = 0; k< nappuloidenMaara;k++){
+                
+                    graphics.setColor(Color.WHITE);
+                    graphics.fillOval(6*KolmionLeveys, (6-k)*KolmionLeveys, KolmionLeveys, KolmionLeveys);
+                
+            }
+            
+            nappuloidenMaara = peli.haePelaajan1Jaahy().size();
+            for(int k = 0; k< nappuloidenMaara;k++){
+                
+                    graphics.setColor(Color.BLACK);
+                    graphics.fillOval(6*KolmionLeveys, KentanKorkeus- (7-k)*KolmionLeveys, KolmionLeveys, KolmionLeveys);
+                
+            }
+        
         
         for(int i = 6; i < 12;i++){
             nappuloidenMaara = peli.haePelilaudanNappulat().get(i+13).size();

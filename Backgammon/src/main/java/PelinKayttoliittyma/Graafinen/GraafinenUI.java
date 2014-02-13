@@ -19,11 +19,19 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+/**
+ * Graafinen käyttöliittymä joka hallitsee kaikkia käyttöliittymän paneeleja.
+ * @author Jonas Westerlund
+ */
 public class GraafinenUI implements Runnable {
 
     private JFrame frame;
     private Pelikokonaisuus peli;
 
+    /**
+     * Luo graafisen käyttöliittymän.
+     * @param peli Pelikokonaisuus jota käyttöliittymä hallitsee
+     */
     public GraafinenUI(Pelikokonaisuus peli) {
         this.peli = peli;
     }
@@ -31,7 +39,7 @@ public class GraafinenUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Backgammon");
-        frame.setPreferredSize(new Dimension(520, 635));
+        frame.setPreferredSize(new Dimension(300, 100));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
@@ -40,9 +48,13 @@ public class GraafinenUI implements Runnable {
         frame.setResizable(false);
 
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
     
+    /**
+     * Metodi joka siirtyy aloituspaneeliin käyttöliittymässä. Muuttaa ikkunan suuruudeen ja piirtää käyttöliittymän uudestaan
+     */
     public void siirryAloitusPaneeliin(){
         haeFrame().setSize(new Dimension(400, 175));
         frame.getContentPane().removeAll();
@@ -52,8 +64,13 @@ public class GraafinenUI implements Runnable {
         
     }
     
-    public void siirryPeliPaneeliin(){
+    /**
+     * Metodi joka siirtyy itse pelipaneeliin käyttöliittymässä. Muuttaa ikkunan suuruudeen ja piirtää käyttöliittymän uudestaan
+     */
+    public void siirryPeliPaneeliin(){     
         frame.getContentPane().removeAll();
+        frame.setSize(new Dimension(527, 675));
+        frame.setLocationRelativeTo(null);
         PeliPaneeli peliNakyma = new PeliPaneeli(this.peli,this);
         haeContentPane().add(peliNakyma);
         haeContentPane().revalidate();
@@ -61,6 +78,9 @@ public class GraafinenUI implements Runnable {
         
     }
     
+    /**
+     * Metodi joka siirtyy pelaajien nimeämis paneeliin käyttöliittymässä.
+     */
     public void alustaPelaajienNimetPaneeli(){
         PelaajienLisaysPaneeli nimiPaneeli = new PelaajienLisaysPaneeli(peli,this);
         frame.getContentPane().add(nimiPaneeli);

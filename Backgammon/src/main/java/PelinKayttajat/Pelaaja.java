@@ -22,6 +22,7 @@ public class Pelaaja {
     Pelikokonaisuus peli;
     HashMap<Integer, Pelinappula> nappulat;
     Pelaaja vastustaja;
+    boolean jaahylla;
     ArrayList<Pelinappula> jaahy;
     ArrayList<Pelinappula> koti;
 
@@ -42,6 +43,7 @@ public class Pelaaja {
         this.vastustaja = null;
         this.jaahy = jaahy;
         this.koti = koti;
+        this.jaahylla = false;
     }
 
     public ArrayList<Pelinappula> haePelaajanJaahy(){
@@ -49,6 +51,14 @@ public class Pelaaja {
     }
     public ArrayList<Pelinappula> haePelaajanKoti(){
         return this.koti;
+    }
+    
+    /**
+     * Tarkistaa onko pelaajalla nappuloita jäähyllä (siis keskellä lautaa)
+     * @return Kertoo onko pelaajan jaahy tyhjä vai ei.
+     */
+    public boolean onkoPelaajaJaahylla(){
+        return !peli.haePelilauta().onkoPelaajanJaahyTyhja(this);
     }
     
     public char haePelaajanTyyppi() {

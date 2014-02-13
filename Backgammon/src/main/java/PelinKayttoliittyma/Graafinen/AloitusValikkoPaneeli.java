@@ -18,7 +18,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+/**
+ * Paneeli joka tulee sisältämään aloitusvalikon.
+ * @author Jonas Westerlund
+ */
 public class AloitusValikkoPaneeli extends JPanel {
     
     JPanel paneeli;
@@ -29,6 +32,11 @@ public class AloitusValikkoPaneeli extends JPanel {
     Pelikokonaisuus peli;
     GraafinenUI graafinen;
     
+    /**
+     * Luo paneelin joka tulee sisältämään tervetuloviestin, Aloita peli-napin, Vaihda pelaajaa-napin, Lue säännöt-napin, sekä Lopeta peli-napin.
+     * @param peli
+     * @param graafinen
+     */
     public AloitusValikkoPaneeli(Pelikokonaisuus peli,GraafinenUI graafinen){
         this.peli = peli;
         this.graafinen = graafinen;
@@ -59,6 +67,9 @@ public class AloitusValikkoPaneeli extends JPanel {
         
     }
     
+    /**
+     * Tulee toimimaan Aloita peli-napin kuuntelijana
+     */
     public class PelinAloitusKuuntelija implements ActionListener { 
 
     @Override

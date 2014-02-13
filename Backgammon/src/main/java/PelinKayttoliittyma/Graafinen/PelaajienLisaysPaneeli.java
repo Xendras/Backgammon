@@ -16,10 +16,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
- *
- * @author jonas
+ * Paneeli jossa pelaajat lisätään.
+ * @author Jonas Westerlund
  */
 public class PelaajienLisaysPaneeli extends JPanel {
     
@@ -31,15 +32,20 @@ public class PelaajienLisaysPaneeli extends JPanel {
     Pelikokonaisuus peli;
     GraafinenUI graafinen;
     
+    /**
+     * Luo paneelin johon annetaan pelaajien nimet.
+     * @param peli Pelikokonaisuus jota paneeli ohjaa.
+     * @param graafinen Käyttöliittymä jossa paneeli on.
+     */
     public PelaajienLisaysPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen){
         this.peli = peli;
         this.graafinen = graafinen;
         
         setLayout(new GridLayout(3,2));
 
-        pelaaja1 = new JLabel("Pelaaja 1: ");
+        pelaaja1 = new JLabel("Pelaaja 1: ", SwingConstants.CENTER);
         nimi1Kentta = new JTextField();
-        pelaaja2 = new JLabel("Pelaaja 2: ");
+        pelaaja2 = new JLabel("Pelaaja 2: ",SwingConstants.CENTER);
         nimi2Kentta = new JTextField();
 
         lisaaPelaajat = new JButton("Lisää pelaajat!");
@@ -53,6 +59,9 @@ public class PelaajienLisaysPaneeli extends JPanel {
         add(lisaaPelaajat);
     }
     
+    /**
+     * Kuuntelija joka kuuntelee Lisää pelaajat-napin painauksia. Alustaa pelin ja lisää pelaajat pelikokonaisuuteen.
+     */
     public class PelaajanLisaysKuuntelija implements ActionListener { 
     
     @Override

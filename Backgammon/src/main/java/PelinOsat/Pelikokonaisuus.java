@@ -129,18 +129,29 @@ public class Pelikokonaisuus {
      * Kutsuu pelilaudan metodia joka siirtaa nappulaa HashMapissa.
      * @param sijainti Siirrettävän nappulan sijainti
      * @param siirtoja Kuinka monta siirtoa
+     * @return Palauttaa booleanin joka kertoo josko siirto onnistui
      */
-    public void siirraPelinappulaa(int sijainti, int siirtoja){
-        this.pelilauta.siirraNappulaaLaudalla(sijainti, siirtoja);
+    public boolean siirraPelinappulaa(int sijainti, int siirtoja){
+        return this.pelilauta.siirraNappulaaLaudalla(sijainti, siirtoja);
     }
     
     /**
      * Kutsuu pelilaudan metodia joka lisää nappulan HashMapiin.
      * @param nappula Siirrettävän nappulan sijainti
      * @param sijainti Kuinka monta siirtoa
+     * @return Palauttaa booleanin joka kertoo josko lisäys onnistui
      */
-    public void lisaaPelinappula(Pelinappula nappula, int sijainti){
-        this.pelilauta.lisaaNappulaLaudalle(nappula, sijainti);
+    public boolean lisaaPelinappula(Pelinappula nappula, int sijainti){
+        return this.pelilauta.lisaaNappulaLaudalle(nappula, sijainti);
+    }
+    
+    /**
+     *
+     * @param sijainti
+     * @return Palauttaa booleanin joka kertoo josko lisäys onnistui
+     */
+    public boolean lisaaPelinappulaTakaisinLaudalle(int sijainti){
+        return this.pelilauta.lisaaNappulaTakaisinLaudalle(sijainti);
     }
     
     /**
