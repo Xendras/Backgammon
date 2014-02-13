@@ -31,7 +31,7 @@ public class GraafinenUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Backgammon");
-        frame.setPreferredSize(new Dimension(650, 775));
+        frame.setPreferredSize(new Dimension(520, 635));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         

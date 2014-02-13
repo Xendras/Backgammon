@@ -25,10 +25,11 @@ public class PelilaudanPiirtoPaneeli extends JPanel {
     Color kolmio1;
     Color kolmio2;
     int nappuloidenMaara;
-    public static final int KolmionLeveys = 50;
-    public static final int KentanKorkeus = 700;
-    public static final int KolmionKorkeus = 300;
-    public static final int KentanLeveys = 650;
+    
+    public static final int KentanKorkeus = 560;
+    public static final int KolmionKorkeus = 230;
+    public static final int KentanLeveys = 520;
+    public static final int KolmionLeveys = KentanLeveys/13;
 
     public PelilaudanPiirtoPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen) {
         this.peli = peli;
@@ -39,9 +40,21 @@ public class PelilaudanPiirtoPaneeli extends JPanel {
         
         
         super.setBackground(tausta);
-        setPreferredSize(new Dimension(660,710));
+        setPreferredSize(new Dimension(KentanLeveys,KentanKorkeus));
 
         setLayout(new GridLayout(14, 13));
+        
+        for(int i = 0 ; i<7;i++){
+            for(int k = 13; k<25;k++){
+                add(new NappulaNappi(peli,graafinen,k));
+            }
+        }
+        
+        for(int i = 0 ; i<7;i++){
+            for(int k = 12; k>0;k--){
+                add(new NappulaNappi(peli,graafinen,k));
+            }
+        }
 
     }
 
@@ -76,7 +89,7 @@ public class PelilaudanPiirtoPaneeli extends JPanel {
                     graphics.fillOval((i+1)*KolmionLeveys, k*KolmionLeveys, KolmionLeveys, KolmionLeveys);
                 } else {
                     graphics.setColor(Color.WHITE);
-                    graphics.fillOval(i*KolmionLeveys, k*KolmionLeveys, KolmionLeveys, KolmionLeveys);
+                    graphics.fillOval((i+1)*KolmionLeveys, k*KolmionLeveys, KolmionLeveys, KolmionLeveys);
                 }
             }
         }
@@ -111,35 +124,35 @@ public class PelilaudanPiirtoPaneeli extends JPanel {
     
     public void piirraPelilauta(Graphics graphics){
         
-        for (int i = 0; i < (KentanLeveys-50)/2; i += 100) {
+        for (int i = 0; i < (KentanLeveys-KolmionLeveys)/2; i += KolmionLeveys*2) {
             drawLightTriangle(graphics, i, KentanKorkeus, KolmionLeveys + i, KentanKorkeus, KolmionLeveys/2 + i, KentanKorkeus-KolmionKorkeus, 3);
         }
-        for (int i = KolmionLeveys; i < (KentanLeveys-50)/2; i += 100) {
-            drawNormalTriangle(graphics, i, KentanKorkeus, KolmionLeveys + i, KentanKorkeus, 25 + i, KentanKorkeus-KolmionKorkeus, 3);
+        for (int i = KolmionLeveys; i < (KentanLeveys-KolmionLeveys)/2; i += KolmionLeveys*2) {
+            drawNormalTriangle(graphics, i, KentanKorkeus, KolmionLeveys + i, KentanKorkeus, KolmionLeveys/2 + i, KentanKorkeus-KolmionKorkeus, 3);
         }
         graphics.setColor(new Color(105,105,105));
-        graphics.fillRect(300, 0, KolmionLeveys, KentanKorkeus);
-        for (int i = 350; i < KentanLeveys; i += 100) {
-            drawLightTriangle(graphics, i, KentanKorkeus, KolmionLeveys + i, KentanKorkeus, 25 + i, KentanKorkeus-KolmionKorkeus, 3);
+        graphics.fillRect((KentanLeveys-KolmionLeveys)/2, 0, KolmionLeveys, KentanKorkeus);
+        for (int i = (KentanLeveys-KolmionLeveys)/2+KolmionLeveys ; i < KentanLeveys; i += KolmionLeveys*2) {
+            drawLightTriangle(graphics, i, KentanKorkeus, KolmionLeveys + i, KentanKorkeus, KolmionLeveys/2 + i, KentanKorkeus-KolmionKorkeus, 3);
         }
-        for (int i = 400; i < KentanLeveys; i += 100) {
-            drawNormalTriangle(graphics, i, KentanKorkeus, KolmionLeveys + i, KentanKorkeus, 25 + i, KentanKorkeus-KolmionKorkeus, 3);
-        }
-
-        for (int i = 0; i < (KentanLeveys-50)/2; i += 100) {
-            drawNormalTriangle(graphics, i, 0, KolmionLeveys + i, 0, 25 + i, KolmionKorkeus, 3);
+        for (int i = (KentanLeveys-KolmionLeveys)/2+2*KolmionLeveys; i < KentanLeveys; i += KolmionLeveys*2) {
+            drawNormalTriangle(graphics, i, KentanKorkeus, KolmionLeveys + i, KentanKorkeus, KolmionLeveys/2 + i, KentanKorkeus-KolmionKorkeus, 3);
         }
 
-        for (int i = KolmionLeveys; i < (KentanLeveys-50)/2; i += 100) {
-            drawLightTriangle(graphics, i, 0, KolmionLeveys + i, 0, 25 + i, KolmionKorkeus, 3);
+        for (int i = 0; i < (KentanLeveys-KolmionLeveys)/2; i += KolmionLeveys*2) {
+            drawNormalTriangle(graphics, i, 0, KolmionLeveys + i, 0, KolmionLeveys/2 + i, KolmionKorkeus, 3);
         }
 
-        for (int i = 350; i < KentanLeveys; i += 100) {
-            drawNormalTriangle(graphics, i, 0, KolmionLeveys + i, 0, 25 + i, KolmionKorkeus, 3);
+        for (int i = KolmionLeveys; i < (KentanLeveys-KolmionLeveys)/2; i += KolmionLeveys*2) {
+            drawLightTriangle(graphics, i, 0, KolmionLeveys + i, 0, KolmionLeveys/2 + i, KolmionKorkeus, 3);
         }
 
-        for (int i = 400; i < KentanLeveys; i += 100) {
-            drawLightTriangle(graphics, i, 0, KolmionLeveys + i, 0, 25 + i, KolmionKorkeus, 3);
+        for (int i = (KentanLeveys-KolmionLeveys)/2+KolmionLeveys; i < KentanLeveys; i += KolmionLeveys*2) {
+            drawNormalTriangle(graphics, i, 0, KolmionLeveys + i, 0, KolmionLeveys/2 + i, KolmionKorkeus, 3);
+        }
+
+        for (int i = (KentanLeveys-KolmionLeveys)/2+2*KolmionLeveys; i < KentanLeveys; i += KolmionLeveys*2) {
+            drawLightTriangle(graphics, i, 0, KolmionLeveys + i, 0, KolmionLeveys/2 + i, KolmionKorkeus, 3);
         }
     }
     
