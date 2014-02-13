@@ -19,7 +19,7 @@ import javax.swing.SwingUtilities;
  *
  * @author Jonas Westerlund
  */
-public class Main {
+public class Backgammon {
     
     public static void main(String[] args) {
         Pelikokonaisuus peli = new Pelikokonaisuus();
