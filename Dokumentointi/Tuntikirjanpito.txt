@@ -11,5 +11,7 @@
 5.2.2014 // 2h // Javadocin kirjoittamista ja testien päivitystä
 6.2.2014 // 2h // Sekvenssikaavioita ja testejä
 10.2.2014 // 5h // Testien päivittelyä ajantasalle ja graafisen käyttöliittymän aloittelua
+12.2.2014 // 4h // Todellista siirtymistä tekstiUIsta graafiseen.
+13.2.2014 // 5h // Graafisen käyttöliittymän parantelemista. Pelilauta ja nappien piirtäminen toimii. Myös siirtäminen (jäähyt mukaan lukien). Javadocit päivitetty.
 
 
