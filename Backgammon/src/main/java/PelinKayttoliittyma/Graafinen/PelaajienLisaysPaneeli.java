@@ -43,9 +43,9 @@ public class PelaajienLisaysPaneeli extends JPanel {
         
         setLayout(new GridLayout(3,2));
 
-        pelaaja1 = new JLabel("Pelaaja 1: ", SwingConstants.CENTER);
+        pelaaja1 = new JLabel("Pelaaja 1 (Musta): ", SwingConstants.CENTER);
         nimi1Kentta = new JTextField();
-        pelaaja2 = new JLabel("Pelaaja 2: ",SwingConstants.CENTER);
+        pelaaja2 = new JLabel("Pelaaja 2 (Valkoinen): ",SwingConstants.CENTER);
         nimi2Kentta = new JTextField();
 
         lisaaPelaajat = new JButton("Lisää pelaajat!");

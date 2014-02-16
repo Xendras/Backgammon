@@ -22,7 +22,7 @@ import javax.swing.SwingConstants;
  * Luokka jossa pelin sisältö piirretään. Sisältää myös paneelin joka vastaa nappuloiden toiminnallisuudesta.
  * @author Jonas Westerlund
  */
-public class PelilaudanPiirtoPaneeli extends JPanel {
+public class PelilaudanPaneeli extends JPanel {
 
     Pelikokonaisuus peli;
     GraafinenUI graafinen;
@@ -59,7 +59,7 @@ public class PelilaudanPiirtoPaneeli extends JPanel {
      * @param graafinen Käyttöliittymä johon paneeli kuuluu.
      * @param peliPaneeli Paneeli johon tämä paneeli kuuluu.
      */
-    public PelilaudanPiirtoPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen, PeliPaneeli peliPaneeli) {
+    public PelilaudanPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen, PeliPaneeli peliPaneeli) {
         this.peli = peli;
         this.graafinen = graafinen;
         this.peliPaneeli = peliPaneeli;
@@ -68,7 +68,8 @@ public class PelilaudanPiirtoPaneeli extends JPanel {
         this.kolmio2 = new Color(139,69,19);
                
         super.setBackground(tausta);
-        setPreferredSize(new Dimension(KentanLeveys,KentanKorkeus));
+        setMaximumSize(new Dimension(KentanLeveys,KentanKorkeus));
+        setMinimumSize(new Dimension(KentanLeveys,KentanKorkeus));
 
         setLayout(new GridLayout(14, 13));
         

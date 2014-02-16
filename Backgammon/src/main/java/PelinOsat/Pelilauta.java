@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Luokka joka simuloi pelilautaa. Pelilaudan struktuurina toimii HashMap.
+ * Luokka joka simuloi pelilautaa. Pelilaudan rakenteena toimii HashMap.
  *
  * @author Jonas Westerlund
  */
@@ -139,14 +139,15 @@ public class Pelilauta {
      * @param sijainti Sijainti jossa nappula on.
      * @param siirrot Siirrot joita siirretään.
      */
-    public void siirraNappulaKotiin(Pelaaja vuorossa, int sijainti, int siirrot) {
+    public boolean siirraNappulaKotiin(Pelaaja vuorossa, int sijainti, int siirrot) {
         if (!voikoSiirtaaKotiin(vuorossa, sijainti, siirrot)) {
-            return;
+            return false;
         }
         Pelinappula nappula = pelilauta.get(sijainti).get(pelilauta.get(sijainti).size() - 1);
         pelilauta.get(sijainti).remove(pelilauta.get(sijainti).size() - 1);
         lisaaNappulaPelaajanKotiin(nappula, vuorossa);
-        nappula.asetaPelinappulanSijainti(0);
+        nappula.asetaPelinappulanSijainti(25);
+        return true;
 
     }
 
@@ -218,7 +219,7 @@ public class Pelilauta {
                 return true;
             }
         } else {
-            if (sijainti + siirtoja == 0) {
+            if (sijainti - siirtoja == 0) {
                 return true;
             }
         }
@@ -263,6 +264,7 @@ public class Pelilauta {
             return true;
         }
         return false;
+        
     }
 
     public boolean onkoPelaajanJaahyTyhja(Pelaaja pelaaja) {

@@ -3,6 +3,7 @@ package PelinKayttoliittyma.Graafinen;
 import PelinKayttoliittyma.Teksti.TekstiUI;
 import PelinOsat.Pelikokonaisuus;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -17,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 /**
@@ -68,11 +70,11 @@ public class GraafinenUI implements Runnable {
      * Metodi joka siirtyy itse pelipaneeliin käyttöliittymässä. Muuttaa ikkunan suuruudeen ja piirtää käyttöliittymän uudestaan
      */
     public void siirryPeliPaneeliin(){ 
-        frame.setSize(new Dimension(527, 675));
+        frame.setSize(new Dimension(710, 675)); // 527x655 oletus
         frame.getContentPane().removeAll();
         frame.setLocationRelativeTo(null);
         PeliPaneeli peliNakyma = new PeliPaneeli(this.peli,this);
-        haeContentPane().add(peliNakyma);
+        haeContentPane().add(peliNakyma, SwingConstants.CENTER);
         haeContentPane().revalidate();
         haeContentPane().repaint();
         
