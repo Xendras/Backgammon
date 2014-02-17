@@ -79,6 +79,7 @@ public class NappulaNappi extends JButton {
                         peli.asetaPelaajaVuorossa(peli.haePelaajaVuorossa().haeVastustaja());
                         peliPaneeli.haeIlmoitusKentta().append("\nPelaajan " + peli.haePelaajaVuorossa().haePelaajanNimi() + " vuoro!");
                         peliPaneeli.haeHeitaNoppaaNappi().setEnabled(true);
+                        peliPaneeli.asetaNoppaNappienTila(true);
                         peli.asetaNoppaaHeitetty(false);
                         if (peli.haePelaajaVuorossa() == peli.haePelaaja1()) {
                             peliPaneeli.setBackground(Color.BLACK);

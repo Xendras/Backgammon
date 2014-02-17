@@ -124,6 +124,14 @@ public class Pelikokonaisuus {
     public void asetaPelaaja2(Pelaaja pelaaja2) {
         this.pelaaja2 = pelaaja2;
     }
+    
+    public Noppa haeNoppa1(){
+        return this.noppa1;
+    }
+    
+    public Noppa haeNoppa2(){
+        return this.noppa2;
+    }
 
     public int heitaNoppaa1() {
         return this.noppa1.heitaNoppaaJaAnnaArvo();

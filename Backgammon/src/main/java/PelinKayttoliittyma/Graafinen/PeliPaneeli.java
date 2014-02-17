@@ -6,6 +6,7 @@
 
 package PelinKayttoliittyma.Graafinen; 
 
+import PelinOsat.Noppa;
 import PelinOsat.Pelikokonaisuus;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,8 +36,8 @@ public class PeliPaneeli extends JPanel {
     
     Pelikokonaisuus peli;
     GraafinenUI graafinen;
-    JLabel noppa1;
-    JLabel noppa2;
+    JButton noppa1;
+    JButton noppa2;
     JTextArea ilmoitusKentta;
     JTextArea pelaajienKodit;
     JScrollPane ilmoitusKenttaScroll;
@@ -83,9 +84,13 @@ public class PeliPaneeli extends JPanel {
         ilmoitusKenttaScroll = new JScrollPane(ilmoitusKentta);
         ilmoitusKenttaScroll.setPreferredSize(new Dimension(150,75));
         
-        noppa1 = new JLabel("", SwingConstants.CENTER);
+        noppa1 = new JButton("");
+        NopanValintaKuuntelija nopan1Kuuntelija = new NopanValintaKuuntelija(peli.haeNoppa1());
+        noppa1.addActionListener(nopan1Kuuntelija);
         noppa1.setPreferredSize(new Dimension(50,30));
-        noppa2 = new JLabel("", SwingConstants.CENTER);
+        noppa2 = new JButton("");
+        NopanValintaKuuntelija nopan2Kuuntelija = new NopanValintaKuuntelija(peli.haeNoppa2());
+        noppa2.addActionListener(nopan2Kuuntelija);
         noppa2.setPreferredSize(new Dimension(50,30));
         
         heitaNoppaa = new JButton("Heitä noppia!");
@@ -125,6 +130,11 @@ public class PeliPaneeli extends JPanel {
         return this.pelilauta;
     }
     
+    public void asetaNoppaNappienTila(boolean tila){
+        this.noppa1.setEnabled(tila);
+        this.noppa2.setEnabled(tila);
+    }
+    
     /**
      * Kuuntelee Heitä noppaa-napin painalluksia ja päivittää noppien arvot.
      */
@@ -136,6 +146,8 @@ public class PeliPaneeli extends JPanel {
             noppa2.setText(""+peli.heitaNoppaa2());
             if(peli.haeNopan1Arvo() == peli.haeNopan2Arvo()){
                 peli.asetaHeittojenMaara(4);
+                noppa1.setEnabled(false);
+                noppa2.setEnabled(false);
             } else {
                 peli.asetaHeittojenMaara(2);
             }
@@ -148,6 +160,29 @@ public class PeliPaneeli extends JPanel {
         
         
     }
+    
+    public class NopanValintaKuuntelija implements ActionListener{
+
+        Noppa noppa;
+        
+        public NopanValintaKuuntelija(Noppa noppa){
+            this.noppa = noppa;
+        }
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            peli.asetaValittuNoppa(noppa);
+            if(noppa == peli.haeNoppa1()){
+                noppa1.setEnabled(false);
+            } else {
+                noppa2.setEnabled(false);
+            }
+            
+        }
+        
+        
+    }
+    
     
     public class VuoronLuovutusKuuntelija implements ActionListener{
 
