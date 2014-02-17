@@ -210,7 +210,7 @@ public class PelilautaTest {
     public void voikoSiirtaaKotiinPalauttaaTrueAlalaudalla(){
         peli.lisaaPelinappula(nappula2, 3);
         peli.asetaPelaajaVuorossa(peli.haePelaaja2());
-        assertEquals(true,pelilauta.voikoSiirtaaKotiin(pelaaja2,3,-3));
+        assertEquals(true,pelilauta.voikoSiirtaaKotiin(pelaaja2,3,3));
     }
     
     @Test

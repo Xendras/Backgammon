@@ -5,6 +5,7 @@
  */
 package PelinKayttoliittyma.Graafinen;
 
+import PelinOsat.Noppa;
 import PelinOsat.Pelikokonaisuus;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -71,7 +72,8 @@ public class NappulaNappi extends JButton {
                     }
                     
                     peli.vahennaVuoroLaskuria();
-                    peli.asetaValittuNoppa(peli.haeToinenNoppa(peli.haeValittuNoppa()));
+                    Noppa uusiValittuNoppa = peli.haeToinenNoppa(peli.haeValittuNoppa());
+                    peli.asetaValittuNoppa(uusiValittuNoppa);
 
                     if (peli.haeVuoroLaskuri() == 0) {
                         peli.asetaPelaajaVuorossa(peli.haePelaajaVuorossa().haeVastustaja());

@@ -58,7 +58,7 @@ public class GraafinenUI implements Runnable {
      * Metodi joka siirtyy aloituspaneeliin käyttöliittymässä. Muuttaa ikkunan suuruudeen ja piirtää käyttöliittymän uudestaan
      */
     public void siirryAloitusPaneeliin(){
-        haeFrame().setSize(new Dimension(400, 175));
+        frame.setSize(new Dimension(400, 175));
         frame.getContentPane().removeAll();
         AloitusValikkoPaneeli aloitusValikko = new AloitusValikkoPaneeli(peli,this);
         haeContentPane().add(aloitusValikko, BorderLayout.CENTER);

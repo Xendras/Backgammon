@@ -186,7 +186,7 @@ public class Pelikokonaisuus {
     }
 
     public void alustaVuoroLaskuri() {
-        this.vuoroLaskuri = this.heittojenMaara;
+        this.vuoroLaskuri = heittojenMaara;
     }
 
     /**
@@ -310,11 +310,7 @@ public class Pelikokonaisuus {
                 }
             }
         }
-
-        if (seuraavaVuoro) {
-            vahennaVuoroLaskuria();
-        }
-
+        
         return seuraavaVuoro;
 
     }
