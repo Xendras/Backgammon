@@ -124,12 +124,12 @@ public class Pelikokonaisuus {
     public void asetaPelaaja2(Pelaaja pelaaja2) {
         this.pelaaja2 = pelaaja2;
     }
-    
-    public Noppa haeNoppa1(){
+
+    public Noppa haeNoppa1() {
         return this.noppa1;
     }
-    
-    public Noppa haeNoppa2(){
+
+    public Noppa haeNoppa2() {
         return this.noppa2;
     }
 
@@ -318,9 +318,27 @@ public class Pelikokonaisuus {
                 }
             }
         }
-        
+
         return seuraavaVuoro;
 
+    }
+
+    public boolean voikoPelaajaVuorossaSiirtaa(int siirtoja) {
+        for (int i = 1; i < 25; i++) {
+            if (!haePelaajaVuorossa().haePelaajanJaahy().isEmpty()) {
+                if (haePelilauta().voikoLisata(haePelaajaVuorossa().haePelaajanJaahy().get(haePelaajaVuorossa().haePelaajanJaahy().size()-1), siirtoja)) {
+                    return true;
+                }
+            } else if (haePelilauta().ovatkoNappulatVastustajanAlueella(haePelaajaVuorossa())) {
+                if (haePelilauta().voikoSiirtaaKotiin(haePelaajaVuorossa(), i, siirtoja)) {
+                    return true;
+                }
+            } else if (haePelilauta().voikoSiirtaa(i,siirtoja)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
