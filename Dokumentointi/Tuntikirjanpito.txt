@@ -13,5 +13,6 @@
 10.2.2014 // 5h // Testien päivittelyä ajantasalle ja graafisen käyttöliittymän aloittelua
 12.2.2014 // 4h // Todellista siirtymistä tekstiUIsta graafiseen.
 13.2.2014 // 5h // Graafisen käyttöliittymän parantelemista. Pelilauta ja nappien piirtäminen toimii. Myös siirtäminen (jäähyt mukaan lukien). Javadocit päivitetty.
-
+19.2.2014 // 2h // Demon valmistelua, hienosäätöä.
+23.2.2014 // 2h // Pelin valikkojen viimeistelyä.
 

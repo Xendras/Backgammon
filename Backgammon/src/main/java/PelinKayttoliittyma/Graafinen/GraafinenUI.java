@@ -9,7 +9,10 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -41,12 +44,14 @@ public class GraafinenUI implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Backgammon");
-        frame.setPreferredSize(new Dimension(300, 100));
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
-//        haeContentPane().add(new PeliPaneeli(peli,this));
-        alustaPelaajienNimetPaneeli();
+        try {
+            siirryAloitusPaneeliin();
+        } catch (FileNotFoundException ex) {
+            return;
+        }
         frame.setResizable(false);
 
         frame.pack();
@@ -57,11 +62,12 @@ public class GraafinenUI implements Runnable {
     /**
      * Metodi joka siirtyy aloituspaneeliin käyttöliittymässä. Muuttaa ikkunan suuruudeen ja piirtää käyttöliittymän uudestaan
      */
-    public void siirryAloitusPaneeliin(){
-        frame.setSize(new Dimension(400, 175));
+    public void siirryAloitusPaneeliin() throws FileNotFoundException{
         frame.getContentPane().removeAll();
+        frame.setPreferredSize(new Dimension(450, 100));
         AloitusValikkoPaneeli aloitusValikko = new AloitusValikkoPaneeli(peli,this);
         haeContentPane().add(aloitusValikko, BorderLayout.CENTER);
+        haeContentPane().revalidate();
         haeContentPane().repaint();
         
     }
@@ -83,9 +89,14 @@ public class GraafinenUI implements Runnable {
     /**
      * Metodi joka siirtyy pelaajien nimeämis paneeliin käyttöliittymässä.
      */
-    public void alustaPelaajienNimetPaneeli(){
+    public void siirryPelaajienNimetPaneeliin(){
+        frame.getContentPane().removeAll();
+        frame.setSize(new Dimension(300, 100));
+        frame.setLocationRelativeTo(null);
         PelaajienLisaysPaneeli nimiPaneeli = new PelaajienLisaysPaneeli(peli,this);
         frame.getContentPane().add(nimiPaneeli);
+        haeContentPane().revalidate();
+        haeContentPane().repaint();
     }
 
     public JFrame haeFrame(){

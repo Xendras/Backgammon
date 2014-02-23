@@ -10,6 +10,8 @@ import PelinOsat.Pelikokonaisuus;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -68,9 +70,14 @@ public class NappulaNappi extends JButton {
                     if (peli.onkoPeliLoppu(peli.haePelaajaVuorossa())) {
                         JOptionPane.showMessageDialog(graafinen.haeFrame(), "Onneksi olkoon! Pelaaja " + peli.haePelaajaVuorossa().haePelaajanNimi() + " voitti!", "Peli loppui!", 1);
                         peliPaneeli.haeIlmoitusKentta().append("\nPeli loppui!");
-                        graafinen.siirryAloitusPaneeliin();
+                        try {
+                            graafinen.siirryAloitusPaneeliin();
+                        } catch (FileNotFoundException e) {
+                            return;
+                        }
+
                     }
-                    
+
                     peli.vahennaVuoroLaskuria();
                     Noppa uusiValittuNoppa = peli.haeToinenNoppa(peli.haeValittuNoppa());
                     peli.asetaValittuNoppa(uusiValittuNoppa);

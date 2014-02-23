@@ -1,0 +1,51 @@
+S‰‰nnˆt on yksinkertaista oppia, mutta strategiaa ja muun muassa parhaita 
+aloituksia kullekin noppalukuparille on tutkittu paljon.
+Laudan kummallakin puolella on 12 kiilan rivi. Kiilat on numeroitu ykkˆsest‰ 
+24:‰‰n, ja nappulat liikkuvat aina suuremmasta kiilaluvusta 
+pienemp‰‰n p‰in. Pelaajat liikuttavat nappuloitaan vastakkaisiin suuntiin, 
+joten ensimm‰isen pelaajan 1-kiila on toisen pelaajan 24-kiila. 
+Joissakin tallennetuissa peleiss‰ kiilojen numerointi pidet‰‰n samana yhden 
+pelaajan n‰kˆkulmasta.
+Alkutilanteessa kummallakin pelaajalla on kaksi nappulaa 24-kiilalla, kolme 
+nappulaa 8-kiilalla sek‰ viisi nappulaa 6- ja 13-kiiloilla.
+Kiilat 1-6 muodostavat kotikent‰n. Pelaaja ei voi kotiuttaa omia nappuloitaan, 
+elleiv‰t ne kaikki ole pelaajan omalla kotikent‰ll‰. Kiiloja 
+7-12 sanotaan ulkokent‰ksi, 13-18 ovat vastustajan ulkokentt‰‰ ja 19-24 ovat 
+vastustajan kotikentt‰‰.
+Aluksi molemmat pelaajat heitt‰v‰t noppaa, ja suuremman silm‰luvun saanut aloittaa. 
+Pelaajat siirt‰v‰t vuorotellen ja heitt‰v‰t kahta noppaa
+jokaisen vuoron alussa.
+
+
+Backgammonia pelatessa k‰ytet‰‰n arpakuutioita, mutta t‰m‰ on puolestaan tuplausnoppa, 
+jota ei heitet‰, vaan pelaajat voivat valita 
+kuinkamonekertaisesta pistepotista pelataan, vuorotellen tuplaamalla panosta.
+Nopanheiton j‰lkeen pelaajan t‰ytyy ñ mik‰li mahdollista ñ liikuttaa nappuloita 
+noppien osoittaman silm‰luvun verran. Jos pelaaja heitt‰‰ 
+esimerkiksi numerot 6 ja 3, h‰nen t‰ytyy liikuttaa yht‰ nappulaa kuuden kiilan verran 
+eteenp‰in sek‰ toista nappulaa kolmen kiilan verran 
+eteenp‰in. Noppien j‰rjestyksell‰ ei ole merkityst‰. Kahden siirron t‰ytyy olla 
+erillisi‰: joko kuusi ja kolme tai kolme ja kuusi. Jos pelaaja 
+siirt‰‰ samaa nappulaa 6 + 3, nappulan t‰ytyy voida pys‰hty‰ vapaaseen kiilaan 
+kuutosen tai kolmosen kohdalle. Jos pelaaja heitt‰‰ tuplat eli 
+saa molemmilla nopilla saman silm‰luvun, h‰n saa k‰ytt‰‰ silm‰luvut kahteen kertaan. 
+Jos pelaaja saa esimerkiksi kaksi nelosta, h‰n saa k‰ytt‰‰ 
+siirtoihinsa silm‰luvut 4 + 4 + 4 + 4.
+Pelaaja joutuu luovuttamaan vuoronsa, jos h‰nell‰ ei ole nopanheiton j‰lkeen 
+laillisia siirtoja. Jos pelaajalla on k‰ytett‰viss‰‰n vain yksi 
+laillinen siirto, h‰nen on suoritettava siirto ja j‰tett‰v‰ toinen siirto k‰ytt‰m‰tt‰. 
+Jos pelaajalla on k‰ytett‰viss‰‰n yksi laillinen siirto 
+kummalla nopalla tahansa, muttei molemmilla, h‰nen on pelattava t‰llˆin suurempi numero. 
+Pelaaja voi alkaa kotiuttamaan, kun h‰nen kaikki 
+nappulansa ovat h‰nen omalla kotikent‰ll‰‰n. Esimerkiksi jos pelaaja heitt‰‰ 5 ja 2, 
+h‰n saa siirt‰‰ pois pelilaudalta kiiloissa 2 ja 5 olevat 
+nappulat. Jos pelaaja heitt‰‰ luvun eik‰ h‰nell‰ ole siin‰ kiilassa nappulaa ja 
+nappuloita on vain pienemill‰ kiiloilla, h‰n saa siirt‰‰ 
+suurimmasta kiilasta nappulan. Pelin alussa p‰‰tet‰‰n, moneenko pisteeseen peli‰ halutaan 
+pelata. T‰llˆin pisteet jaetaan seuraavasti:
+Jos pelaaja on kotiuttanut v‰hint‰‰n yhden nappulan, voittaja saa yhden pisteen.
+Jos vastustaja ei ole kotiuttanut yht‰‰n nappulaa, voittaja pelaa gammonin ja saa kaksi 
+pistett‰.
+Jos vastustaja ei ole kotiuttanut yht‰‰n nappulaa ja h‰nell‰ on v‰hint‰‰n yksi nappula 
+voittajan kotikent‰ll‰ pelin p‰‰tytty‰, voittaja pelaa 
+backgammonin ja saa kolme pistett‰.
