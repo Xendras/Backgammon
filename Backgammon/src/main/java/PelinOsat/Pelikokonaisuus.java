@@ -340,5 +340,9 @@ public class Pelikokonaisuus {
 
         return false;
     }
+    
+    public int voikoLuovuttaaVuoron(){
+        return haePelilauta().voikoLuovuttaVuoron();
+    }
 
 }

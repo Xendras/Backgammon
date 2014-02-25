@@ -41,6 +41,7 @@ public class Pelilauta {
 
     /**
      * Lisää nappulan pelaajan jäähylle.
+     *
      * @param nappula Nappula joka siirretään.
      * @param pelaaja Pelaaja jonka jäähylle nappula siirretään.
      */
@@ -49,11 +50,12 @@ public class Pelilauta {
         peli.haePelilaudanNappulat().get(nappula1.haePelinappulanSijainti()).remove(0);
         pelaaja.haePelaajanJaahy().add(nappula1);
         nappula1.asetaPelinappulanSijainti(0);
-        
+
     }
 
     /**
      * Lisää nappulan pelaajan kotiin.
+     *
      * @param nappula Nappula joka siirretään.
      * @param pelaaja Pelaaja jonka kotiin nappula siirretään.
      */
@@ -64,15 +66,16 @@ public class Pelilauta {
     public Pelinappula haeNappulaPelaajanJaahylta(Pelaaja pelaaja) {
         return pelaaja.haePelaajanJaahy().get(pelaaja.haePelaajanJaahy().size() - 1);
     }
-    
+
     /**
-     * Lisää nappulan takaisin laudalle, tarkistaa jos lisäyksen voi tehdä ja päivittää pelilaudan sen mukaan.
-     * Poistaa onnistuessaan nappulan jäähyltä.
+     * Lisää nappulan takaisin laudalle, tarkistaa jos lisäyksen voi tehdä ja
+     * päivittää pelilaudan sen mukaan. Poistaa onnistuessaan nappulan jäähyltä.
+     *
      * @param sijainti Sijainti johon nappula halutaan lisätä.
      * @return Palauttaa booleanin joka kertoo jos lisäys onnistui.
      */
     public boolean lisaaNappulaTakaisinLaudalle(int sijainti) {
-        Pelinappula jaahyNappula = peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size()-1);
+        Pelinappula jaahyNappula = peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1);
         if (voikoLisata(jaahyNappula, sijainti)) {
             if (peli.haePelilaudanNappulat().get(sijainti).size() == 1 && peli.haePelilaudanNappulat().get(sijainti).get(0).haePelinappulanOmistaja() != peli.haePelaajaVuorossa()) {
                 Pelinappula vastustaja = peli.haePelilaudanNappulat().get(sijainti).get(0);
@@ -80,8 +83,8 @@ public class Pelilauta {
             }
             pelilauta.get(sijainti).add(jaahyNappula);
             jaahyNappula.asetaPelinappulanSijainti(sijainti);
-            peli.haePelaajaVuorossa().haePelaajanJaahy().remove(peli.haePelaajaVuorossa().haePelaajanJaahy().size()-1);
-            
+            peli.haePelaajaVuorossa().haePelaajanJaahy().remove(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1);
+
             return true;
         }
         return false;
@@ -100,7 +103,7 @@ public class Pelilauta {
             nappula.asetaPelinappulanSijainti(sijainti);
             return true;
         }
-        
+
         return false;
     }
 
@@ -112,29 +115,30 @@ public class Pelilauta {
      * @return Palauttaa booleanin joka kertoo jos lisäys onnistui.
      */
     public boolean siirraNappulaaLaudalla(int sijainti, int siirtoja) {
-        if(peli.haePelaajaVuorossa().onkoPelaajaJaahylla()){
+        if (peli.haePelaajaVuorossa().onkoPelaajaJaahylla()) {
             return false;
         }
-        
+
         if (voikoSiirtaa(sijainti, siirtoja)) {
             if (peli.haePelilaudanNappulat().get(sijainti + siirtoja).size() == 1 && peli.haePelilaudanNappulat().get(sijainti + siirtoja).get(0).haePelinappulanOmistaja() != peli.haePelaajaVuorossa()) {
                 Pelinappula vastustaja = peli.haePelilaudanNappulat().get(sijainti + siirtoja).get(0);
                 this.lisaaNappulaPelaajanJaahylle(vastustaja, peli.haePelaajaVuorossa().haeVastustaja());
-                
+
             }
-                Pelinappula nappula = pelilauta.get(sijainti).get(pelilauta.get(sijainti).size() - 1);
-                pelilauta.get(sijainti).remove(pelilauta.get(sijainti).size() - 1);
-                pelilauta.get(sijainti + siirtoja).add(nappula);
-                nappula.asetaPelinappulanSijainti(sijainti + siirtoja);
-                
-                return true;
+            Pelinappula nappula = pelilauta.get(sijainti).get(pelilauta.get(sijainti).size() - 1);
+            pelilauta.get(sijainti).remove(pelilauta.get(sijainti).size() - 1);
+            pelilauta.get(sijainti + siirtoja).add(nappula);
+            nappula.asetaPelinappulanSijainti(sijainti + siirtoja);
+
+            return true;
         }
-        
+
         return false;
     }
 
     /**
      * Siirtää nappulan vuorossa olevan pelaajan kotiin.
+     *
      * @param vuorossa Vuorossa oleva pelaaja.
      * @param sijainti Sijainti jossa nappula on.
      * @param siirrot Siirrot joita siirretään.
@@ -201,6 +205,7 @@ public class Pelilauta {
 
     /**
      * Tarkistaa jos nappulan voi siirtää kotiin.
+     *
      * @param pelaaja Pelaaja joka haluaa siirtää.
      * @param sijainti Nappulan sijainti joka halutaan siirtää.
      * @param siirtoja Kuinka monta siirtoa halutaan käyttää.
@@ -225,6 +230,30 @@ public class Pelilauta {
         }
 
         return false;
+    }
+
+    public int voikoLuovuttaVuoron() {
+        if (!peli.onkoNoppaaHeitetty()) {
+            return 1;
+        }
+        if (peli.haeVuoroLaskuri() >= 2) {
+            if (peli.haePelaajaVuorossa().onkoPelaajaJaahylla()
+                    && (peli.haePelilauta().voikoLisata(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), peli.haeNopan1Arvo())
+                    || peli.haePelilauta().voikoLisata(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), peli.haeNopan2Arvo()))) {
+                return 2;
+            } else if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan1Arvo()) || peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan2Arvo())) {
+                return 2;
+            }
+        } else {
+            if (peli.haePelaajaVuorossa().onkoPelaajaJaahylla()
+                    && peli.haePelilauta().voikoLisata(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), peli.haeValitunNopanArvo())) {
+                return 2;
+            } else if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeValitunNopanArvo())) {;
+                return 2;
+            }
+        }
+
+        return 0;
     }
 
     /**
@@ -264,7 +293,7 @@ public class Pelilauta {
             return true;
         }
         return false;
-        
+
     }
 
     public boolean onkoPelaajanJaahyTyhja(Pelaaja pelaaja) {

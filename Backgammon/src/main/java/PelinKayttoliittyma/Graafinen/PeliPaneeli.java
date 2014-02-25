@@ -7,6 +7,7 @@ package PelinKayttoliittyma.Graafinen;
 
 import PelinOsat.Noppa;
 import PelinOsat.Pelikokonaisuus;
+import PelinOsat.Pelinappula;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -191,23 +192,15 @@ public class PeliPaneeli extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!peli.onkoNoppaaHeitetty()) {
-                haeIlmoitusKentta().append("\nHeitä noppaa!");
+            if (peli.voikoLuovuttaaVuoron() == 1) {
+                ilmoitusKentta.append("\nHeitä noppia!");
                 ilmoitusKentta.setCaretPosition(ilmoitusKentta.getDocument().getLength());
                 return;
             }
-            if (peli.haeVuoroLaskuri() >= 2) {
-                if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan1Arvo()) || peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan2Arvo())) {
-                    haeIlmoitusKentta().append("\nMahdollisia siirtoja on jäljellä!");
-                    haeIlmoitusKentta().setCaretPosition(haeIlmoitusKentta().getDocument().getLength());
-                    return;
-                }
-            } else {
-                if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeValitunNopanArvo())) {
-                    haeIlmoitusKentta().append("\nMahdollisia siirtoja on jäljellä!");
-                    haeIlmoitusKentta().setCaretPosition(haeIlmoitusKentta().getDocument().getLength());
-                    return;
-                }
+            if (peli.voikoLuovuttaaVuoron() == 2) {
+                ilmoitusKentta.append("\nMahdollisia siirtoja jäljellä!");
+                ilmoitusKentta.setCaretPosition(ilmoitusKentta.getDocument().getLength());
+                return;
             }
             peli.asetaPelaajaVuorossa(peli.haePelaajaVuorossa().haeVastustaja());
             ilmoitusKentta.append("\nPelaajan " + peli.haePelaajaVuorossa().haePelaajanNimi() + " vuoro!");
