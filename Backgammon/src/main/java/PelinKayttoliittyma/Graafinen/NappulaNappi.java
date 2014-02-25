@@ -60,6 +60,27 @@ public class NappulaNappi extends JButton {
         public void actionPerformed(ActionEvent ae) {
             if (peli.onkoNoppaaHeitetty()) {
 
+                if (peliPaneeli.haeNopan1Tila() && peliPaneeli.haeNopan2Tila()) {
+                    peliPaneeli.haeIlmoitusKentta().append("\nValitse vain yksi noppa!");
+                    peliPaneeli.haeIlmoitusKentta().setCaretPosition(peliPaneeli.haeIlmoitusKentta().getDocument().getLength());
+                    graafinen.haeContentPane().repaint();
+                    return;
+                }
+
+                if (!peliPaneeli.haeNopan1Tila() && !peliPaneeli.haeNopan2Tila()) {
+                    peliPaneeli.haeIlmoitusKentta().append("\nValitse ainakin yksi noppa!");
+                    peliPaneeli.haeIlmoitusKentta().setCaretPosition(peliPaneeli.haeIlmoitusKentta().getDocument().getLength());
+                    graafinen.haeContentPane().repaint();
+                    return;
+                }
+
+                if (peli.haeVuoroLaskuri() == 1 && !(peliPaneeli.haeNopan1Tila() || peliPaneeli.haeNopan2Tila())) {
+                    peliPaneeli.haeIlmoitusKentta().append("\nValitse noppa!");
+                    peliPaneeli.haeIlmoitusKentta().setCaretPosition(peliPaneeli.haeIlmoitusKentta().getDocument().getLength());
+                    graafinen.haeContentPane().repaint();
+                    return;
+                }
+
                 boolean seuraavaVuoro = peli.uusiVuoro(sijaintiLaudalla, peli.haeValitunNopanArvo());
 
                 peliPaneeli.haePelaajienKodit().setText(
@@ -78,15 +99,23 @@ public class NappulaNappi extends JButton {
 
                     }
 
+                    if (peli.haeVuoroLaskuri() > 2) {
+
+                    } else {
+                        if (peli.haeValittuNoppa() == peli.haeNoppa1()) {
+                            peliPaneeli.asetaNopan1Toiminta(false);
+                            peliPaneeli.asetaNopan1Valinta(false);
+                        } else {
+                            peliPaneeli.asetaNopan2Toiminta(false);
+                            peliPaneeli.asetaNopan2Valinta(false);
+                        }
+                    }
                     peli.vahennaVuoroLaskuria();
-                    Noppa uusiValittuNoppa = peli.haeToinenNoppa(peli.haeValittuNoppa());
-                    peli.asetaValittuNoppa(uusiValittuNoppa);
 
                     if (peli.haeVuoroLaskuri() == 0) {
                         peli.asetaPelaajaVuorossa(peli.haePelaajaVuorossa().haeVastustaja());
                         peliPaneeli.haeIlmoitusKentta().append("\nPelaajan " + peli.haePelaajaVuorossa().haePelaajanNimi() + " vuoro!");
                         peliPaneeli.haeHeitaNoppaaNappi().setEnabled(true);
-                        peliPaneeli.asetaNoppaNappienTila(true);
                         peli.asetaNoppaaHeitetty(false);
                         if (peli.haePelaajaVuorossa() == peli.haePelaaja1()) {
                             peliPaneeli.setBackground(Color.BLACK);

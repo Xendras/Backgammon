@@ -76,11 +76,11 @@ public class GraafinenUI implements Runnable {
      * Metodi joka siirtyy itse pelipaneeliin käyttöliittymässä. Muuttaa ikkunan suuruudeen ja piirtää käyttöliittymän uudestaan
      */
     public void siirryPeliPaneeliin(){ 
-        frame.setSize(new Dimension(710, 675)); // 527x655 oletus
+        frame.setSize(new Dimension(720, 675)); // 527x655 oletus
         frame.getContentPane().removeAll();
         frame.setLocationRelativeTo(null);
         PeliPaneeli peliNakyma = new PeliPaneeli(this.peli,this);
-        haeContentPane().add(peliNakyma, SwingConstants.CENTER);
+        haeContentPane().add(peliNakyma, BorderLayout.CENTER);
         haeContentPane().revalidate();
         haeContentPane().repaint();
         

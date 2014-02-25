@@ -232,24 +232,43 @@ public class Pelilauta {
         return false;
     }
 
-    public int voikoLuovuttaVuoron() {
+    public int voikoLuovuttaVuoron(Pelaaja vuorossa) {
         if (!peli.onkoNoppaaHeitetty()) {
             return 1;
         }
         if (peli.haeVuoroLaskuri() >= 2) {
-            if (peli.haePelaajaVuorossa().onkoPelaajaJaahylla()
-                    && (peli.haePelilauta().voikoLisata(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), peli.haeNopan1Arvo())
-                    || peli.haePelilauta().voikoLisata(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), peli.haeNopan2Arvo()))) {
-                return 2;
-            } else if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan1Arvo()) || peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan2Arvo())) {
-                return 2;
+            if (vuorossa == peli.haePelaaja1()) {
+                if (vuorossa.onkoPelaajaJaahylla()
+                        && (peli.haePelilauta().voikoLisata(vuorossa.haePelaajanJaahy().get(vuorossa.haePelaajanJaahy().size() - 1), peli.haeNopan1Arvo())
+                        || peli.haePelilauta().voikoLisata(vuorossa.haePelaajanJaahy().get(vuorossa.haePelaajanJaahy().size() - 1), peli.haeNopan2Arvo()))) {
+                    return 2;
+                } else if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan1Arvo()) || peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan2Arvo())) {
+                    return 2;
+                }
+            } else {
+                if (vuorossa.onkoPelaajaJaahylla()
+                        && (peli.haePelilauta().voikoLisata(vuorossa.haePelaajanJaahy().get(vuorossa.haePelaajanJaahy().size() - 1), 25 - peli.haeNopan1Arvo())
+                        || peli.haePelilauta().voikoLisata(vuorossa.haePelaajanJaahy().get(vuorossa.haePelaajanJaahy().size() - 1), 25 - peli.haeNopan2Arvo()))) {
+                    return 2;
+                } else if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan1Arvo()) || peli.voikoPelaajaVuorossaSiirtaa(peli.haeNopan2Arvo())) {
+                    return 2;
+                }
             }
         } else {
-            if (peli.haePelaajaVuorossa().onkoPelaajaJaahylla()
-                    && peli.haePelilauta().voikoLisata(peli.haePelaajaVuorossa().haePelaajanJaahy().get(peli.haePelaajaVuorossa().haePelaajanJaahy().size() - 1), peli.haeValitunNopanArvo())) {
-                return 2;
-            } else if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeValitunNopanArvo())) {;
-                return 2;
+            if (vuorossa == peli.haePelaaja1()) {
+                if (vuorossa.onkoPelaajaJaahylla()
+                        && voikoLisata(vuorossa.haePelaajanJaahy().get(vuorossa.haePelaajanJaahy().size() - 1), peli.haeValitunNopanArvo())) {
+                    return 2;
+                } else if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeValitunNopanArvo())) {;
+                    return 2;
+                }
+            } else {
+                if (vuorossa.onkoPelaajaJaahylla()
+                        && voikoLisata(vuorossa.haePelaajanJaahy().get(vuorossa.haePelaajanJaahy().size() - 1), 25 - peli.haeValitunNopanArvo())) {
+                    return 2;
+                } else if (peli.voikoPelaajaVuorossaSiirtaa(peli.haeValitunNopanArvo())) {;
+                    return 2;
+                }
             }
         }
 
@@ -267,14 +286,14 @@ public class Pelilauta {
     public boolean ovatkoNappulatVastustajanAlueella(Pelaaja pelaaja) {
         if (pelaaja == peli.haePelaaja1()) {
             for (int i = 1; i < 16; i++) {
-                if (pelaaja.haePelaajanNappulat().get(i).haePelinappulanSijainti() < 19) {
+                if (pelaaja.haePelaajanNappulat().get(i).haePelinappulanSijainti() < 19 ) {
                     return false;
                 }
             }
             return true;
         } else {
             for (int i = 1; i < 16; i++) {
-                if (pelaaja.haePelaajanNappulat().get(i).haePelinappulanSijainti() > 6) {
+                if (pelaaja.haePelaajanNappulat().get(i).haePelinappulanSijainti() > 6 && pelaaja.haePelaajanNappulat().get(i).haePelinappulanSijainti() != 25 ) {
                     return false;
                 }
             }

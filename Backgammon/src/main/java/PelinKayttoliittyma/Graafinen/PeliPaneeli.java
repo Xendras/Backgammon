@@ -15,6 +15,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
@@ -25,6 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 import javax.swing.text.DefaultCaret;
 
@@ -37,8 +40,8 @@ public class PeliPaneeli extends JPanel {
 
     Pelikokonaisuus peli;
     GraafinenUI graafinen;
-    JButton noppa1;
-    JButton noppa2;
+    JToggleButton noppa1;
+    JToggleButton noppa2;
     JTextArea ilmoitusKentta;
     JTextArea pelaajienKodit;
     JScrollPane ilmoitusKenttaScroll;
@@ -87,13 +90,13 @@ public class PeliPaneeli extends JPanel {
         ilmoitusKenttaScroll = new JScrollPane(ilmoitusKentta);
         ilmoitusKenttaScroll.setPreferredSize(new Dimension(150, 75));
 
-        noppa1 = new JButton("");
+        noppa1 = new JToggleButton("", false);
         NopanValintaKuuntelija nopan1Kuuntelija = new NopanValintaKuuntelija(peli.haeNoppa1());
-        noppa1.addActionListener(nopan1Kuuntelija);
+        noppa1.addItemListener(nopan1Kuuntelija);
         noppa1.setPreferredSize(new Dimension(50, 30));
-        noppa2 = new JButton("");
+        noppa2 = new JToggleButton("", false);
         NopanValintaKuuntelija nopan2Kuuntelija = new NopanValintaKuuntelija(peli.haeNoppa2());
-        noppa2.addActionListener(nopan2Kuuntelija);
+        noppa2.addItemListener(nopan2Kuuntelija);
         noppa2.setPreferredSize(new Dimension(50, 30));
 
         heitaNoppaa = new JButton("Heitä noppia!");
@@ -132,9 +135,28 @@ public class PeliPaneeli extends JPanel {
         return this.pelilauta;
     }
 
-    public void asetaNoppaNappienTila(boolean tila) {
+    public void asetaNopan1Valinta(boolean tila) {
+        this.noppa1.setSelected(tila);
+    }
+
+    public void asetaNopan2Valinta(boolean tila) {
+        this.noppa2.setSelected(tila);
+    }
+
+    public void asetaNopan1Toiminta(boolean tila) {
         this.noppa1.setEnabled(tila);
+    }
+
+    public void asetaNopan2Toiminta(boolean tila) {
         this.noppa2.setEnabled(tila);
+    }
+
+    public boolean haeNopan1Tila() {
+        return noppa1.isSelected();
+    }
+
+    public boolean haeNopan2Tila() {
+        return noppa2.isSelected();
     }
 
     /**
@@ -148,11 +170,13 @@ public class PeliPaneeli extends JPanel {
             noppa2.setText("" + peli.heitaNoppaa2());
             if (peli.haeNopan1Arvo() == peli.haeNopan2Arvo()) {
                 peli.asetaHeittojenMaara(4);
-                noppa1.setEnabled(false);
-                noppa2.setEnabled(false);
             } else {
                 peli.asetaHeittojenMaara(2);
             }
+            noppa1.setSelected(false);
+            noppa2.setSelected(false);
+            noppa1.setEnabled(true);
+            noppa2.setEnabled(true);
 
             peli.alustaVuoroLaskuri();
             heitaNoppaa.setEnabled(false);
@@ -162,7 +186,7 @@ public class PeliPaneeli extends JPanel {
 
     }
 
-    public class NopanValintaKuuntelija implements ActionListener {
+    public class NopanValintaKuuntelija implements ItemListener {
 
         Noppa noppa;
 
@@ -171,19 +195,34 @@ public class PeliPaneeli extends JPanel {
         }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
-            if (!peli.onkoNoppaaHeitetty()) {
-                haeIlmoitusKentta().append("\nHeitä noppaa!");
-                ilmoitusKentta.setCaretPosition(ilmoitusKentta.getDocument().getLength());
-                return;
-            }
-            peli.asetaValittuNoppa(noppa);
-            if (noppa == peli.haeNoppa1()) {
-                noppa1.setEnabled(false);
+        public void itemStateChanged(ItemEvent e) {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                if (!peli.onkoNoppaaHeitetty()) {
+                    haeIlmoitusKentta().append("\nHeitä noppaa!");
+                    ilmoitusKentta.setCaretPosition(ilmoitusKentta.getDocument().getLength());
+                    return;
+                }
+                if (noppa == peli.haeNoppa1()) {
+                    noppa1.setSelected(true);
+                    peli.asetaValittuNoppa(noppa);
+                } else {
+                    noppa2.setSelected(true);
+                    peli.asetaValittuNoppa(noppa);
+                }
             } else {
-                noppa2.setEnabled(false);
+                if (!peli.onkoNoppaaHeitetty()) {
+                    haeIlmoitusKentta().append("\nHeitä noppaa!");
+                    ilmoitusKentta.setCaretPosition(ilmoitusKentta.getDocument().getLength());
+                    return;
+                }
+                if (noppa == peli.haeNoppa1()) {
+                    noppa1.setSelected(false);
+                    peli.asetaValittuNoppa(peli.haeToinenNoppa(peli.haeValittuNoppa()));
+                } else {
+                    noppa2.setSelected(false);
+                    peli.asetaValittuNoppa(peli.haeToinenNoppa(peli.haeValittuNoppa()));
+                }
             }
-
         }
 
     }
