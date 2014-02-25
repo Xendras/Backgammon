@@ -22,8 +22,7 @@ import javax.swing.SwingUtilities;
 public class Backgammon {
     
     public static void main(String[] args) {
-        Pelikokonaisuus peli = new Pelikokonaisuus();
-        GraafinenUI kayttoliittyma = new GraafinenUI(peli);
+        GraafinenUI kayttoliittyma = new GraafinenUI();
         SwingUtilities.invokeLater(kayttoliittyma);
        
     }

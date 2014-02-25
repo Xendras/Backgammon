@@ -33,13 +33,6 @@ public class GraafinenUI implements Runnable {
     private JFrame frame;
     private Pelikokonaisuus peli;
 
-    /**
-     * Luo graafisen käyttöliittymän.
-     * @param peli Pelikokonaisuus jota käyttöliittymä hallitsee
-     */
-    public GraafinenUI(Pelikokonaisuus peli) {
-        this.peli = peli;
-    }
 
     @Override
     public void run() {
@@ -64,7 +57,8 @@ public class GraafinenUI implements Runnable {
      */
     public void siirryAloitusPaneeliin() throws FileNotFoundException{
         frame.getContentPane().removeAll();
-        frame.setPreferredSize(new Dimension(450, 100));
+        frame.setSize(new Dimension(450, 100));
+        frame.setLocationRelativeTo(null);
         AloitusValikkoPaneeli aloitusValikko = new AloitusValikkoPaneeli(peli,this);
         haeContentPane().add(aloitusValikko, BorderLayout.CENTER);
         haeContentPane().revalidate();
@@ -76,7 +70,7 @@ public class GraafinenUI implements Runnable {
      * Metodi joka siirtyy itse pelipaneeliin käyttöliittymässä. Muuttaa ikkunan suuruudeen ja piirtää käyttöliittymän uudestaan
      */
     public void siirryPeliPaneeliin(){ 
-        frame.setSize(new Dimension(720, 675)); // 527x655 oletus
+        frame.setSize(new Dimension(770, 675)); // 527x655 oletus
         frame.getContentPane().removeAll();
         frame.setLocationRelativeTo(null);
         PeliPaneeli peliNakyma = new PeliPaneeli(this.peli,this);
@@ -90,8 +84,9 @@ public class GraafinenUI implements Runnable {
      * Metodi joka siirtyy pelaajien nimeämis paneeliin käyttöliittymässä.
      */
     public void siirryPelaajienNimetPaneeliin(){
+        this.peli = new Pelikokonaisuus();
         frame.getContentPane().removeAll();
-        frame.setSize(new Dimension(300, 100));
+        frame.setPreferredSize(new Dimension(300, 100));
         frame.setLocationRelativeTo(null);
         PelaajienLisaysPaneeli nimiPaneeli = new PelaajienLisaysPaneeli(peli,this);
         frame.getContentPane().add(nimiPaneeli);

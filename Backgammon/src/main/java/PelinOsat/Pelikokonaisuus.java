@@ -32,6 +32,8 @@ public class Pelikokonaisuus {
     Noppa valittuNoppa;
     int heittojenMaara;
     int vuoroLaskuri;
+    int pelaaja1HuonoinSijainti;
+    int pelaaja2HuonoinSijainti;
 
     /**
      * Luo pelikokonaisuuden joka sisältää kaksi noppaa, yhden pelilaudan, kaksi
@@ -55,6 +57,8 @@ public class Pelikokonaisuus {
         this.heittojenMaara = 2;
         this.vuoroLaskuri = 2;
         this.valittuNoppa = noppa1;
+        this.pelaaja1HuonoinSijainti = 25;
+        this.pelaaja2HuonoinSijainti = 0;
 
     }
 
@@ -197,6 +201,30 @@ public class Pelikokonaisuus {
         this.vuoroLaskuri = heittojenMaara;
     }
 
+    public int haePelaajan1HuonoinSijainti() {
+        this.pelaaja1HuonoinSijainti = 25;
+
+        for (int i = 1; i < 16; i++) {
+            if (nappulat1.get(i).haePelinappulanSijainti() < this.pelaaja1HuonoinSijainti) {
+                this.pelaaja1HuonoinSijainti = nappulat1.get(i).haePelinappulanSijainti();
+            }
+        }
+
+        return this.pelaaja1HuonoinSijainti;
+    }
+
+    public int haePelaajan2HuonoinSijainti() {
+        this.pelaaja2HuonoinSijainti = 0;
+
+        for (int i = 1; i < 16; i++) {
+            if (nappulat2.get(i).haePelinappulanSijainti() > this.pelaaja2HuonoinSijainti) {
+                this.pelaaja2HuonoinSijainti = nappulat2.get(i).haePelinappulanSijainti();
+            }
+        }
+
+        return this.pelaaja2HuonoinSijainti;
+    }
+
     /**
      * Kutsuu pelilaudan metodia joka siirtaa nappulaa HashMapissa.
      *
@@ -277,7 +305,7 @@ public class Pelikokonaisuus {
             this.lisaaPelinappula(nappulat2.get(i), 6);
         }
     }
-    
+
     public void alustaPelilautaTest() {
 
         for (int i = 1; i < 3; i++) {
@@ -331,10 +359,14 @@ public class Pelikokonaisuus {
         if (ovatkoNappulatVastustajanAlueella(haePelaajaVuorossa())) {
             if (sijainti + noppa == 25 || sijainti - noppa == 0) {
                 seuraavaVuoro = siirraNappulaKotiin(haePelaajaVuorossa(), sijainti, noppa);
+            } else if (haePelaajaVuorossa() == haePelaaja1() && 25 - noppa < haePelaajan1HuonoinSijainti()) {
+                seuraavaVuoro = siirraNappulaKotiin(haePelaajaVuorossa(), haePelaajan1HuonoinSijainti(), 25 - haePelaajan1HuonoinSijainti());
+            } else if (haePelaajaVuorossa() == haePelaaja2() && noppa > haePelaajan2HuonoinSijainti()) {
+                seuraavaVuoro = siirraNappulaKotiin(haePelaajaVuorossa(), haePelaajan2HuonoinSijainti(), haePelaajan2HuonoinSijainti());
             } else {
-                if(haePelaajaVuorossa() == haePelaaja1()){
+                if (haePelaajaVuorossa() == haePelaaja1()) {
                     seuraavaVuoro = siirraPelinappulaa(sijainti, noppa);
-                } else{
+                } else {
                     seuraavaVuoro = siirraPelinappulaa(sijainti, -noppa);
                 }
             }
@@ -362,25 +394,45 @@ public class Pelikokonaisuus {
 
     }
 
-    public boolean voikoPelaajaVuorossaSiirtaa(int siirtoja) {
+    public boolean voikoPelaajaVuorossaSiirtaa(int noppa) {
         for (int i = 1; i < 25; i++) {
-            if (!haePelaajaVuorossa().haePelaajanJaahy().isEmpty()) {
-                if (haePelilauta().voikoLisata(haePelaajaVuorossa().haePelaajanJaahy().get(haePelaajaVuorossa().haePelaajanJaahy().size()-1), siirtoja)) {
+            if (haePelaajaVuorossa() == haePelaaja1()) {
+                if (!haePelaajaVuorossa().haePelaajanJaahy().isEmpty()) {
+                    if (haePelilauta().voikoLisata(haePelaajaVuorossa().haePelaajanJaahy().get(haePelaajaVuorossa().haePelaajanJaahy().size() - 1), noppa)) {
+                        return true;
+                    }
+                } else if (haePelilauta().ovatkoNappulatVastustajanAlueella(haePelaajaVuorossa())) {
+                    if (haePelilauta().voikoSiirtaaKotiin(haePelaajaVuorossa(), i, noppa) || haePelilauta().voikoSiirtaa(i, noppa)) {
+                        return true;
+                    }
+                    if (haePelilauta().voikoSiirtaaKotiin(haePelaajaVuorossa(), i, noppa) || haePelilauta().voikoSiirtaa(i, noppa)) {
+                        return true;
+                    }
+                } else if (haePelilauta().voikoSiirtaa(i, noppa)) {
                     return true;
                 }
-            } else if (haePelilauta().ovatkoNappulatVastustajanAlueella(haePelaajaVuorossa())) {
-                if (haePelilauta().voikoSiirtaaKotiin(haePelaajaVuorossa(), i, siirtoja) || haePelilauta().voikoSiirtaa(i,siirtoja) ) {
+            } else {
+                if (!haePelaajaVuorossa().haePelaajanJaahy().isEmpty()) {
+                    if (haePelilauta().voikoLisata(haePelaajaVuorossa().haePelaajanJaahy().get(haePelaajaVuorossa().haePelaajanJaahy().size() - 1), noppa)) {
+                        return true;
+                    }
+                } else if (haePelilauta().ovatkoNappulatVastustajanAlueella(haePelaajaVuorossa())) {
+                    if (haePelilauta().voikoSiirtaaKotiin(haePelaajaVuorossa(), i, noppa) || haePelilauta().voikoSiirtaa(i, -noppa)) {
+                        return true;
+                    }
+                    if (haePelilauta().voikoSiirtaaKotiin(haePelaajaVuorossa(), i, noppa) || haePelilauta().voikoSiirtaa(i, -noppa)) {
+                        return true;
+                    }
+                } else if (haePelilauta().voikoSiirtaa(i, -noppa)) {
                     return true;
                 }
-            } else if (haePelilauta().voikoSiirtaa(i,siirtoja)) {
-                return true;
             }
         }
 
         return false;
     }
-    
-    public int voikoLuovuttaaVuoron(){
+
+    public int voikoLuovuttaaVuoron() {
         return haePelilauta().voikoLuovuttaVuoron(haePelaajaVuorossa());
     }
 

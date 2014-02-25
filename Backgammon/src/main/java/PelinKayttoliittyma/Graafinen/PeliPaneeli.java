@@ -62,7 +62,7 @@ public class PeliPaneeli extends JPanel {
 
         pelilauta = new PelilaudanPaneeli(peli, graafinen, this);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setSize(new Dimension(690, 635));
+        setSize(new Dimension(720, 635));
 
         JPanel alaOsio = new JPanel();
         alaOsio.setLayout(new BoxLayout(alaOsio, BoxLayout.X_AXIS));

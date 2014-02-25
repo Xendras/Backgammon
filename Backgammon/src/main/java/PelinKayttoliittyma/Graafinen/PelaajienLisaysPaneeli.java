@@ -9,6 +9,7 @@ package PelinKayttoliittyma.Graafinen;
 import PelinKayttajat.Pelaaja;
 import PelinOsat.Pelikokonaisuus;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,6 +41,7 @@ public class PelaajienLisaysPaneeli extends JPanel {
     public PelaajienLisaysPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen){
         this.peli = peli;
         this.graafinen = graafinen;
+        setPreferredSize(new Dimension(300,100));
         
         setLayout(new GridLayout(3,2));
 
@@ -72,7 +74,7 @@ public class PelaajienLisaysPaneeli extends JPanel {
         peli.haePelaaja2().asetaVastustaja(peli.haePelaaja1());
         peli.asetaPelaajaVuorossa(peli.haePelaaja1());
         peli.alustaPelinappulat();
-        peli.alustaPelilautaTest();
+        peli.alustaPelilauta();
         
         graafinen.siirryPeliPaneeliin();
              
