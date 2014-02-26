@@ -80,7 +80,7 @@ public class PeliPaneeli extends JPanel {
         ylaOsio.add(pelaajienKodit);
 
         luovutaVuoro = new JButton("Luovuta vuoro!");
-        luovutaVuoro.setPreferredSize(new Dimension(120, 30));
+        luovutaVuoro.setPreferredSize(new Dimension(140, 30));
         VuoronLuovutusKuuntelija kuuntelija1 = new VuoronLuovutusKuuntelija();
         luovutaVuoro.addActionListener(kuuntelija1);
         luovutaVuoro.setAlignmentX(SwingConstants.LEFT);
@@ -88,7 +88,7 @@ public class PeliPaneeli extends JPanel {
         ilmoitusKentta = new JTextArea("Pelaaja " + peli.haePelaaja1().haePelaajanNimi() + " aloittaa!");
         ilmoitusKentta.setEditable(true);
         ilmoitusKenttaScroll = new JScrollPane(ilmoitusKentta);
-        ilmoitusKenttaScroll.setPreferredSize(new Dimension(150, 75));
+        ilmoitusKenttaScroll.setPreferredSize(new Dimension(160, 75));
 
         noppa1 = new JToggleButton("", false);
         NopanValintaKuuntelija nopan1Kuuntelija = new NopanValintaKuuntelija(peli.haeNoppa1());
@@ -100,7 +100,7 @@ public class PeliPaneeli extends JPanel {
         noppa2.setPreferredSize(new Dimension(50, 30));
 
         heitaNoppaa = new JButton("Heitä noppia!");
-        heitaNoppaa.setPreferredSize(new Dimension(120, 30));
+        heitaNoppaa.setPreferredSize(new Dimension(140, 30));
         NopanHeittoKuuntelija kuuntelija2 = new NopanHeittoKuuntelija();
         heitaNoppaa.addActionListener(kuuntelija2);
 

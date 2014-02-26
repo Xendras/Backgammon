@@ -55,7 +55,6 @@ public class AloitusValikkoPaneeli extends JPanel {
 
         alustaSaannot();
         saannotDialog = new JDialog();
-        setPreferredSize(new Dimension(450,100));
 
         this.peli = peli;
         this.graafinen = graafinen;

@@ -39,13 +39,12 @@ public class GraafinenUI implements Runnable {
         frame = new JFrame("Backgammon");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
+        frame.setResizable(true);
         try {
             siirryAloitusPaneeliin();
         } catch (FileNotFoundException ex) {
             return;
         }
-        frame.setResizable(false);
 
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -57,7 +56,7 @@ public class GraafinenUI implements Runnable {
      */
     public void siirryAloitusPaneeliin() throws FileNotFoundException{
         frame.getContentPane().removeAll();
-        frame.setSize(new Dimension(450, 100));
+        
         frame.setLocationRelativeTo(null);
         AloitusValikkoPaneeli aloitusValikko = new AloitusValikkoPaneeli(peli,this);
         haeContentPane().add(aloitusValikko, BorderLayout.CENTER);
@@ -85,8 +84,7 @@ public class GraafinenUI implements Runnable {
      */
     public void siirryPelaajienNimetPaneeliin(){
         this.peli = new Pelikokonaisuus();
-        frame.getContentPane().removeAll();
-        frame.setPreferredSize(new Dimension(300, 100));
+        frame.getContentPane().removeAll();;
         frame.setLocationRelativeTo(null);
         PelaajienLisaysPaneeli nimiPaneeli = new PelaajienLisaysPaneeli(peli,this);
         frame.getContentPane().add(nimiPaneeli);

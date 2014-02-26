@@ -41,7 +41,6 @@ public class PelaajienLisaysPaneeli extends JPanel {
     public PelaajienLisaysPaneeli(Pelikokonaisuus peli, GraafinenUI graafinen){
         this.peli = peli;
         this.graafinen = graafinen;
-        setPreferredSize(new Dimension(300,100));
         
         setLayout(new GridLayout(3,2));
 
@@ -74,7 +73,7 @@ public class PelaajienLisaysPaneeli extends JPanel {
         peli.haePelaaja2().asetaVastustaja(peli.haePelaaja1());
         peli.asetaPelaajaVuorossa(peli.haePelaaja1());
         peli.alustaPelinappulat();
-        peli.alustaPelilauta();
+        peli.alustaPelilautaTest();
         
         graafinen.siirryPeliPaneeliin();
              
