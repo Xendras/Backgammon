@@ -43,6 +43,8 @@ public class PelaajienLisaysPaneeli extends JPanel {
         this.graafinen = graafinen;
         
         setLayout(new GridLayout(3,2));
+        setSize(new Dimension(300,200));
+
 
         pelaaja1 = new JLabel("Pelaaja 1 (Musta): ", SwingConstants.CENTER);
         nimi1Kentta = new JTextField();

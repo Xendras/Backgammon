@@ -85,7 +85,7 @@ public class NappulaNappi extends JButton {
 
                 peliPaneeli.haePelaajienKodit().setText(
                         "Pelaajan " + peli.haePelaaja1().haePelaajanNimi() + " koti: \n" + peli.haePelaajan1Koti().size()
-                        + "/15 nappulaa \n\nPelaajan " + peli.haePelaaja2().haePelaajanNimi() + " koti: \n" + peli.haePelaajan2Koti().size() + "/15 nappulaa");
+                        + "/15 nappulaa \n\n\n\n\n\n\n\nPelaajan " + peli.haePelaaja2().haePelaajanNimi() + " koti: \n" + peli.haePelaajan2Koti().size() + "/15 nappulaa");
 
                 if (seuraavaVuoro) {
                     if (peli.onkoPeliLoppu(peli.haePelaajaVuorossa())) {

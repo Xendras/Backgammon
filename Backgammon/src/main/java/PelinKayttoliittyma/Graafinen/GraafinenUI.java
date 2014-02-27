@@ -39,7 +39,8 @@ public class GraafinenUI implements Runnable {
         frame = new JFrame("Backgammon");
 
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        frame.setResizable(true);
+        frame.setResizable(false);
+       
         try {
             siirryAloitusPaneeliin();
         } catch (FileNotFoundException ex) {
@@ -56,10 +57,10 @@ public class GraafinenUI implements Runnable {
      */
     public void siirryAloitusPaneeliin() throws FileNotFoundException{
         frame.getContentPane().removeAll();
-        
+        frame.setPreferredSize(new Dimension(400,50));
         frame.setLocationRelativeTo(null);
         AloitusValikkoPaneeli aloitusValikko = new AloitusValikkoPaneeli(peli,this);
-        haeContentPane().add(aloitusValikko, BorderLayout.CENTER);
+        haeContentPane().add(aloitusValikko);
         haeContentPane().revalidate();
         haeContentPane().repaint();
         
@@ -69,11 +70,11 @@ public class GraafinenUI implements Runnable {
      * Metodi joka siirtyy itse pelipaneeliin käyttöliittymässä. Muuttaa ikkunan suuruudeen ja piirtää käyttöliittymän uudestaan
      */
     public void siirryPeliPaneeliin(){ 
-        frame.setSize(new Dimension(770, 675)); // 527x655 oletus
+        frame.setPreferredSize(new Dimension(770, 705)); // 527x655 oletus
         frame.getContentPane().removeAll();
         frame.setLocationRelativeTo(null);
         PeliPaneeli peliNakyma = new PeliPaneeli(this.peli,this);
-        haeContentPane().add(peliNakyma, BorderLayout.CENTER);
+        haeContentPane().add(peliNakyma);
         haeContentPane().revalidate();
         haeContentPane().repaint();
         
@@ -85,6 +86,7 @@ public class GraafinenUI implements Runnable {
     public void siirryPelaajienNimetPaneeliin(){
         this.peli = new Pelikokonaisuus();
         frame.getContentPane().removeAll();;
+        frame.setPreferredSize(new Dimension(300,400));
         frame.setLocationRelativeTo(null);
         PelaajienLisaysPaneeli nimiPaneeli = new PelaajienLisaysPaneeli(peli,this);
         frame.getContentPane().add(nimiPaneeli);

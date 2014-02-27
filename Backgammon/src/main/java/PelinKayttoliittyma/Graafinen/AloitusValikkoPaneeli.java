@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
@@ -58,8 +59,10 @@ public class AloitusValikkoPaneeli extends JPanel {
 
         this.peli = peli;
         this.graafinen = graafinen;
+        
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setPreferredSize(new Dimension(300,150));
 
         tervetuloaTeksti = new JLabel("Tervetuloa Backgammon-peliin!");
         tervetuloaTeksti.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -92,7 +95,7 @@ public class AloitusValikkoPaneeli extends JPanel {
     public void alustaSaannot() {
         File kayttoOhje = new File("Käyttöohje.txt");
         try {
-            this.tiedostonLukija = new Scanner(kayttoOhje);
+            this.tiedostonLukija = new Scanner(new FileInputStream(kayttoOhje), "x-ISO-2022-CN-GB");
         } catch (FileNotFoundException e) {
             return;
         }
@@ -126,8 +129,8 @@ public class AloitusValikkoPaneeli extends JPanel {
             saannotDialog.setVisible(true);
             saannotDialog.setModal(true);
             saannotDialog.setLocationRelativeTo(null);
-            saannotDialog.setSize(new Dimension(550,500));
-            saannotDialog.setResizable(false);
+            saannotDialog.setSize(new Dimension(600,500));
+            saannotDialog.setResizable(true);
         }
 
     }

@@ -10,6 +10,7 @@ import PelinOsat.Pelikokonaisuus;
 import PelinOsat.Pelinappula;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -62,7 +63,9 @@ public class PeliPaneeli extends JPanel {
 
         pelilauta = new PelilaudanPaneeli(peli, graafinen, this);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setSize(new Dimension(720, 635));
+        setMinimumSize(new Dimension(720, 635));
+        setMaximumSize(new Dimension(720, 635));
+        setBackground(Color.BLACK);
 
         JPanel alaOsio = new JPanel();
         alaOsio.setLayout(new BoxLayout(alaOsio, BoxLayout.X_AXIS));
@@ -72,8 +75,9 @@ public class PeliPaneeli extends JPanel {
 
         pelaajienKodit = new JTextArea(
                 "Pelaajan " + peli.haePelaaja1().haePelaajanNimi() + " koti: \n" + peli.haePelaajan1Koti().size()
-                + "/15 nappulaa \n\nPelaajan " + peli.haePelaaja2().haePelaajanNimi() + " koti: \n" + peli.haePelaajan2Koti().size() + "/15 nappulaa");
-        pelaajienKodit.setMaximumSize(new Dimension(170, 150));
+                + "/15 nappulaa \n\n\n\n\n\n\n\nPelaajan " + peli.haePelaaja2().haePelaajanNimi() + " koti: \n" + peli.haePelaajan2Koti().size() + "/15 nappulaa");
+        pelaajienKodit.setFont(pelaajienKodit.getFont().deriveFont(12f));
+        pelaajienKodit.setMaximumSize(new Dimension(170, 170));
         pelaajienKodit.setEditable(false);
 
         ylaOsio.add(pelilauta);
@@ -86,9 +90,10 @@ public class PeliPaneeli extends JPanel {
         luovutaVuoro.setAlignmentX(SwingConstants.LEFT);
 
         ilmoitusKentta = new JTextArea("Pelaaja " + peli.haePelaaja1().haePelaajanNimi() + " aloittaa!");
-        ilmoitusKentta.setEditable(true);
+        ilmoitusKentta.setEditable(false);
+        ilmoitusKentta.setFont(ilmoitusKentta.getFont().deriveFont(11f));
         ilmoitusKenttaScroll = new JScrollPane(ilmoitusKentta);
-        ilmoitusKenttaScroll.setPreferredSize(new Dimension(160, 75));
+        ilmoitusKenttaScroll.setPreferredSize(new Dimension(200, 75));
 
         noppa1 = new JToggleButton("", false);
         NopanValintaKuuntelija nopan1Kuuntelija = new NopanValintaKuuntelija(peli.haeNoppa1());
@@ -106,9 +111,9 @@ public class PeliPaneeli extends JPanel {
 
         alaOsio.setMaximumSize(new Dimension(690, 75));
 
-        alaOsio.add(Box.createRigidArea(new Dimension(40, 0)));
+        alaOsio.add(Box.createRigidArea(new Dimension(20, 0)));
         alaOsio.add(luovutaVuoro);
-        alaOsio.add(Box.createRigidArea(new Dimension(40, 0)));
+        alaOsio.add(Box.createRigidArea(new Dimension(20, 0)));
         alaOsio.add(ilmoitusKenttaScroll);
         alaOsio.add(noppa1);
         alaOsio.add(heitaNoppaa);
