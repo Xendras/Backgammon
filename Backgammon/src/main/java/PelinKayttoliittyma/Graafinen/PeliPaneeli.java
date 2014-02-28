@@ -7,30 +7,20 @@ package PelinKayttoliittyma.Graafinen;
 
 import PelinOsat.Noppa;
 import PelinOsat.Pelikokonaisuus;
-import PelinOsat.Pelinappula;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
-import javax.swing.text.DefaultCaret;
 
 /**
  * Luokka joka sisältää pelipaneelin jossa itse peli tapahtuu.
@@ -63,8 +53,8 @@ public class PeliPaneeli extends JPanel {
 
         pelilauta = new PelilaudanPaneeli(peli, graafinen, this);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setPreferredSize(new Dimension(720, 635));
         setMinimumSize(new Dimension(720, 635));
-        setMaximumSize(new Dimension(720, 635));
         setBackground(Color.BLACK);
 
         JPanel alaOsio = new JPanel();
@@ -163,6 +153,8 @@ public class PeliPaneeli extends JPanel {
     public boolean haeNopan2Tila() {
         return noppa2.isSelected();
     }
+    
+    
 
     /**
      * Kuuntelee Heitä noppaa-napin painalluksia ja päivittää noppien arvot.
@@ -191,14 +183,25 @@ public class PeliPaneeli extends JPanel {
 
     }
 
+    /**
+     * Kuuntelija joka kuuntelee noppien valintaan liittyviä komentoja.
+     */
     public class NopanValintaKuuntelija implements ItemListener {
 
         Noppa noppa;
 
+        /**
+         * Tallentaa nopan luokalle
+         * @param noppa Noppa olio
+         */
         public NopanValintaKuuntelija(Noppa noppa) {
             this.noppa = noppa;
         }
 
+        /**
+         * Tarkistaa jos noppa oli jo valittu vai ei ja muuttaa pelin tilannetta sen mukaan.
+         * @param e Napin painallus
+         */
         @Override
         public void itemStateChanged(ItemEvent e) {
             if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -232,8 +235,15 @@ public class PeliPaneeli extends JPanel {
 
     }
 
+    /**
+     * Kuuntelija joka hallitee Luovuta vuoro-nappia ja sen toiminnallisuutta
+     */
     public class VuoronLuovutusKuuntelija implements ActionListener {
 
+        /**
+         * Tarkistaa jos mahdollisia siirtoja on jäljellä, jos ei niin luovuttaa vuoron
+         * @param e Napin painallus
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             if (peli.voikoLuovuttaaVuoron() == 1) {

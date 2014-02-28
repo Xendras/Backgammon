@@ -5,13 +5,11 @@
  */
 package PelinKayttoliittyma.Graafinen;
 
-import PelinOsat.Noppa;
 import PelinOsat.Pelikokonaisuus;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
@@ -51,11 +49,14 @@ public class NappulaNappi extends JButton {
 
     /**
      * Kuuntelija joka suorittaa pelinappulan siirtoja ja lisäyksiä
-     * pelitilanteen mukaan. Toiminnot siirretään tulevaisuudessa omalle
-     * luokalle/metodille. Päivittää myös pelipaneelia.
+     * pelitilanteen mukaan. Päivittää myös pelipaneelia.
      */
     public class NappulanKuuntelija implements ActionListener {
 
+        /**
+         * Riippuen napin painalluksesta suorittaa sarjan käskyjä joka vie peliä eteenpäin.
+         * @param ae Napin painallus
+         */
         @Override
         public void actionPerformed(ActionEvent ae) {
             if (peli.onkoNoppaaHeitetty()) {

@@ -146,6 +146,7 @@ public class Pelilauta {
      * @param vuorossa Vuorossa oleva pelaaja.
      * @param sijainti Sijainti jossa nappula on.
      * @param siirrot Siirrot joita siirretään.
+     * @return 
      */
     public boolean siirraNappulaKotiin(Pelaaja vuorossa, int sijainti, int siirrot) {
         if (!voikoSiirtaaKotiin(vuorossa, sijainti, siirrot)) {
@@ -240,6 +241,12 @@ public class Pelilauta {
         return false;
     }
 
+    /**
+     * Tarkistaa jos pelaaja voi luovuttaa vuoron. Tähän käytetään metodeja
+     * jotka tarkistavat jos sääntöjen mukaisia siirtoja on jäljellä.
+     * @param vuorossa Pelaaja vuorossa
+     * @return Palauttaa kokonaisluvun {0,1,2} riippuen mikä tilanne on (helpottamaan pelitilanteen ilmoituksia)
+     */
     public int voikoLuovuttaVuoron(Pelaaja vuorossa) {
         if (!peli.onkoNoppaaHeitetty()) {
             return 1;

@@ -8,8 +8,6 @@ package PelinKayttoliittyma.Graafinen;
 
 import PelinKayttajat.Pelaaja;
 import PelinOsat.Pelikokonaisuus;
-import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,7 +41,7 @@ public class PelaajienLisaysPaneeli extends JPanel {
         this.graafinen = graafinen;
         
         setLayout(new GridLayout(3,2));
-        setSize(new Dimension(300,200));
+
 
 
         pelaaja1 = new JLabel("Pelaaja 1 (Musta): ", SwingConstants.CENTER);
@@ -65,9 +63,10 @@ public class PelaajienLisaysPaneeli extends JPanel {
     /**
      * Kuuntelija joka kuuntelee Lisää pelaajat-napin painauksia. Alustaa pelin ja lisää pelaajat pelikokonaisuuteen.
      */
-    public class PelaajanLisaysKuuntelija implements ActionListener { 
-    
-    @Override
+    public class PelaajanLisaysKuuntelija implements ActionListener {
+
+
+        @Override
     public void actionPerformed(ActionEvent ae) {
         peli.asetaPelaaja1(new Pelaaja(nimi1Kentta.getText(), 'X', peli, peli.haePelaaja1Nappulat(), peli.haePelaajan1Jaahy(), peli.haePelaajan1Koti()));
         peli.asetaPelaaja2(new Pelaaja(nimi2Kentta.getText(), 'O', peli, peli.haePelaaja2Nappulat(), peli.haePelaajan2Jaahy(), peli.haePelaajan2Koti()));
@@ -75,7 +74,7 @@ public class PelaajienLisaysPaneeli extends JPanel {
         peli.haePelaaja2().asetaVastustaja(peli.haePelaaja1());
         peli.asetaPelaajaVuorossa(peli.haePelaaja1());
         peli.alustaPelinappulat();
-        peli.alustaPelilautaTest();
+        peli.alustaPelilauta();
         
         graafinen.siirryPeliPaneeliin();
              

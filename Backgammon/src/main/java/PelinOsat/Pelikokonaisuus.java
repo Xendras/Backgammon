@@ -201,6 +201,10 @@ public class Pelikokonaisuus {
         this.vuoroLaskuri = heittojenMaara;
     }
 
+    /**
+     * Laskee millä paikalla pelaaja 1:sellä on nappula kauimpana kodista. Käytetään kun nappuloita kotiutetaan.
+     * @return Sijainnin jossa huonoin nappula sijaitsee.
+     */
     public int haePelaajan1HuonoinSijainti() {
         this.pelaaja1HuonoinSijainti = 25;
 
@@ -213,6 +217,10 @@ public class Pelikokonaisuus {
         return this.pelaaja1HuonoinSijainti;
     }
 
+    /**
+     *Laskee millä paikalla pelaaja 2:sellä on nappula kauimpana kodista. Käytetään kun nappuloita kotiutetaan.
+     * @return Sijainnin jossa huonoin nappula sijaitsee.
+     */
     public int haePelaajan2HuonoinSijainti() {
         this.pelaaja2HuonoinSijainti = 0;
 
@@ -306,53 +314,42 @@ public class Pelikokonaisuus {
         }
     }
 
-    public void alustaPelilautaTest() {
 
-        for (int i = 1; i < 3; i++) {
-            this.lisaaPelinappula(nappulat1.get(i), 24);
-        }
-
-        for (int i = 3; i < 8; i++) {
-            this.lisaaPelinappula(nappulat1.get(i), 23);
-        }
-
-        for (int i = 8; i < 11; i++) {
-            this.lisaaPelinappula(nappulat1.get(i), 21);
-        }
-
-        for (int i = 11; i < 16; i++) {
-            this.lisaaPelinappula(nappulat1.get(i), 19);
-        }
-
-        for (int i = 1; i < 3; i++) {
-            this.lisaaPelinappula(nappulat2.get(i), 2);
-        }
-
-        for (int i = 3; i < 8; i++) {
-            this.lisaaPelinappula(nappulat2.get(i), 3);
-        }
-
-        for (int i = 8; i < 11; i++) {
-            this.lisaaPelinappula(nappulat2.get(i), 1);
-        }
-
-        for (int i = 11; i < 16; i++) {
-            this.lisaaPelinappula(nappulat2.get(i), 5);
-        }
-    }
-
+    /**
+     * Tarkistaa jos nappulat ovat vastustajan alueella
+     * @param pelaaja Pelaaja jonka nappuloita tutkitaan
+     * @return Palauttaa booleanin joka kertoo jos nappulat ovat vastustajan alueella (eli omalla kotilaudalla)
+     */
     public boolean ovatkoNappulatVastustajanAlueella(Pelaaja pelaaja) {
         return haePelilauta().ovatkoNappulatVastustajanAlueella(pelaaja);
     }
 
+    /**
+     * Siirtää nappulan kotiin
+     * @param vuorossa Pelaaja vuorossa
+     * @param sijainti Nappulan sijainti jota siirretään
+     * @param siirrot Siirtojen määrä
+     * @return Palauttaa booleanin joka krtoo jos nappula saatiin siirrettyä
+     */
     public boolean siirraNappulaKotiin(Pelaaja vuorossa, int sijainti, int siirrot) {
         return haePelilauta().siirraNappulaKotiin(vuorossa, sijainti, siirrot);
     }
 
+    /**
+     * Tarkistaa jos peli on loppu
+     * @param vuorossa Pelaaja vuorossa
+     * @return Palauttaa booleanin joka kertoo jos peli on loppu
+     */
     public boolean onkoPeliLoppu(Pelaaja vuorossa) {
         return haePelilauta().onkoPeliLoppu(vuorossa);
     }
 
+    /**
+     * Hallitsee pelin vuoroja. Riippuen sijainnista ja pelin tilanteesta niin vuoron aikana tapahtuu monia asioita
+     * @param sijainti Siirrettävän nopan sijainti
+     * @param noppa Nopan arvo
+     * @return Palauttaa booleanin joka kertoo jos seuraava vuoro voi alkaa
+     */
     public boolean uusiVuoro(int sijainti, int noppa) {
         boolean seuraavaVuoro = false;
 
@@ -394,6 +391,11 @@ public class Pelikokonaisuus {
 
     }
 
+    /**
+     * Tarkistaa jos pelaaja vuorossa voi siirtää jotain nappulaa sääntöjen mukaan yhdellä nopalla
+     * @param noppa Valitun nopan arvo
+     * @return Palauttaa booleanin joka kertoo jos pelaaja pystyy siirtämään nappulaa
+     */
     public boolean voikoPelaajaVuorossaSiirtaa(int noppa) {
         for (int i = 1; i < 25; i++) {
             if (haePelaajaVuorossa() == haePelaaja1()) {
@@ -432,6 +434,10 @@ public class Pelikokonaisuus {
         return false;
     }
 
+    /**
+     * Tarkistaa jos pelaaja voi luovuttaa vuoron
+     * @return Palauttaa int arvon riippuen tilanteesta (katso metodin kuvaus jota kutsutaan)
+     */
     public int voikoLuovuttaaVuoron() {
         return haePelilauta().voikoLuovuttaVuoron(haePelaajaVuorossa());
     }

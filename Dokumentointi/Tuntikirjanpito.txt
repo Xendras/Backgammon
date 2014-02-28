@@ -15,4 +15,6 @@
 13.2.2014 // 5h // Graafisen käyttöliittymän parantelemista. Pelilauta ja nappien piirtäminen toimii. Myös siirtäminen (jäähyt mukaan lukien). Javadocit päivitetty.
 19.2.2014 // 2h // Demon valmistelua, hienosäätöä.
 23.2.2014 // 2h // Pelin valikkojen viimeistelyä.
+25.2.2014 // 3h //  Lisätoiminnallisuuksia (kotiin siirtäminen sääntöjen mukaan, pelinappuloiden kasa ei kasva liian suureksi) ja käyttöliittymää
+27.2.2014 // 3h // Käyttöliittymän kanssa taistelua (ragequiteSwing)
 
