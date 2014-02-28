@@ -37,7 +37,7 @@ public class AloitusValikkoPaneeli extends JPanel {
 
     /**
      * Luo paneelin joka tulee sisältämään tervetuloviestin, Aloita peli-napin,
-     * Vaihda pelaajaa-napin, Luo säännöt-napin, sekä Lopeta peli-napin.
+     * Luo säännöt-napin, sekä Lopeta peli-napin.
      *
      * @param peli
      * @param graafinen

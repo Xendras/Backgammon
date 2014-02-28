@@ -17,4 +17,5 @@
 23.2.2014 // 2h // Pelin valikkojen viimeistelyä.
 25.2.2014 // 3h //  Lisätoiminnallisuuksia (kotiin siirtäminen sääntöjen mukaan, pelinappuloiden kasa ei kasva liian suureksi) ja käyttöliittymää
 27.2.2014 // 3h // Käyttöliittymän kanssa taistelua (ragequiteSwing)
+28.2.2014 // 4h // Viimeisimpiä rageiluja swingin kanssa, ohjelman rakenne kirjoitettu ja jar tiedosto luotu. Javadoc kirjoitettu loppuun.
 

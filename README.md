@@ -1,4 +1,6 @@
 Backgammon
 ==========
 
-Jos näet tämän niin toimii.
+HUOM!
+
+Sääntöjen lukeminen ei toimi jar-tiedostossa, toiminto toimii kyllä kun ohjelma ajetaan NetBeanssissä

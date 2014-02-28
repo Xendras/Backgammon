@@ -1,3 +1,7 @@
+HUOM!!!!
+Sääntöjen lukeminen ei toimi jar-tiedostossa, toiminto toimii kyllä kun ohjelma ajetaan NetBeanssissä
+
+
 Pelin tavoite
 
 Pelin tavoitteena on siirtää kaikki omat pelinappulat pois laudalta. 

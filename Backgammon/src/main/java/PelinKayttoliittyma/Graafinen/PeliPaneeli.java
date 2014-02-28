@@ -64,8 +64,8 @@ public class PeliPaneeli extends JPanel {
         ylaOsio.setLayout(new BoxLayout(ylaOsio, BoxLayout.X_AXIS));
 
         pelaajienKodit = new JTextArea(
-                "Pelaajan " + peli.haePelaaja1().haePelaajanNimi() + " koti: \n" + peli.haePelaajan1Koti().size()
-                + "/15 nappulaa \n\n\n\n\n\n\n\nPelaajan " + peli.haePelaaja2().haePelaajanNimi() + " koti: \n" + peli.haePelaajan2Koti().size() + "/15 nappulaa");
+                "\nPelaajan " + peli.haePelaaja1().haePelaajanNimi() + " koti: \n" + peli.haePelaajan1Koti().size()
+                + "/15 nappulaa \n\n\n\n\n\nPelaajan " + peli.haePelaaja2().haePelaajanNimi() + " koti: \n" + peli.haePelaajan2Koti().size() + "/15 nappulaa");
         pelaajienKodit.setFont(pelaajienKodit.getFont().deriveFont(12f));
         pelaajienKodit.setMaximumSize(new Dimension(170, 170));
         pelaajienKodit.setEditable(false);

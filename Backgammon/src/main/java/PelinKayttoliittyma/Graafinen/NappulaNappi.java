@@ -85,8 +85,8 @@ public class NappulaNappi extends JButton {
                 boolean seuraavaVuoro = peli.uusiVuoro(sijaintiLaudalla, peli.haeValitunNopanArvo());
 
                 peliPaneeli.haePelaajienKodit().setText(
-                        "Pelaajan " + peli.haePelaaja1().haePelaajanNimi() + " koti: \n" + peli.haePelaajan1Koti().size()
-                        + "/15 nappulaa \n\n\n\n\n\n\n\nPelaajan " + peli.haePelaaja2().haePelaajanNimi() + " koti: \n" + peli.haePelaajan2Koti().size() + "/15 nappulaa");
+                        "\nPelaajan " + peli.haePelaaja1().haePelaajanNimi() + " koti: \n" + peli.haePelaajan1Koti().size()
+                        + "/15 nappulaa \n\n\n\n\n\nPelaajan " + peli.haePelaaja2().haePelaajanNimi() + " koti: \n" + peli.haePelaajan2Koti().size() + "/15 nappulaa");
 
                 if (seuraavaVuoro) {
                     if (peli.onkoPeliLoppu(peli.haePelaajaVuorossa())) {

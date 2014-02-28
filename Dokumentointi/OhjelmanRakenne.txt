@@ -1,0 +1,5 @@
+Ohjelmalogiikkaa hallinnoi Pelikokonaisuus luokka johon lisätään kaikki pelin tärkeät varsinaiset osat. Tähän kokonaisuuteen kuuluu kaksi noppaa, pelilauta, kaksi pelaajaa, sekä pelinappulat molemmille pelaajille. 
+
+Pelilauta on luokka jossa suurin osa ohjelman toteutuksesta tapahtuu. Pelilaudalla siirretään ja lisätään nappuloita, joten se on yhteydessä HashMapin kautta jokaiseen pelinappulaan. Tässä luokassa myös tarkistetaan pelin tilanne esimerkiksi pelin loppumisen varalta. Pelikokonaisuus oikeastaan vain ohjaa pelilautaa, pelaajia, sekä noppia, eikä itse tee muuta kuin luo uudet vuorot. Rakenne yrittää simuloida oikeaa fyysistä Backgammon peliä jossa itse peli luo rakenteen pelin muille osille.
+
+Pelin graafinen käyttöliittymä lähtee liikkeelle GraafinenUI luokasta johon kuuluu JFrame sekä metodit jotka siirtyvät paneelista toiseen. Käyttöliittymä on suurimmaksi osaksi yhteydessä pelikokonaisuuteen käyttöliittymän kuuntelijoiden kautta joiden avulla pelaaja saa vaikutettua peliin.
